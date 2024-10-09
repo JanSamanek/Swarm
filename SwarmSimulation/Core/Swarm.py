@@ -18,6 +18,8 @@ class SwarmManager:
         self.saturation = alogrithmSettings["saturation"]
         self.deadzone = alogrithmSettings["deadzone"]
         
+        self.UpdateAgentsInPerceptionRange()
+
         
     def CreateAgent(self, startingPos : tuple[int, int]):
         self.agents.append(Agent(startingPos, ID=self.agentCounter))
@@ -31,11 +33,14 @@ class SwarmManager:
     
     def UpdateAgentsInPerceptionRange(self):
         for agentToUpdate in self.agents:
+            agentsInPerceptionRange = []
             for agent in self.agents:
                 if agentToUpdate.ID != agent.ID:
                     distance = DistanceHelper.CalculateEuclideanDistance(agentToUpdate, agent)
                     if distance <= agentToUpdate.perceptionRange:
-                        agentToUpdate.UpdateAgentsInPerceptionRange(agent)
+                        agentsInPerceptionRange.append(agent)
+            agentToUpdate.UpdateAgentsInPerceptionRange(agentsInPerceptionRange)
+                        
                         
     def DrawAgents(self, screen, drawPerceptionRadiuses=False):
         if drawPerceptionRadiuses:
@@ -52,14 +57,20 @@ class Agent(pygame.Rect):
         self.perceptionRange : float = perceptionRange
         self.ID : int = ID
         self.agentsInPerceptionRange : list[Agent] = []
+        self.consensus = 
                 
-    def UpdateAgentsInPerceptionRange(self, agent):
-        self.agentsInPerceptionRange.append(agent)
+    def UpdateAgentsInPerceptionRange(self, agents):
+        self.agentsInPerceptionRange = agents
         
     def Move(self, speedX, speedY, dt):
         positionDelta = (speedX*dt, speedY*dt)
         self.move_ip(positionDelta)
-        
+    
+    # CAPF    
+    def CalculateOverallError(self):
+        for agent in self.agentsInPerceptionRange:
+            
+    # APF
     def APF(self, desiredDistance, damping=None, saturation=None, deadzone=None):
         xControlInput, yControlInput = 0, 0
         
@@ -81,6 +92,9 @@ class Agent(pygame.Rect):
             
         return (xControlInput, yControlInput)
 
+    def CAPF(self, desiredDistance, mixingFunctionPower):
+        pass        
+    
     def Draw(self, screen, color=(255, 255, 255)):
         pygame.draw.rect(screen, color, self)
         
@@ -90,3 +104,4 @@ class Agent(pygame.Rect):
     def DrawAgentsInPerceptionRange(self, screen, color=(0, 255, 0)):
         for agentInRange in self.agentsInPerceptionRange:
             agentInRange.Draw(screen, color)
+        
