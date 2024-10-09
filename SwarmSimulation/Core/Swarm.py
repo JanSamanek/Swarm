@@ -52,8 +52,6 @@ class Agent(pygame.Rect):
         self.perceptionRange : float = perceptionRange
         self.ID : int = ID
         self.agentsInPerceptionRange : list[Agent] = []
-        self.consensus : float = ConsensusFiltr.CalculateMainConsensus(self)
-        self.consensusFiltr : ConsensusFiltr = ConsensusFiltr(self.consensus)
                 
     def UpdateAgentsInPerceptionRange(self, agent):
         self.agentsInPerceptionRange.append(agent)
@@ -83,9 +81,6 @@ class Agent(pygame.Rect):
             
         return (xControlInput, yControlInput)
 
-    def CAPF(self, desiredDistance, mixingFunctionPower):
-        pass        
-    
     def Draw(self, screen, color=(255, 255, 255)):
         pygame.draw.rect(screen, color, self)
         
@@ -95,21 +90,3 @@ class Agent(pygame.Rect):
     def DrawAgentsInPerceptionRange(self, screen, color=(0, 255, 0)):
         for agentInRange in self.agentsInPerceptionRange:
             agentInRange.Draw(screen, color)
-        
-    
-class ConsensusFiltr():
-    
-    def __init__(self, initValue):
-        self.consensus = initValue
-        
-    def UpdateConsensus(self, agent : Agent, desiredDistance : float, mixingFunctionPower : int):
-        consensusUpdate = 0
-        for agent in agent.agentsInPerceptionRange:
-            pass
-    
-    @staticmethod
-    def CalculateMainConsensus(agent : Agent):
-        consensusMain = 0
-        for agentInPerceptionRange in agent.agentsInPerceptionRange:
-            consensusMain +=  agentInPerceptionRange.consensus - agent.consensus 
-        return consensusMain
