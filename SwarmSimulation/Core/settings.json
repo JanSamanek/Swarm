@@ -1,0 +1,11 @@
+{
+    "swarmSettings":
+    {
+        "algorithmSettings":
+        {
+            "damping": 0.5,
+            "saturation": 30,
+            "deadzone": 5
+        }
+    }
+}
