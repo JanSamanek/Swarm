@@ -13,22 +13,21 @@ class SwarmManager:
             settings = json.load(file)
 
         swarmSettings = settings["swarmSettings"]
-        alogrithmSettings = swarmSettings["algorithmSettings"]
-        self.gain = alogrithmSettings["gain"]
-        self.saturation = alogrithmSettings["saturation"]
-        self.deadzone = alogrithmSettings["deadzone"]
+        self.apfSettings = swarmSettings["APF"]
         
         self.UpdateAgentsInPerceptionRange()
-
         
     def CreateAgent(self, startingPos : tuple[int, int]):
         self.agents.append(Agent(startingPos, ID=self.agentCounter))
         self.agentCounter += 1 
                         
-    def UpdateAgentPositions(self, dt, desiredDistance):
+    def APF(self, dt, desiredDistance):
         self.UpdateAgentsInPerceptionRange()
         for agent in self.agents:
-            (controlInputX, controlInputY) = agent.APF(desiredDistance, self.gain, self.saturation, self.deadzone)
+            (controlInputX, controlInputY) = agent.APF(desiredDistance, 
+                                                       self.apfSettings["gain"], 
+                                                       self.apfSettings["saturation"], 
+                                                       self.apfSettings["deadzone"])
             agent.Move(controlInputX, controlInputY, dt)
     
     def UpdateAgentsInPerceptionRange(self):
@@ -60,9 +59,12 @@ class Agent(pygame.Rect):
         positionDelta = (speedX*dt, speedY*dt)
         self.move_ip(positionDelta)
     
-    # # CAPF    
-    # def CalculateOverallError(self):
-    #     for agent in self.agentsInPerceptionRange:
+    # CAPF    
+    def CalculateOverallError(self, desiredDistance):
+        distanceError = 0
+        for agent in self.agentsInPerceptionRange:
+            distance = DistanceHelper.CalculateEuclideanDistance(self, agent)
+            distanceError += desiredDistance - distance
             
     # APF
     def APF(self, desiredDistance, gain=None, saturation=None, deadzone=None):
@@ -70,11 +72,11 @@ class Agent(pygame.Rect):
         
         for agent in self.agentsInPerceptionRange:
             distance = DistanceHelper.CalculateEuclideanDistance(self, agent)
-            distance_error = desiredDistance - distance
+            distanceError = desiredDistance - distance
             
-            if deadzone is None or deadzone <= abs(distance_error):
-                xControlInput += 2*(distance_error / distance) * (self.centerx - agent.centerx) 
-                yControlInput += 2*(distance_error / distance) * (self.centery - agent.centery)
+            if deadzone is None or deadzone <= abs(distanceError):
+                xControlInput += 2*(distanceError / distance) * (self.centerx - agent.centerx) 
+                yControlInput += 2*(distanceError / distance) * (self.centery - agent.centery)
                         
         if gain is not None:
             xControlInput = gain * xControlInput

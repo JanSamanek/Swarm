@@ -1,7 +1,7 @@
 {
     "swarmSettings":
     {
-        "algorithmSettings":
+        "APF":
         {
             "gain": 10,
             "saturation": 30,

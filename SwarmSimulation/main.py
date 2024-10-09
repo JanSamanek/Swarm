@@ -27,7 +27,7 @@ if __name__ == "__main__":
         dt = clock.tick(FPS) / 1000
         
         swarmManager.DrawAgents(screen, drawPerceptionRadiuses=False)
-        swarmManager.UpdateAgentPositions(dt, desiredDistance=100)
+        swarmManager.APF(dt, desiredDistance=100)
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
