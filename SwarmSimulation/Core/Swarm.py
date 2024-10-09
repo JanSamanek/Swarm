@@ -57,7 +57,7 @@ class Agent(pygame.Rect):
         self.perceptionRange : float = perceptionRange
         self.ID : int = ID
         self.agentsInPerceptionRange : list[Agent] = []
-        self.consensus = 
+        # self.consensus = 
                 
     def UpdateAgentsInPerceptionRange(self, agents):
         self.agentsInPerceptionRange = agents
@@ -66,9 +66,9 @@ class Agent(pygame.Rect):
         positionDelta = (speedX*dt, speedY*dt)
         self.move_ip(positionDelta)
     
-    # CAPF    
-    def CalculateOverallError(self):
-        for agent in self.agentsInPerceptionRange:
+    # # CAPF    
+    # def CalculateOverallError(self):
+    #     for agent in self.agentsInPerceptionRange:
             
     # APF
     def APF(self, desiredDistance, damping=None, saturation=None, deadzone=None):
