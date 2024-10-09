@@ -75,8 +75,8 @@ class Agent(pygame.Rect):
             distanceError = desiredDistance - distance
             
             if deadzone is None or deadzone <= abs(distanceError):
-                xControlInput += 2*(distanceError / distance) * (self.centerx - agent.centerx) 
-                yControlInput += 2*(distanceError / distance) * (self.centery - agent.centery)
+                xControlInput += (distanceError / distance) * (self.centerx - agent.centerx) 
+                yControlInput += (distanceError / distance) * (self.centery - agent.centery)
                         
         if gain is not None:
             xControlInput = gain * xControlInput

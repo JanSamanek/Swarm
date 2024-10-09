@@ -3,7 +3,7 @@
     {
         "APF":
         {
-            "gain": 10,
+            "gain": 15,
             "saturation": 30,
             "deadzone": null
         }
