@@ -3,9 +3,9 @@
     {
         "algorithmSettings":
         {
-            "damping": 0.5,
+            "gain": 10,
             "saturation": 30,
-            "deadzone": 5
+            "deadzone": null
         }
     }
 }

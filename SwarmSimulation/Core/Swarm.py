@@ -7,14 +7,14 @@ class SwarmManager:
     
     def __init__(self) -> None:
         self.agents : list[Agent] = []
-        self.agentCounter = 1
+        self.agentCounter = 0
         
         with open('Core/settings.json', 'r') as file:
             settings = json.load(file)
 
         swarmSettings = settings["swarmSettings"]
         alogrithmSettings = swarmSettings["algorithmSettings"]
-        self.damping = alogrithmSettings["damping"]
+        self.gain = alogrithmSettings["gain"]
         self.saturation = alogrithmSettings["saturation"]
         self.deadzone = alogrithmSettings["deadzone"]
         
@@ -28,19 +28,17 @@ class SwarmManager:
     def UpdateAgentPositions(self, dt, desiredDistance):
         self.UpdateAgentsInPerceptionRange()
         for agent in self.agents:
-            (controlInputX, controlInputY) = agent.APF(desiredDistance, self.damping, self.saturation, self.deadzone)
+            (controlInputX, controlInputY) = agent.APF(desiredDistance, self.gain, self.saturation, self.deadzone)
             agent.Move(controlInputX, controlInputY, dt)
     
     def UpdateAgentsInPerceptionRange(self):
         for agentToUpdate in self.agents:
-            agentsInPerceptionRange = []
+            agentToUpdate.agentsInPerceptionRange = []
             for agent in self.agents:
                 if agentToUpdate.ID != agent.ID:
                     distance = DistanceHelper.CalculateEuclideanDistance(agentToUpdate, agent)
                     if distance <= agentToUpdate.perceptionRange:
-                        agentsInPerceptionRange.append(agent)
-            agentToUpdate.UpdateAgentsInPerceptionRange(agentsInPerceptionRange)
-                        
+                        agentToUpdate.agentsInPerceptionRange.append(agent)
                         
     def DrawAgents(self, screen, drawPerceptionRadiuses=False):
         if drawPerceptionRadiuses:
@@ -54,13 +52,9 @@ class Agent(pygame.Rect):
     
     def __init__(self, startPos, ID, perceptionRange=200):
         super().__init__((*startPos, 10, 10))        
-        self.perceptionRange : float = perceptionRange
+        self.perceptionRange : int = perceptionRange
         self.ID : int = ID
         self.agentsInPerceptionRange : list[Agent] = []
-        # self.consensus = 
-                
-    def UpdateAgentsInPerceptionRange(self, agents):
-        self.agentsInPerceptionRange = agents
         
     def Move(self, speedX, speedY, dt):
         positionDelta = (speedX*dt, speedY*dt)
@@ -71,7 +65,7 @@ class Agent(pygame.Rect):
     #     for agent in self.agentsInPerceptionRange:
             
     # APF
-    def APF(self, desiredDistance, damping=None, saturation=None, deadzone=None):
+    def APF(self, desiredDistance, gain=None, saturation=None, deadzone=None):
         xControlInput, yControlInput = 0, 0
         
         for agent in self.agentsInPerceptionRange:
@@ -79,12 +73,12 @@ class Agent(pygame.Rect):
             distance_error = desiredDistance - distance
             
             if deadzone is None or deadzone <= abs(distance_error):
-                xControlInput += (distance_error / distance) * (self.centerx - agent.centerx) 
-                yControlInput += (distance_error / distance) * (self.centery - agent.centery)
+                xControlInput += 2*(distance_error / distance) * (self.centerx - agent.centerx) 
+                yControlInput += 2*(distance_error / distance) * (self.centery - agent.centery)
                         
-        if damping is not None:
-            xControlInput = damping * xControlInput
-            yControlInput = damping * yControlInput
+        if gain is not None:
+            xControlInput = gain * xControlInput
+            yControlInput = gain * yControlInput
             
         if saturation is not None:
             xControlInput = np.clip(xControlInput, -saturation, saturation)
