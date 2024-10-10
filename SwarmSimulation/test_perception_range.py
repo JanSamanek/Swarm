@@ -11,15 +11,15 @@ if __name__ == "__main__":
     
     robotManager = SwarmManager()
     
-    robotManager.CreateAgent((380, 370))
-    robotManager.CreateAgent((400, 310))
-    robotManager.CreateAgent((480, 300))
-    robotManager.CreateAgent((200, 180))
-    robotManager.CreateAgent((520, 340))
-    robotManager.CreateAgent((325, 380))
-    robotManager.CreateAgent((430, 270))
-    robotManager.CreateAgent((200, 450))
-    robotManager.CreateAgent((450, 200))
+    robotManager.AddAgentToSwarm((380, 370))
+    robotManager.AddAgentToSwarm((400, 310))
+    robotManager.AddAgentToSwarm((480, 300))
+    robotManager.AddAgentToSwarm((200, 180))
+    robotManager.AddAgentToSwarm((520, 340))
+    robotManager.AddAgentToSwarm((325, 380))
+    robotManager.AddAgentToSwarm((430, 270))
+    robotManager.AddAgentToSwarm((200, 450))
+    robotManager.AddAgentToSwarm((450, 200))
     
     GREEN = "\033[92m"
     RESET = "\033[0m"

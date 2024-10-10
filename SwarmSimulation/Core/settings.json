@@ -1,11 +1,14 @@
 {
-    "swarmSettings":
+    "APF":
     {
-        "APF":
-        {
-            "gain": 15,
-            "saturation": 30,
-            "deadzone": null
-        }
+        "gain": 15,
+        "saturation": 30,
+        "deadzone": null,
+        "perceptionRange" : 100,
+        "desiredDistance" : 50
+    },
+    "CAPF":
+    {
+        
     }
 }

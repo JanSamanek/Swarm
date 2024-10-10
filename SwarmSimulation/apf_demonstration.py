@@ -1,10 +1,14 @@
 if __name__ == "__main__":
     import pygame
-    from Core.Swarm import SwarmManager
+    from Core.Swarm import SwarmManagerAPF
+    from Core.Agents import APFAgent
     import json
     
     with open('Core/settings.json', 'r') as file:
         settings = json.load(file)
+    apfSettings = settings["APF"]
+    perceptionRange = apfSettings["perceptionRange"]
+    desiredDistancee = apfSettings["desiredDistance"]
             
     pygame.init()
     
@@ -12,15 +16,15 @@ if __name__ == "__main__":
     SCREEN_HEIGHT = 600
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     
-    swarmManager = SwarmManager()
+    swarmManager = SwarmManagerAPF()
     
-    swarmManager.AddAgentToSwarm((380, 370))
-    swarmManager.AddAgentToSwarm((400, 310))
-    swarmManager.AddAgentToSwarm((480, 300))
-    swarmManager.AddAgentToSwarm((345, 320))
-    swarmManager.AddAgentToSwarm((520, 340))
-    swarmManager.AddAgentToSwarm((325, 380))
-    swarmManager.AddAgentToSwarm((430, 270))
+    swarmManager.CreateAgent(startPos=(380, 370))
+    swarmManager.CreateAgent(startPos=(400, 310))
+    swarmManager.CreateAgent(startPos=(480, 300))
+    swarmManager.CreateAgent(startPos=(345, 320))
+    swarmManager.CreateAgent(startPos=(520, 340))
+    swarmManager.CreateAgent(startPos=(325, 380))
+    swarmManager.CreateAgent(startPos=(430, 270))
     
     clock = pygame.time.Clock()
     FPS = 20
@@ -31,7 +35,7 @@ if __name__ == "__main__":
         dt = clock.tick(FPS) / 1000
         
         swarmManager.DrawAgents(screen, drawPerceptionRadiuses=False)
-        swarmManager.APF(dt, desiredDistance=settings["desiredDistance"])
+        swarmManager.UpadteRobotPositions(dt, desiredDistance=desiredDistancee)
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
