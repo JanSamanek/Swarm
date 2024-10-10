@@ -26,63 +26,45 @@ class Agent(pygame.Rect):
         for agentInRange in self.agentsInPerceptionRange:
             agentInRange.Draw(screen, color)
 
+max_distance_temporary = 200 # TODO: remove
 class CAPFAgent(Agent):
     
     def __init__(self, startPos, ID, perceptionRange):
         super().__init__(startPos, ID, perceptionRange)
         self.consensus = None
         self.speed = np.array([0,0])
-        
-    def CalculateOverallError(self, desiredDistance):
-        distanceError = 0
-        for agent in self.agentsInPerceptionRange:
-            distance = DistanceHelper.CalculateEuclideanDistance(self, agent)
-            distanceError += distance - desiredDistance
-        return distanceError
     
-    def CalculateControlInput(self, dt, numberOfAgents, desiredDistance, consensusGain, mixingFunctionPower, saturation):
+    def CalculateControlInput(self, dt, numberOfAgents, enclosingPoint, consensusGain, p, gain):
         
-        self.UpdateConsensus(dt, desiredDistance, consensusGain, mixingFunctionPower)  
+        self.UpdateConsensus(dt, enclosingPoint, consensusGain, p)  
         
-        sum_1 = 0
-        sum_2 = 0
-        controlInput = np.array([0,0]).astype(np.float64)
-        for agent in self.agentsInPerceptionRange:
-            distance = DistanceHelper.CalculateEuclideanDistance(self, agent)
-            distanceError = distance - desiredDistance
-            sum_1 += distanceError**2 
-            sum_2 += distanceError * (np.array(self.center) - np.array(agent.center)) / distance 
+        distance = DistanceHelper.CalculateSquaredEuclideanDistance(enclosingPoint, self.center)
+        controlInput = -2*(np.array(self.center) - np.array(enclosingPoint)) \
+                         *((distance/(max_distance_temporary**2))**(p-1)) \
+                         /((numberOfAgents*self.consensus)**((p-1)/p))
+
+        if gain is not None:
+            controlInput = gain * controlInput
         
-        controlInput = 2*(sum_1**(mixingFunctionPower-1))*sum_2
-        controlInput /= ((numberOfAgents*self.consensus)**((mixingFunctionPower-1)/mixingFunctionPower))
-        
-        if saturation is not None:
-            controlInput = np.clip(controlInput, -saturation, saturation)
-        
-        return -controlInput
+        return controlInput
       
-    def InitConsensus(self, desiredDistance):
-        self.consensus = self.CalculateOverallError(desiredDistance)
+    def InitConsensus(self, enclosingPoint):
+        self.consensus = DistanceHelper.CalculateSquaredEuclideanDistance(enclosingPoint, self.center)
     
-    def UpdateConsensus(self, dt, desiredDistance, consensusGain, mixingFunctionPower):          
-        sum_1 = 0
-        sum_2 = 0
-        sum_3 = 0
+    def UpdateConsensus(self, dt, enclosingPoint, consensusGain, p):          
+        consensusDot = 0
         for agent in self.agentsInPerceptionRange:
-            distance = DistanceHelper.CalculateEuclideanDistance(self, agent)
-            distanceError = distance - desiredDistance
-            sum_1 += consensusGain*(agent.consensus - self.consensus)
-            sum_2 += distanceError**2 
-            sum_3 += distanceError * (np.array(self.center) - np.array(agent.center)).dot(self.speed - agent.speed) / distance 
-    
-        consensusDot = sum_1 + 2*mixingFunctionPower*(sum_2**(mixingFunctionPower-1))*sum_3
-        self.consensus += consensusDot * dt
+            consensusDot += consensusGain*(agent.consensus - self.consensus)
+        distance = DistanceHelper.CalculateSquaredEuclideanDistance(enclosingPoint, self.center)
+        consensusDot += 2*p*((distance/(max_distance_temporary**2))**(p-1))* \
+                        (np.array(self.centerx) - np.array(enclosingPoint)).dot(self.speed)
+
+        self.consensus += consensusDot*dt
         print(f"{self.ID} : {self.consensus}")
         
     def Move(self, controlInput, dt):
         self.speed = controlInput
         print(f"{self.ID} : {self.speed*dt}")
-
         super().Move(controlInput, dt)
 
 

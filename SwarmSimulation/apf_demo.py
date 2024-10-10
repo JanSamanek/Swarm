@@ -1,7 +1,6 @@
 if __name__ == "__main__":
     import pygame
     from Core.Swarm import SwarmManagerAPF
-    from Core.Agents import APFAgent
     import json
     
     with open('Core/settings.json', 'r') as file:
@@ -35,7 +34,7 @@ if __name__ == "__main__":
         dt = clock.tick(FPS) / 1000
         
         swarmManager.DrawAgents(screen, drawPerceptionRadiuses=False)
-        swarmManager.UpadteRobotPositions(dt, desiredDistance=desiredDistancee)
+        swarmManager.UpdateAgentPositions(dt, desiredDistance=desiredDistancee)
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

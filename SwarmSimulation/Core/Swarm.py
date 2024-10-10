@@ -10,9 +10,7 @@ class SwarmManager:
         
         with open('Core/settings.json', 'r') as file:
             self.settings = json.load(file)
-        
-        self.UpdateAgentsInPerceptionRange()
-    
+            
     def UpdateAgentsInPerceptionRange(self):
         for agentToUpdate in self.agents:
             agentToUpdate.agentsInPerceptionRange = []
@@ -29,14 +27,19 @@ class SwarmManager:
         for agent in self.agents:
             agent.Draw(screen)
             
-
 class SwarmManagerAPF(SwarmManager):
                       
     def __init__(self):
         super().__init__()
         self.apfSettings = self.settings["APF"]
         
-    def UpadteRobotPositions(self, dt, desiredDistance):
+    def CreateAgent(self, startPos):
+        self.agents.append(APFAgent(startPos, 
+                                    ID=self.agentCounter, 
+                                    perceptionRange=self.apfSettings["perceptionRange"]))
+        self.agentCounter += 1 
+        
+    def UpdateAgentPositions(self, dt, desiredDistance):
         self.UpdateAgentsInPerceptionRange()
         for agent in self.agents:
             controlInput = agent.CalculateControlInput(desiredDistance, 
@@ -46,18 +49,13 @@ class SwarmManagerAPF(SwarmManager):
             agent.Move(controlInput, dt)
     
     
-    def CreateAgent(self, startPos):
-        self.agents.append(APFAgent(startPos, 
-                                    ID=self.agentCounter, 
-                                    perceptionRange=self.apfSettings["perceptionRange"]))
-        self.agentCounter += 1 
         
 class SwarmManagerCAPF(SwarmManager):
     
     def __init__(self):
         super().__init__()
         self.capfSettings = self.settings["CAPF"]
-        self.agents : list[CAPFAgent]    
+        self.agents : CAPFAgent
     
     def CreateAgent(self, startPos):
         self.agents.append(CAPFAgent(startPos, 
@@ -66,19 +64,18 @@ class SwarmManagerCAPF(SwarmManager):
         self.agentCounter += 1 
     
     
-    def InitAgentConsensuses(self, desiredDistance):
+    def InitAgentConsensuses(self, enclosingPoint):
         self.UpdateAgentsInPerceptionRange()
         for agent in self.agents:
-            agent.InitConsensus(desiredDistance)
+            agent.InitConsensus(enclosingPoint)
         
-    def UpadteRobotPositions(self, dt, desiredDistance):
+    def UpdateAgentsPositions(self, dt, enclosingPoint):
         self.UpdateAgentsInPerceptionRange()
-        
         for agent in self.agents:
             controlInput = agent.CalculateControlInput(dt, 
-                                                       self.agentCounter, 
-                                                       desiredDistance, 
-                                                       self.capfSettings["consensusGain"], 
-                                                       self.capfSettings["mixingFunctionPower"],
-                                                       self.capfSettings["saturation"])
+                                                        self.agentCounter, 
+                                                        enclosingPoint, 
+                                                        self.capfSettings["consensusGain"], 
+                                                        self.capfSettings["mixingFunctionPower"],
+                                                        self.capfSettings["gain"])
             agent.Move(controlInput, dt)

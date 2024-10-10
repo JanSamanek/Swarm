@@ -9,10 +9,10 @@
     },
     "CAPF":
     {
-        "perceptionRange" : 150,
-        "desiredDistance" : 80,
+        "perceptionRange" : 200,
+        "enclosingPoint" : [400, 300],
         "consensusGain" : 1,
-        "mixingFunctionPower" : 1,
-        "saturation": 30
+        "mixingFunctionPower" : 3,
+        "gain" : 10000
     }
 }

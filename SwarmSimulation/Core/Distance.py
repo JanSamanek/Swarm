@@ -8,6 +8,6 @@ class DistanceHelper:
         return distance
     
     @staticmethod
-    def CalculateSquaredEuclideanDistance(robot1, robot2):
-        distance = np.sum((np.array(robot1.center) - np.array(robot2.center)) ** 2)
+    def CalculateSquaredEuclideanDistance(center1, center2):
+        distance = np.sum((np.array(center1) - np.array(center2)) ** 2)
         return distance
