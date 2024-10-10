@@ -1,4 +1,4 @@
-from Core.Agents import APFAgent
+from Core.Agents import APFAgent, CAPFAgent
 from Core.Distance import DistanceHelper
 import json
 
@@ -35,7 +35,7 @@ class SwarmManagerAPF(SwarmManager):
     def __init__(self):
         super().__init__()
         self.apfSettings = self.settings["APF"]
-          
+        
     def UpadteRobotPositions(self, dt, desiredDistance):
         self.UpdateAgentsInPerceptionRange()
         for agent in self.agents:
@@ -47,5 +47,38 @@ class SwarmManagerAPF(SwarmManager):
     
     
     def CreateAgent(self, startPos):
-        self.agents.append(APFAgent(startPos, ID=self.agentCounter, perceptionRange=self.apfSettings["perceptionRange"]))
+        self.agents.append(APFAgent(startPos, 
+                                    ID=self.agentCounter, 
+                                    perceptionRange=self.apfSettings["perceptionRange"]))
         self.agentCounter += 1 
+        
+class SwarmManagerCAPF(SwarmManager):
+    
+    def __init__(self):
+        super().__init__()
+        self.capfSettings = self.settings["CAPF"]
+        self.agents : list[CAPFAgent]    
+    
+    def CreateAgent(self, startPos):
+        self.agents.append(CAPFAgent(startPos, 
+                                     ID=self.agentCounter, 
+                                     perceptionRange=self.capfSettings["perceptionRange"]))
+        self.agentCounter += 1 
+    
+    
+    def InitAgentConsensuses(self, desiredDistance):
+        self.UpdateAgentsInPerceptionRange()
+        for agent in self.agents:
+            agent.InitConsensus(desiredDistance)
+        
+    def UpadteRobotPositions(self, dt, desiredDistance):
+        self.UpdateAgentsInPerceptionRange()
+        
+        for agent in self.agents:
+            controlInput = agent.CalculateControlInput(dt, 
+                                                       self.agentCounter, 
+                                                       desiredDistance, 
+                                                       self.capfSettings["consensusGain"], 
+                                                       self.capfSettings["mixingFunctionPower"],
+                                                       self.capfSettings["saturation"])
+            agent.Move(controlInput, dt)
