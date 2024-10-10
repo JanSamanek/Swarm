@@ -10,8 +10,8 @@ class Agent(pygame.Rect):
         self.ID : int = ID
         self.agentsInPerceptionRange : list[Agent] = []
         
-    def Move(self, speedX, speedY, dt):
-        positionDelta = (speedX*dt, speedY*dt)
+    def Move(self, controlInput, dt):
+        positionDelta = (controlInput[0]*dt, controlInput[1]*dt)
         self.move_ip(positionDelta)
         
     def Draw(self, screen, color=(255, 255, 255)):
@@ -46,6 +46,7 @@ class CAPFAgent(Agent):
         for agent in self.agentsInPerceptionRange:
             consensus_dot += agent.consensus - self.consensus
         consensusGain *= consensusGain
+        # TODO :
         
         
 
@@ -56,24 +57,21 @@ class APFAgent(Agent):
         super().__init__(startPos, ID, perceptionRange)
         
     def CalculateControlInput(self, desiredDistance, gain=None, saturation=None, deadzone=None):
-        xControlInput, yControlInput = 0, 0
+        controlInput = np.array([0, 0], dtype=np.float64)
         
         for agent in self.agentsInPerceptionRange:
             distance = DistanceHelper.CalculateEuclideanDistance(self, agent)
             distanceError = desiredDistance - distance
             
             if deadzone is None or deadzone <= abs(distanceError):
-                xControlInput += (distanceError / distance) * (self.centerx - agent.centerx) 
-                yControlInput += (distanceError / distance) * (self.centery - agent.centery)
+                controlInput += (distanceError / distance) * (np.array(self.center) - np.array(agent.center)).astype(np.float64) 
                         
         if gain is not None:
-            xControlInput = gain * xControlInput
-            yControlInput = gain * yControlInput
+            controlInput = gain * controlInput
             
         if saturation is not None:
-            xControlInput = np.clip(xControlInput, -saturation, saturation)
-            yControlInput = np.clip(yControlInput, -saturation, saturation)
-            
-        return (xControlInput, yControlInput)
+            controlInput = np.clip(controlInput, -saturation, saturation)
+        
+        return controlInput
 
         

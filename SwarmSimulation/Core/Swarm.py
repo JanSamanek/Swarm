@@ -39,11 +39,11 @@ class SwarmManagerAPF(SwarmManager):
     def UpadteRobotPositions(self, dt, desiredDistance):
         self.UpdateAgentsInPerceptionRange()
         for agent in self.agents:
-            (controlInputX, controlInputY) = agent.CalculateControlInput(desiredDistance, 
+            controlInput = agent.CalculateControlInput(desiredDistance, 
                                                        self.apfSettings["gain"], 
                                                        self.apfSettings["saturation"], 
                                                        self.apfSettings["deadzone"])
-            agent.Move(controlInputX, controlInputY, dt)
+            agent.Move(controlInput, dt)
     
     
     def CreateAgent(self, startPos):
