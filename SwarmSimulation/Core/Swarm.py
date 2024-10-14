@@ -72,10 +72,16 @@ class SwarmManagerCAPF(SwarmManager):
     def UpdateAgentsPositions(self, dt, enclosingPoint):
         self.UpdateAgentsInPerceptionRange()
         for agent in self.agents:
-            controlInput = agent.CalculateControlInput(dt, 
-                                                        self.agentCounter, 
+            controlInput = agent.CalculateControlInput( self.agentCounter, 
                                                         enclosingPoint, 
-                                                        self.capfSettings["consensusGain"], 
                                                         self.capfSettings["mixingFunctionPower"],
                                                         self.capfSettings["gain"])
             agent.Move(controlInput, dt)
+            
+    def UpdateNewConsensuses(self, dt, enclosingPoint, consensusGain, p):
+        for agent in self.agents:
+            agent.UpdateNewConsensus(dt, enclosingPoint, consensusGain, p)  
+
+    def UpdateOldConsensuses(self):
+        for agent in self.agents:
+            agent.UpdateOldConsensus()

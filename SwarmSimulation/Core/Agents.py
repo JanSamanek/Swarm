@@ -26,45 +26,59 @@ class Agent(pygame.Rect):
         for agentInRange in self.agentsInPerceptionRange:
             agentInRange.Draw(screen, color)
 
-max_distance_temporary = 200 # TODO: remove
+max_distance_temporary = 350 # TODO: remove
 class CAPFAgent(Agent):
     
     def __init__(self, startPos, ID, perceptionRange):
         super().__init__(startPos, ID, perceptionRange)
-        self.consensus = None
+        self.newConsensus = None
+        self.oldConsensus = None
         self.speed = np.array([0,0])
     
-    def CalculateControlInput(self, dt, numberOfAgents, enclosingPoint, consensusGain, p, gain):
-        
-        self.UpdateConsensus(dt, enclosingPoint, consensusGain, p)  
-        
+    def CalculateControlInput(self, numberOfAgents, enclosingPoint, p, gain):        
         distance = DistanceHelper.CalculateSquaredEuclideanDistance(enclosingPoint, self.center)
         controlInput = -2*(np.array(self.center) - np.array(enclosingPoint)) \
                          *((distance/(max_distance_temporary**2))**(p-1)) \
-                         /((numberOfAgents*self.consensus)**((p-1)/p))
+                         /((numberOfAgents*self.newConsensus)**((p-1)/p))
 
         if gain is not None:
             controlInput = gain * controlInput
         
         return controlInput
-      
-    def InitConsensus(self, enclosingPoint):
-        self.consensus = DistanceHelper.CalculateSquaredEuclideanDistance(enclosingPoint, self.center)
     
-    def UpdateConsensus(self, dt, enclosingPoint, consensusGain, p):          
+    def UpdateNewConsensus(self, dt, enclosingPoint, consensusGain, p):          
         consensusDot = 0
         for agent in self.agentsInPerceptionRange:
-            consensusDot += consensusGain*(agent.consensus - self.consensus)
+            consensusDot += consensusGain*(agent.oldConsensus - self.oldConsensus)
         distance = DistanceHelper.CalculateSquaredEuclideanDistance(enclosingPoint, self.center)
         consensusDot += 2*p*((distance/(max_distance_temporary**2))**(p-1))* \
                         (np.array(self.centerx) - np.array(enclosingPoint)).dot(self.speed)
 
-        self.consensus += consensusDot*dt
-        print(f"{self.ID} : {self.consensus}")
+        self.newConsensus += consensusDot*dt
+        
+        #########################################
+        if self.ID == 1:
+            print(f"{self.ID} : {self.newConsensus}")
+        #########################################
+
+      
+    def UpdateOldConsensus(self):
+        self.oldConsensus = self.newConsensus
+        
+    def InitConsensus(self, enclosingPoint):
+        distance = DistanceHelper.CalculateSquaredEuclideanDistance(enclosingPoint, self.center)
+        self.oldConsensus = distance
+        self.newConsensus = distance
         
     def Move(self, controlInput, dt):
         self.speed = controlInput
-        print(f"{self.ID} : {self.speed*dt}")
+        
+        #########################################
+        if self.ID == 1:
+            print(f"{self.ID} : {self.speed*dt}")
+        #########################################
+
+            
         super().Move(controlInput, dt)
 
 

@@ -43,10 +43,12 @@ if __name__ == "__main__":
     while run:
         dt = clock.tick(FPS) / 1000
 
-        pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(*enclosingPoint, 10, 10))
+        pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(*enclosingPoint, 5, 5))
 
         swarmManager.DrawAgents(screen, drawPerceptionRadiuses=False)
+        swarmManager.UpdateNewConsensuses(dt, enclosingPoint, capfSettings["consensusGain"], capfSettings["mixingFunctionPower"])
         swarmManager.UpdateAgentsPositions(dt, enclosingPoint=enclosingPoint)
+        swarmManager.UpdateOldConsensuses()
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

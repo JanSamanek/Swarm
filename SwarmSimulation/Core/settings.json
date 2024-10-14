@@ -9,9 +9,9 @@
     },
     "CAPF":
     {
-        "perceptionRange" : 200,
+        "perceptionRange" : 100,
         "enclosingPoint" : [400, 300],
-        "consensusGain" : 1,
+        "consensusGain" : 4,
         "mixingFunctionPower" : 3,
         "gain" : 10000
     }
