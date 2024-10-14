@@ -6,6 +6,7 @@ if __name__ == "__main__":
     with open('Core/settings.json', 'r') as file:
         settings = json.load(file)
     capfSettings = settings["CAPF"]
+    consensusSettings = capfSettings["consensusFiltr"]
     perceptionRange = capfSettings["perceptionRange"]
     enclosingPoint = capfSettings["enclosingPoint"]
             
@@ -32,12 +33,10 @@ if __name__ == "__main__":
     swarmManager.CreateAgent(startPos=(585, 190))
     swarmManager.CreateAgent(startPos=(190, 290))
 
-
-    
     swarmManager.InitAgentConsensuses(enclosingPoint)
     
     clock = pygame.time.Clock()
-    FPS = 10
+    FPS = 20
         
     run = True
     while run:
@@ -46,7 +45,7 @@ if __name__ == "__main__":
         pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(*enclosingPoint, 5, 5))
 
         swarmManager.DrawAgents(screen, drawPerceptionRadiuses=False)
-        swarmManager.UpdateNewConsensuses(dt, enclosingPoint, capfSettings["consensusGain"], capfSettings["mixingFunctionPower"])
+        swarmManager.UpdateNewConsensuses(dt, enclosingPoint, consensusSettings["consensusGain"], consensusSettings["mixingFunctionPower"])
         swarmManager.UpdateAgentsPositions(dt, enclosingPoint=enclosingPoint)
         swarmManager.UpdateOldConsensuses()
         

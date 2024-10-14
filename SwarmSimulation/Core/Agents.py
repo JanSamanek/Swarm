@@ -1,5 +1,6 @@
 import pygame          
 from Core.Distance import DistanceHelper
+from Core.Consensus import ConsensusFiltr
 import numpy as np
 
 class Agent(pygame.Rect):
@@ -11,8 +12,8 @@ class Agent(pygame.Rect):
         self.agentsInPerceptionRange : list[Agent] = []
         
     def Move(self, controlInput, dt):
-        positionDelta = (controlInput[0]*dt, controlInput[1]*dt)
-        self.move_ip(positionDelta)
+        positionDelta = np.array(controlInput*dt).astype(np.int64)
+        self.move_ip(*positionDelta)
         return positionDelta
         
     def Draw(self, screen, color=(255, 255, 255)):
@@ -26,7 +27,6 @@ class Agent(pygame.Rect):
         for agentInRange in self.agentsInPerceptionRange:
             agentInRange.Draw(screen, color)
 
-max_distance_temporary = 350 # TODO: remove
 class CAPFAgent(Agent):
     
     def __init__(self, startPos, ID, perceptionRange):
@@ -35,30 +35,44 @@ class CAPFAgent(Agent):
         self.oldConsensus = None
         self.speed = np.array([0,0])
     
-    def CalculateControlInput(self, numberOfAgents, enclosingPoint, p, gain):        
-        distance = DistanceHelper.CalculateSquaredEuclideanDistance(enclosingPoint, self.center)
-        controlInput = -2*(np.array(self.center) - np.array(enclosingPoint)) \
-                         *((distance/(max_distance_temporary**2))**(p-1)) \
-                         /((numberOfAgents*self.newConsensus)**((p-1)/p))
+    def CalculateControlInput(self, n, o, p, gain):   
 
+        distance = DistanceHelper.CalculateSquaredEuclideanDistance(o, self.center)
+        distanceVector = np.array(self.center) - np.array(o)
+        
+        NORM = 300**2 # TODO: remove
+        controlInput = -2 * distanceVector * (distance / (NORM))**(p-1) / ((n*self.newConsensus)**((p-1)/p))
+
+        
+        #########################################
+        if self.ID == 0:
+            print(f"controlInput : {controlInput}")    
+        #########################################
+        
         if gain is not None:
             controlInput = gain * controlInput
         
-        return controlInput
+        # controlInput = np.clip(controlInput, -20, 20)
+            
+        return np.array(controlInput).astype(np.int64)
     
     def UpdateNewConsensus(self, dt, enclosingPoint, consensusGain, p):          
-        consensusDot = 0
-        for agent in self.agentsInPerceptionRange:
-            consensusDot += consensusGain*(agent.oldConsensus - self.oldConsensus)
+    
         distance = DistanceHelper.CalculateSquaredEuclideanDistance(enclosingPoint, self.center)
-        consensusDot += 2*p*((distance/(max_distance_temporary**2))**(p-1))* \
-                        (np.array(self.centerx) - np.array(enclosingPoint)).dot(self.speed)
+        distanceVector = np.array(self.center) - np.array(enclosingPoint)
 
+        consensusDot = ConsensusFiltr.CalculateConsensusDot(self, 
+                                                            self.agentsInPerceptionRange,
+                                                            distance,
+                                                            distanceVector,
+                                                            self.speed,
+                                                            consensusGain,
+                                                            p)
         self.newConsensus += consensusDot*dt
         
         #########################################
-        if self.ID == 1:
-            print(f"{self.ID} : {self.newConsensus}")
+        if self.ID == 0:
+            print(f"consensus = {self.newConsensus}, consensusDot = {consensusDot}, distance = {distance}")
         #########################################
 
       
@@ -71,16 +85,15 @@ class CAPFAgent(Agent):
         self.newConsensus = distance
         
     def Move(self, controlInput, dt):
-        self.speed = controlInput
+        self.speed = controlInput    
         
-        #########################################
-        if self.ID == 1:
-            print(f"{self.ID} : {self.speed*dt}")
-        #########################################
+        positionDelta = super().Move(controlInput, dt)
 
-            
-        super().Move(controlInput, dt)
-
+        #########################################
+        if self.ID == 0:
+            print(f"speed = {self.speed}, positionDelta = {positionDelta}")
+        #########################################
+    
 
 class APFAgent(Agent):
 
@@ -91,7 +104,7 @@ class APFAgent(Agent):
         controlInput = np.array([0, 0], dtype=np.float64)
         
         for agent in self.agentsInPerceptionRange:
-            distance = DistanceHelper.CalculateEuclideanDistance(self, agent)
+            distance = DistanceHelper.CalculateEuclideanDistance(self.center, agent.center)
             distanceError = desiredDistance - distance
             if deadzone is None or deadzone <= abs(distanceError):
                 controlInput += (distanceError / distance) * (np.array(self.center) - np.array(agent.center)).astype(np.float64) 

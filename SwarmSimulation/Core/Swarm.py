@@ -16,7 +16,7 @@ class SwarmManager:
             agentToUpdate.agentsInPerceptionRange = []
             for agent in self.agents:
                 if agentToUpdate.ID != agent.ID:
-                    distance = DistanceHelper.CalculateEuclideanDistance(agentToUpdate, agent)
+                    distance = DistanceHelper.CalculateEuclideanDistance(agentToUpdate.center, agent.center)
                     if distance <= agentToUpdate.perceptionRange:
                         agentToUpdate.agentsInPerceptionRange.append(agent)
                         
@@ -55,6 +55,7 @@ class SwarmManagerCAPF(SwarmManager):
     def __init__(self):
         super().__init__()
         self.capfSettings = self.settings["CAPF"]
+        self.consensusSettings = self.capfSettings["consensusFiltr"]
         self.agents : CAPFAgent
     
     def CreateAgent(self, startPos):
@@ -74,7 +75,7 @@ class SwarmManagerCAPF(SwarmManager):
         for agent in self.agents:
             controlInput = agent.CalculateControlInput( self.agentCounter, 
                                                         enclosingPoint, 
-                                                        self.capfSettings["mixingFunctionPower"],
+                                                        self.consensusSettings["mixingFunctionPower"],
                                                         self.capfSettings["gain"])
             agent.Move(controlInput, dt)
             
