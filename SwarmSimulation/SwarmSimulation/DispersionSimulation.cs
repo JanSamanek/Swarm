@@ -3,6 +3,10 @@ using System.Drawing;
 using System.Numerics;
 using System.Windows.Forms;
 using SwarmSimulation.Core;
+using SwarmSimulation.Core.Algorithms;
+using SwarmSimulation.Core.Algorithms.Implementation;
+using SwarmSimulation.Core.Algorithms.Inputs;
+using SwarmSimulation.Core.Algorithms.Settings;
 using SwarmSimulation.Settings;
 
 namespace SwarmSimulation
@@ -10,8 +14,8 @@ namespace SwarmSimulation
     public sealed class DispersionSimulation : BaseForm
     {
         private Swarm _swarm;
-        private DispersionAlgorithmSettings _dispersionAlgorithmSettings;
-
+        private IAlgorithm<DispersionAlgorithmSettings, DispersionAlgorithmInput> _dispersionAlgorithm;
+        
         public DispersionSimulation()
         {
             Text = @"Swarm dispersion simulation";
@@ -20,13 +24,15 @@ namespace SwarmSimulation
 
         protected override void InitializeSimulation()
         {
-            _dispersionAlgorithmSettings = new DispersionAlgorithmSettings
+            _dispersionAlgorithm = 
+                AlgorithmFactory.Get<DispersionAlgorithm, DispersionAlgorithmSettings, DispersionAlgorithmInput>();
+            
+            var algorithmSettings = new DispersionAlgorithmSettings
             {
-                DesiredDistance = 50,
                 DampingCoefficient = 4,
                 StiffnessCoefficient = 15,
-                NeighboursToCalculateFrom = 2
             };
+            _dispersionAlgorithm.ConfigureSettings(algorithmSettings);
             
             var perceptionRange = 100;
             _swarm = new Swarm();
@@ -49,7 +55,12 @@ namespace SwarmSimulation
 
         protected override void UpdateSimulation(object sender, EventArgs e)
         {
-            _swarm.Disperse(_dispersionAlgorithmSettings);
+            var input = new DispersionAlgorithmInput
+            {
+                DesiredDistance = 50,
+                NeighboursToCalculateFrom = 2
+            };
+            _swarm.Disperse(_dispersionAlgorithm, input);
             
             PictureBox.Invalidate();
         }

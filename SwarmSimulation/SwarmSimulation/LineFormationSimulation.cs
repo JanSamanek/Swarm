@@ -3,15 +3,18 @@ using System.Drawing;
 using System.Numerics;
 using System.Windows.Forms;
 using SwarmSimulation.Core;
-using SwarmSimulation.Settings;
+using SwarmSimulation.Core.Algorithms;
+using SwarmSimulation.Core.Algorithms.Implementation;
+using SwarmSimulation.Core.Algorithms.Inputs;
+using SwarmSimulation.Core.Algorithms.Settings;
 
 namespace SwarmSimulation
 {
     public sealed class LineFormationSimulation : BaseForm
     {
         private Swarm _swarm;
-        private LineFormationAlgorithmSettings _lineFormationAlgorithmSettings;
-
+        private IAlgorithm<LineFormationAlgorithmSettings, LineFormationAlgorithmInput> _lineFormationAlgorithm;
+        
         public LineFormationSimulation()
         {
             Text = @"Swarm line formation simulation";
@@ -20,13 +23,16 @@ namespace SwarmSimulation
 
         protected override void InitializeSimulation()
         {
-            _lineFormationAlgorithmSettings = new LineFormationAlgorithmSettings
+            _lineFormationAlgorithm =
+                AlgorithmFactory
+                    .Get<LineFormationAlgorithm, LineFormationAlgorithmSettings, LineFormationAlgorithmInput>();
+            
+            var settings = new LineFormationAlgorithmSettings
             {
-                DesiredDistance = 30,
                 GainParallel = 0.3f,
                 GainPerpendicular = 0.2f,
-                LineOrientationAngleInRadians = (float) Math.PI / 4
             };
+            _lineFormationAlgorithm.ConfigureSettings(settings);
             
             var perceptionRange = 120;
             _swarm = new Swarm();
@@ -41,7 +47,13 @@ namespace SwarmSimulation
 
         protected override void UpdateSimulation(object sender, EventArgs e)
         {
-            _swarm.MoveToLineFormation(_lineFormationAlgorithmSettings);
+            var input = new LineFormationAlgorithmInput
+            {
+                DesiredDistance = 30,
+                LineOrientationAngleInRadians = (float) Math.PI / 4
+            };
+            
+            _swarm.MoveToLineFormation(_lineFormationAlgorithm, input);
             PictureBox.Invalidate();
         }
         

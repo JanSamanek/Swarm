@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using SwarmSimulation.Core.Algorithms;
-using SwarmSimulation.Settings;
+using SwarmSimulation.Core.Algorithms.Inputs;
+using SwarmSimulation.Core.Algorithms.Settings;
 
 namespace SwarmSimulation.Core
 {
@@ -16,23 +17,24 @@ namespace SwarmSimulation.Core
             Agents.Add(new Agent(AgentCounter++, position, perceptionRange));
         }
 
-        public void MoveToLineFormation(LineFormationAlgorithmSettings algorithmSettings)
+        public void MoveToLineFormation(IAlgorithm<LineFormationAlgorithmSettings, LineFormationAlgorithmInput> algorithm, 
+            LineFormationAlgorithmInput input)
         {
-            var algorithm = AlgorithmFactory.Get<LineFormationAlgorithm, LineFormationAlgorithmSettings>();
-            UpdatePositions(algorithm, algorithmSettings);
-        }
-        public void Disperse(DispersionAlgorithmSettings algorithmSettings)
-        {
-            var algorithm = AlgorithmFactory.Get<DispersionAlgorithm, DispersionAlgorithmSettings>();
-            UpdatePositions(algorithm, algorithmSettings);
+            UpdatePositions(algorithm, input);
         }
         
-        private void UpdatePositions<T>(IAlgorithm<T> algorithm, T settings)
+        public void Disperse(IAlgorithm<DispersionAlgorithmSettings, DispersionAlgorithmInput> algorithm, 
+            DispersionAlgorithmInput input)
+        {
+            UpdatePositions(algorithm, input);
+        }
+        
+        private void UpdatePositions<TSettings, TInput>(IAlgorithm<TSettings,TInput> algorithm, TInput input)
         {
             UpdateNeighbours();
             foreach (var agent in Agents)
             {
-                var controlInput = algorithm.CalculateControlInput(agent, settings);
+                var controlInput = algorithm.CalculateControlInput(agent, input);
                 agent.Move(controlInput);
             }
         }

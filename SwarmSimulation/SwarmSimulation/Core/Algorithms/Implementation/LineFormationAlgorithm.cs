@@ -2,16 +2,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using SwarmSimulation.Settings;
+using SwarmSimulation.Core.Algorithms.Inputs;
+using SwarmSimulation.Core.Algorithms.Settings;
 using SwarmSimulation.Utilities.Extensions;
 
-namespace SwarmSimulation.Core.Algorithms
+namespace SwarmSimulation.Core.Algorithms.Implementation
 {
-    public class LineFormationAlgorithm : IAlgorithm<LineFormationAlgorithmSettings>
+    public class LineFormationAlgorithm : IAlgorithm<LineFormationAlgorithmSettings, LineFormationAlgorithmInput>
     {
-        public Vector2 CalculateControlInput(Agent agent, LineFormationAlgorithmSettings settings)
+        public LineFormationAlgorithmSettings Settings { get; set; }
+        public void ConfigureSettings(LineFormationAlgorithmSettings settings)
         {
-            var orientationAngle = settings.LineOrientationAngleInRadians;
+            Settings = settings;
+        }
+        public Vector2 CalculateControlInput(Agent agent, LineFormationAlgorithmInput input)
+        {
+            var orientationAngle = input.LineOrientationAngleInRadians;
 
             var adjacent = GetAdjacentAgents(agent, orientationAngle);
             
@@ -23,9 +29,9 @@ namespace SwarmSimulation.Core.Algorithms
                 var parallelDistance = new Vector2(0, distance.Y);
                 var perpendicularDistance = new Vector2(distance.X, 0);
                 
-                controlInputParallel += settings.GainParallel * parallelDistance;
-                controlInputPerpendicular += settings.GainPerpendicular 
-                                             * (perpendicularDistance.Length() - settings.DesiredDistance)
+                controlInputParallel += Settings.GainParallel * parallelDistance;
+                controlInputPerpendicular += Settings.GainPerpendicular 
+                                             * (perpendicularDistance.Length() - input.DesiredDistance)
                                              * perpendicularDistance;
             }
             
@@ -56,5 +62,6 @@ namespace SwarmSimulation.Core.Algorithms
             }
             return adjacent;
         }
+
     }
 }

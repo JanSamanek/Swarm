@@ -50,11 +50,15 @@
         <Compile Include="BaseForm.cs">
           <SubType>Form</SubType>
         </Compile>
-        <Compile Include="Core\Agent.cs" />
         <Compile Include="Core\Algorithms\AlgorithmFactory.cs" />
-        <Compile Include="Core\Algorithms\DispersionAlgorithm.cs" />
         <Compile Include="Core\Algorithms\IAlgorithm.cs" />
-        <Compile Include="Core\Algorithms\LineFormationAlgorithm.cs" />
+        <Compile Include="Core\Algorithms\Implementation\DispersionAlgorithm.cs" />
+        <Compile Include="Core\Algorithms\Implementation\LineFormationAlgorithm.cs" />
+        <Compile Include="Core\Algorithms\Inputs\DispersionAlgorithmInput.cs" />
+        <Compile Include="Core\Algorithms\Inputs\LineFormationAlgorithmInput.cs" />
+        <Compile Include="Core\Agent.cs" />
+        <Compile Include="Core\Algorithms\Settings\DispersionAlgorithmSettings.cs" />
+        <Compile Include="Core\Algorithms\Settings\LineFormationAlgorithmSettings.cs" />
         <Compile Include="Core\Swarm.cs" />
         <Compile Include="Core\SwarmRenderer.cs" />
         <Compile Include="DispersionSimulation.cs">
@@ -63,10 +67,8 @@
         <Compile Include="LineFormationSimulation.cs">
           <SubType>Form</SubType>
         </Compile>
-        <Compile Include="Settings\DispersionAlgorithmSettings.cs" />
         <Compile Include="Program.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
-        <Compile Include="Settings\LineFormationAlgorithmSettings.cs" />
         <Compile Include="Settings\SimulationSettings.cs" />
         <Compile Include="Utilities\Extensions\Vector2Extensions.cs" />
         <Compile Include="Utilities\MathUtils.cs" />

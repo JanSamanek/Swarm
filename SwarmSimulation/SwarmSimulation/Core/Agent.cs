@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Numerics;
-using SwarmSimulation.Settings;
 using SwarmSimulation.Utilities;
 
 namespace SwarmSimulation.Core
@@ -12,12 +11,14 @@ namespace SwarmSimulation.Core
         public Vector2 Velocity { get; private set; } = Vector2.Zero;
         public int PerceptionRange { get; }
         public List<Agent> Neighbors { get; set; } = new List<Agent>();
+        public bool IsLeader { get; set; }
 
-        public Agent(int id, Vector2 position, int perceptionRange)
+        public Agent(int id, Vector2 position, int perceptionRange, bool isLeader = false)
         {
             Position = position;
             Id = id;
             PerceptionRange = perceptionRange;
+            IsLeader = isLeader;
         }
 
         public void Move(Vector2 controlInput)
