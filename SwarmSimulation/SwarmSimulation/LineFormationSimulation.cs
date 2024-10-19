@@ -29,8 +29,8 @@ namespace SwarmSimulation
             
             var settings = new LineFormationAlgorithmSettings
             {
-                GainParallel = 0.3f,
-                GainPerpendicular = 0.2f,
+                GainParallel = 0.9f,
+                GainPerpendicular = 0.6f,
             };
             _lineFormationAlgorithm.ConfigureSettings(settings);
             
