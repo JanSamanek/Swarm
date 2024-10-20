@@ -1,4 +1,6 @@
 
+using SwarmSimulation.Core.Algorithms.Contracts;
+
 namespace SwarmSimulation.Core.Algorithms
 {
     public static class AlgorithmFactory

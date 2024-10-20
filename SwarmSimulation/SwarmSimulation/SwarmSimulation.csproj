@@ -50,14 +50,17 @@
         <Compile Include="BaseForm.cs">
           <SubType>Form</SubType>
         </Compile>
+        <Compile Include="Core\Agents\Contracts\IAgent.cs" />
+        <Compile Include="Core\Agents\Implementation\RegularAgent.cs" />
+        <Compile Include="Core\Agents\Implementation\Agent.cs" />
+        <Compile Include="Core\Agents\Implementation\LeaderAgent.cs" />
         <Compile Include="Core\Algorithms\AlgorithmFactory.cs" />
-        <Compile Include="Core\Algorithms\IAlgorithm.cs" />
-        <Compile Include="Core\Algorithms\Implementation\DispersionAlgorithm.cs" />
+        <Compile Include="Core\Algorithms\Contracts\IAlgorithm.cs" />
+        <Compile Include="Core\Algorithms\Implementation\ProximityAlgorithm.cs" />
         <Compile Include="Core\Algorithms\Implementation\LineFormationAlgorithm.cs" />
-        <Compile Include="Core\Algorithms\Inputs\DispersionAlgorithmInput.cs" />
+        <Compile Include="Core\Algorithms\Inputs\ProximityAlgorithmInput.cs" />
         <Compile Include="Core\Algorithms\Inputs\LineFormationAlgorithmInput.cs" />
-        <Compile Include="Core\Agent.cs" />
-        <Compile Include="Core\Algorithms\Settings\DispersionAlgorithmSettings.cs" />
+        <Compile Include="Core\Algorithms\Settings\ProximityAlgorithmSettings.cs" />
         <Compile Include="Core\Algorithms\Settings\LineFormationAlgorithmSettings.cs" />
         <Compile Include="Core\Swarm.cs" />
         <Compile Include="Core\SwarmRenderer.cs" />
@@ -65,6 +68,9 @@
           <SubType>Form</SubType>
         </Compile>
         <Compile Include="LineFormationSimulation.cs">
+          <SubType>Form</SubType>
+        </Compile>
+        <Compile Include="LineStretchingSimulation.cs">
           <SubType>Form</SubType>
         </Compile>
         <Compile Include="Program.cs"/>

@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Numerics;
 using System.Windows.Forms;
 using SwarmSimulation.Core;
+using SwarmSimulation.Core.Agents.Implementation;
 using SwarmSimulation.Core.Algorithms;
 using SwarmSimulation.Core.Algorithms.Contracts;
 using SwarmSimulation.Core.Algorithms.Implementation;
@@ -12,14 +13,17 @@ using SwarmSimulation.Settings;
 
 namespace SwarmSimulation
 {
-    public sealed class DispersionSimulation : BaseForm
+    public sealed class LineStretchingSimulation : BaseForm
     {
         private Swarm _swarm;
+        private LeaderAgent _leader1;
+        private LeaderAgent _leader2;
+
         private IAlgorithm<ProximityAlgorithmSettings, ProximityAlgorithmInput> _dispersionAlgorithm;
         
-        public DispersionSimulation()
+        public LineStretchingSimulation()
         {
-            Text = @"Swarm dispersion simulation";
+            Text = @"Swarm line stretching simulation";
             StartSimulation();
         }
 
@@ -35,8 +39,12 @@ namespace SwarmSimulation
             };
             _dispersionAlgorithm.ConfigureSettings(algorithmSettings);
             
-            var perceptionRange = 100;
+            const int perceptionRange = 100;
             _swarm = new Swarm();
+
+            _leader1 = _swarm.AddLeader(new Vector2(485, 300), perceptionRange);
+            _leader2 = _swarm.AddLeader(new Vector2(515, 300), perceptionRange);
+            
             _swarm.AddAgent(new Vector2(490, 300), perceptionRange);
             _swarm.AddAgent(new Vector2(495, 295), perceptionRange);
             _swarm.AddAgent(new Vector2(505, 295), perceptionRange);
@@ -61,7 +69,9 @@ namespace SwarmSimulation
                 DesiredDistance = 50,
                 NeighboursToCalculateFrom = 2
             };
-            _swarm.Disperse(_dispersionAlgorithm, input);
+            _leader1.MoveToTarget(new Vector2(300, 300), 15.0f);
+            _leader2.MoveToTarget(new Vector2(750, 300), 15.0f);
+            _swarm.Disperse(_dispersionAlgorithm, input); // TODO: create LineStretching
             
             PictureBox.Invalidate();
         }

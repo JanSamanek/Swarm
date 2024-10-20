@@ -1,20 +1,23 @@
 using System.Linq;
 using System.Numerics;
+using SwarmSimulation.Core.Agents;
+using SwarmSimulation.Core.Agents.Implementation;
+using SwarmSimulation.Core.Algorithms.Contracts;
 using SwarmSimulation.Core.Algorithms.Inputs;
 using SwarmSimulation.Core.Algorithms.Settings;
 using SwarmSimulation.Utilities;
 
 namespace SwarmSimulation.Core.Algorithms.Implementation
 {
-    public class DispersionAlgorithm : IAlgorithm<DispersionAlgorithmSettings, DispersionAlgorithmInput>
+    public class ProximityAlgorithm : IAlgorithm<ProximityAlgorithmSettings, ProximityAlgorithmInput>
     {
-        public DispersionAlgorithmSettings Settings { get; set; }
-        public void ConfigureSettings(DispersionAlgorithmSettings settings)
+        public ProximityAlgorithmSettings Settings { get; set; }
+        public void ConfigureSettings(ProximityAlgorithmSettings settings)
         {
             Settings = settings;
         }
 
-        public Vector2 CalculateControlInput(Agent agent, DispersionAlgorithmInput input)
+        public Vector2 CalculateControlInput(RegularAgent agent, ProximityAlgorithmInput input)
         {
             var closestNeighbours = agent.Neighbors
                 .OrderBy(neighbour => Vector2.Distance(neighbour.Position, agent.Position))

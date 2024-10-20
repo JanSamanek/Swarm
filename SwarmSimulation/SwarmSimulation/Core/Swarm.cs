@@ -1,7 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using SwarmSimulation.Core.Algorithms;
+using SwarmSimulation.Core.Agents.Contracts;
+using SwarmSimulation.Core.Agents.Implementation;
+using SwarmSimulation.Core.Algorithms.Contracts;
 using SwarmSimulation.Core.Algorithms.Inputs;
 using SwarmSimulation.Core.Algorithms.Settings;
 
@@ -9,22 +12,30 @@ namespace SwarmSimulation.Core
 {
     public class Swarm
     {
-        public List<Agent> Agents { get; } = new List<Agent>();
+        public List<IAgent> Agents { get; } = new List<IAgent>();
         private int AgentCounter { get; set; }
 
-        public void CreateAgent(Vector2 position, int perceptionRange)
+        public RegularAgent AddAgent(Vector2 position, int perceptionRange)
         {
-            Agents.Add(new Agent(AgentCounter++, position, perceptionRange));
+            var regular = new RegularAgent(AgentCounter++, position, perceptionRange);
+            Agents.Add(regular);
+            return regular;
         }
-
+        public LeaderAgent AddLeader(Vector2 position, int perceptionRange)
+        {
+            var leader = new LeaderAgent(AgentCounter++, position, perceptionRange);
+            Agents.Add(leader);
+            return leader;
+        }
+        
         public void MoveToLineFormation(IAlgorithm<LineFormationAlgorithmSettings, LineFormationAlgorithmInput> algorithm, 
             LineFormationAlgorithmInput input)
         {
             UpdatePositions(algorithm, input);
         }
         
-        public void Disperse(IAlgorithm<DispersionAlgorithmSettings, DispersionAlgorithmInput> algorithm, 
-            DispersionAlgorithmInput input)
+        public void Disperse(IAlgorithm<ProximityAlgorithmSettings, ProximityAlgorithmInput> algorithm, 
+            ProximityAlgorithmInput input)
         {
             UpdatePositions(algorithm, input);
         }
@@ -32,9 +43,9 @@ namespace SwarmSimulation.Core
         private void UpdatePositions<TSettings, TInput>(IAlgorithm<TSettings,TInput> algorithm, TInput input)
         {
             UpdateNeighbours();
-            foreach (var agent in Agents)
+            foreach (var agent in Agents.Where(a => a is RegularAgent))
             {
-                var controlInput = algorithm.CalculateControlInput(agent, input);
+                var controlInput = algorithm.CalculateControlInput((RegularAgent) agent, input);
                 agent.Move(controlInput);
             }
         }
@@ -43,7 +54,7 @@ namespace SwarmSimulation.Core
         {
             foreach (var agentToUpdate in Agents)
             {
-                agentToUpdate.Neighbors = new List<Agent>();
+                agentToUpdate.Neighbors = new List<IAgent>();
                 foreach (var agent in Agents.Where(agent => agentToUpdate.Id != agent.Id))
                 {
                     var distance = Vector2.Distance(agent.Position, agentToUpdate.Position);

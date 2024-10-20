@@ -1,6 +1,6 @@
 namespace SwarmSimulation.Core.Algorithms.Settings
 {
-    public class DispersionAlgorithmSettings
+    public class ProximityAlgorithmSettings
     {
         public float DampingCoefficient { get; set; }
         public float StiffnessCoefficient { get; set; }

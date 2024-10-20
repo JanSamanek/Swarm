@@ -4,6 +4,7 @@ using System.Numerics;
 using System.Windows.Forms;
 using SwarmSimulation.Core;
 using SwarmSimulation.Core.Algorithms;
+using SwarmSimulation.Core.Algorithms.Contracts;
 using SwarmSimulation.Core.Algorithms.Implementation;
 using SwarmSimulation.Core.Algorithms.Inputs;
 using SwarmSimulation.Core.Algorithms.Settings;
@@ -36,13 +37,13 @@ namespace SwarmSimulation
             
             var perceptionRange = 120;
             _swarm = new Swarm();
-            _swarm.CreateAgent(new Vector2(380, 370), perceptionRange);
-            _swarm.CreateAgent(new Vector2(400, 310), perceptionRange);
-            _swarm.CreateAgent(new Vector2(480, 300), perceptionRange);
-            _swarm.CreateAgent(new Vector2(345, 320), perceptionRange);
-            _swarm.CreateAgent(new Vector2(520, 340), perceptionRange);
-            _swarm.CreateAgent(new Vector2(325, 380), perceptionRange);
-            _swarm.CreateAgent(new Vector2(430, 270), perceptionRange);
+            _swarm.AddAgent(new Vector2(380, 370), perceptionRange);
+            _swarm.AddAgent(new Vector2(400, 310), perceptionRange);
+            _swarm.AddAgent(new Vector2(480, 300), perceptionRange);
+            _swarm.AddAgent(new Vector2(345, 320), perceptionRange);
+            _swarm.AddAgent(new Vector2(520, 340), perceptionRange);
+            _swarm.AddAgent(new Vector2(325, 380), perceptionRange);
+            _swarm.AddAgent(new Vector2(430, 270), perceptionRange);
         }
 
         protected override void UpdateSimulation(object sender, EventArgs e)

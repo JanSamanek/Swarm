@@ -2,6 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using SwarmSimulation.Core.Agents;
+using SwarmSimulation.Core.Agents.Contracts;
+using SwarmSimulation.Core.Agents.Implementation;
+using SwarmSimulation.Core.Algorithms.Contracts;
 using SwarmSimulation.Core.Algorithms.Inputs;
 using SwarmSimulation.Core.Algorithms.Settings;
 using SwarmSimulation.Utilities.Extensions;
@@ -15,7 +19,7 @@ namespace SwarmSimulation.Core.Algorithms.Implementation
         {
             Settings = settings;
         }
-        public Vector2 CalculateControlInput(Agent agent, LineFormationAlgorithmInput input)
+        public Vector2 CalculateControlInput(RegularAgent agent, LineFormationAlgorithmInput input)
         {
             var orientationAngle = input.LineOrientationAngleInRadians;
 
@@ -38,7 +42,7 @@ namespace SwarmSimulation.Core.Algorithms.Implementation
             var controlInput = controlInputParallel + controlInputPerpendicular;
             return controlInput.Rotate(-orientationAngle);
         }
-        private static IEnumerable<Agent> GetAdjacentAgents(Agent agent, float orientationAngle)
+        private static IEnumerable<IAgent> GetAdjacentAgents(RegularAgent agent, float orientationAngle)
         {
             var closest = agent.Neighbors
                 .OrderBy(neighbour 
@@ -50,7 +54,7 @@ namespace SwarmSimulation.Core.Algorithms.Implementation
             var closestLeft = closest.FirstOrDefault(a => 
                 a.Position.Rotate(orientationAngle).X < agent.Position.Rotate(orientationAngle).X);
 
-            var adjacent = new List<Agent>();
+            var adjacent = new List<IAgent>();
             if (closestRight != null)
             {
                 adjacent.Add(closestRight);

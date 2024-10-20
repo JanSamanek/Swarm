@@ -1,5 +1,6 @@
 using System.Drawing;
 using System.Linq;
+using SwarmSimulation.Core.Agents.Contracts;
 
 namespace SwarmSimulation.Core
 {
@@ -28,20 +29,20 @@ namespace SwarmSimulation.Core
             }
         }
 
-        private static void DrawPerceptionRange(Agent agent, Graphics graphics)
+        private static void DrawPerceptionRange(IAgent agent, Graphics graphics)
         {
             var range = agent.PerceptionRange;
             graphics.FillEllipse(Brushes.Firebrick, (int) agent.Position.X - range / 2, (int) agent.Position.Y - range / 2, 
                 range, range);
         }
 
-        private static void DrawAgent(Agent agent, Graphics graphics, (int Width, int Height) size)
+        private static void DrawAgent(IAgent agent, Graphics graphics, (int Width, int Height) size)
         {
             graphics.FillEllipse(Brushes.White, (int) agent.Position.X - size.Width / 2, (int) agent.Position.Y - size.Height / 2, 
                 size.Width, size.Height);
         }
         
-        private static void DrawId(Agent agent, Graphics graphics, (int Width, int Height) agentSize)
+        private static void DrawId(IAgent agent, Graphics graphics, (int Width, int Height) agentSize)
         {
             var font = new Font("Arial", 10);
             var stringSize = graphics.MeasureString(agent.Id.ToString(), font);
