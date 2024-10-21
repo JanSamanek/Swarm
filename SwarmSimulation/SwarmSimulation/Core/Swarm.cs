@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -26,6 +25,13 @@ namespace SwarmSimulation.Core
             var leader = new LeaderAgent(AgentCounter++, position, perceptionRange);
             Agents.Add(leader);
             return leader;
+        }
+
+        public void MoveToArrowFormation(
+            IAlgorithm<ArrowFormationAlgorithmSettings, ArrowFormationAlgorithmInput> algorithm,
+            ArrowFormationAlgorithmInput input)
+        {
+            UpdatePositions(algorithm, input);
         }
         
         public void MoveToLineFormation(IAlgorithm<LineFormationAlgorithmSettings, LineFormationAlgorithmInput> algorithm, 

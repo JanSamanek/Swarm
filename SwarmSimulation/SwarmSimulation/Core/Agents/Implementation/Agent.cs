@@ -5,7 +5,7 @@ using SwarmSimulation.Utilities;
 
 namespace SwarmSimulation.Core.Agents.Implementation
 {
-    public class Agent : IAgent
+    public class Agent
     {
         protected Agent(int id, Vector2 position, int perceptionRange)
         {

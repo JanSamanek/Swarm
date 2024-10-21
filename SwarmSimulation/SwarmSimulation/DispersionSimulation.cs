@@ -35,7 +35,7 @@ namespace SwarmSimulation
             };
             _dispersionAlgorithm.ConfigureSettings(algorithmSettings);
             
-            var perceptionRange = 100;
+            const int perceptionRange = 100;
             _swarm = new Swarm();
             _swarm.AddAgent(new Vector2(490, 300), perceptionRange);
             _swarm.AddAgent(new Vector2(495, 295), perceptionRange);
