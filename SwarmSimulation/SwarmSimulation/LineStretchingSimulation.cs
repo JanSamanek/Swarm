@@ -71,7 +71,7 @@ namespace SwarmSimulation
             };
             _leader1.MoveToTarget(new Vector2(300, 300), 15.0f);
             _leader2.MoveToTarget(new Vector2(750, 300), 15.0f);
-            _swarm.Disperse(_dispersionAlgorithm, input); // TODO: create LineStretching
+            _swarm.Disperse(_dispersionAlgorithm, input);
             
             PictureBox.Invalidate();
         }
