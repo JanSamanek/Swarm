@@ -1,6 +1,6 @@
 namespace SwarmSimulation.Core.Algorithms.Settings
 {
-    public class ArrowFormationAlgorithmSettings
+    public class FormationAlgorithmSettings
     {
         public float ApfGain { get; set; }       
     }

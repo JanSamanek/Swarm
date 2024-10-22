@@ -28,8 +28,8 @@ namespace SwarmSimulation.Core
         }
 
         public void MoveToArrowFormation(
-            IAlgorithm<ArrowFormationAlgorithmSettings, ArrowFormationAlgorithmInput> algorithm,
-            ArrowFormationAlgorithmInput input)
+            IAlgorithm<FormationAlgorithmSettings, FormationAlgorithmInput> algorithm,
+            FormationAlgorithmInput input)
         {
             UpdatePositions(algorithm, input);
         }

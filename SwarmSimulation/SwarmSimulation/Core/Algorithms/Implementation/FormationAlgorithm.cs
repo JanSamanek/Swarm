@@ -7,15 +7,15 @@ using SwarmSimulation.Core.Algorithms.Settings;
 
 namespace SwarmSimulation.Core.Algorithms.Implementation
 {
-    public class ArrowFormationAlgorithm : IAlgorithm<ArrowFormationAlgorithmSettings, ArrowFormationAlgorithmInput>
+    public class FormationAlgorithm : IAlgorithm<FormationAlgorithmSettings, FormationAlgorithmInput>
     {
-        public ArrowFormationAlgorithmSettings Settings { get; set; }
-        public void ConfigureSettings(ArrowFormationAlgorithmSettings settings)
+        public FormationAlgorithmSettings Settings { get; set; }
+        public void ConfigureSettings(FormationAlgorithmSettings settings)
         {
             Settings = settings;
         }
 
-        public Vector2 CalculateControlInput(RegularAgent agent, ArrowFormationAlgorithmInput input)
+        public Vector2 CalculateControlInput(RegularAgent agent, FormationAlgorithmInput input)
         {
             var controlInput = Vector2.Zero;
             foreach (var neighbour in agent.Neighbors)

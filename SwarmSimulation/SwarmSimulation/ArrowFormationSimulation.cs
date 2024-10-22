@@ -16,7 +16,7 @@ namespace SwarmSimulation
     {
         private Swarm _swarm;
         private LeaderAgent _leader;
-        private IAlgorithm<ArrowFormationAlgorithmSettings, ArrowFormationAlgorithmInput> _arrowFormationAlgorithm;
+        private IAlgorithm<FormationAlgorithmSettings, FormationAlgorithmInput> _arrowFormationAlgorithm;
         public ArrowFormationSimulation()
         {
             Text = @"Swarm arrow formation simulation";
@@ -27,9 +27,9 @@ namespace SwarmSimulation
          {
              _arrowFormationAlgorithm =
                  AlgorithmFactory
-                     .Get<ArrowFormationAlgorithm, ArrowFormationAlgorithmSettings, ArrowFormationAlgorithmInput>();
+                     .Get<FormationAlgorithm, FormationAlgorithmSettings, FormationAlgorithmInput>();
              
-             var settings = new ArrowFormationAlgorithmSettings
+             var settings = new FormationAlgorithmSettings
              {
                 ApfGain = 55.0f
              };
@@ -66,7 +66,7 @@ namespace SwarmSimulation
             //     }
             // }
             
-            var input = new ArrowFormationAlgorithmInput
+            var input = new FormationAlgorithmInput
             {
                 DesiredInterAgentDistances = desiredInterAgentDistances
             };

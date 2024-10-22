@@ -59,13 +59,13 @@
         <Compile Include="Core\Agents\Implementation\LeaderAgent.cs" />
         <Compile Include="Core\Algorithms\AlgorithmFactory.cs" />
         <Compile Include="Core\Algorithms\Contracts\IAlgorithm.cs" />
-        <Compile Include="Core\Algorithms\Implementation\ArrowFormationAlgorithm.cs" />
+        <Compile Include="Core\Algorithms\Implementation\FormationAlgorithm.cs" />
         <Compile Include="Core\Algorithms\Implementation\ProximityAlgorithm.cs" />
         <Compile Include="Core\Algorithms\Implementation\LineFormationAlgorithm.cs" />
-        <Compile Include="Core\Algorithms\Inputs\ArrowFormationAlgorithmInput.cs" />
+        <Compile Include="Core\Algorithms\Inputs\FormationAlgorithmInput.cs" />
         <Compile Include="Core\Algorithms\Inputs\ProximityAlgorithmInput.cs" />
         <Compile Include="Core\Algorithms\Inputs\LineFormationAlgorithmInput.cs" />
-        <Compile Include="Core\Algorithms\Settings\ArrowFormationAlgorithmSettings.cs" />
+        <Compile Include="Core\Algorithms\Settings\FormationAlgorithmSettings.cs" />
         <Compile Include="Core\Algorithms\Settings\ProximityAlgorithmSettings.cs" />
         <Compile Include="Core\Algorithms\Settings\LineFormationAlgorithmSettings.cs" />
         <Compile Include="Core\Swarm.cs" />
