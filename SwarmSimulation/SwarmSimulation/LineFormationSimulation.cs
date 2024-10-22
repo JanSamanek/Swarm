@@ -24,16 +24,12 @@ namespace SwarmSimulation
 
         protected override void InitializeSimulation()
         {
-            _lineFormationAlgorithm =
-                AlgorithmFactory
-                    .Get<LineFormationAlgorithm, LineFormationAlgorithmSettings, LineFormationAlgorithmInput>();
-            
-            var settings = new LineFormationAlgorithmSettings
+            var algorithmSettings = new LineFormationAlgorithmSettings
             {
                 GainParallel = 0.9f,
                 GainPerpendicular = 0.6f,
             };
-            _lineFormationAlgorithm.ConfigureSettings(settings);
+            _lineFormationAlgorithm = new LineFormationAlgorithm(algorithmSettings);
             
             var perceptionRange = 120;
             _swarm = new Swarm();

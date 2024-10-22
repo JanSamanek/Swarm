@@ -4,7 +4,6 @@ using System.Numerics;
 using System.Windows.Forms;
 using SwarmSimulation.Core;
 using SwarmSimulation.Core.Agents.Implementation;
-using SwarmSimulation.Core.Algorithms;
 using SwarmSimulation.Core.Algorithms.Contracts;
 using SwarmSimulation.Core.Algorithms.Implementation;
 using SwarmSimulation.Core.Algorithms.Inputs;
@@ -25,16 +24,12 @@ namespace SwarmSimulation
         
          protected override void InitializeSimulation()
          {
-             _arrowFormationAlgorithm =
-                 AlgorithmFactory
-                     .Get<FormationAlgorithm, FormationAlgorithmSettings, FormationAlgorithmInput>();
              
-             var settings = new FormationAlgorithmSettings
+             var algorithmSettings = new FormationAlgorithmSettings
              {
                 ApfGain = 55.0f
              };
-             _arrowFormationAlgorithm.ConfigureSettings(settings);
-             
+             _arrowFormationAlgorithm = new FormationAlgorithm(algorithmSettings);
             
             const int perceptionRange = 200;
             _swarm = new Swarm();

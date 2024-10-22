@@ -12,11 +12,10 @@ namespace SwarmSimulation.Core.Algorithms.Implementation
     public class ProximityAlgorithm : IAlgorithm<ProximityAlgorithmSettings, ProximityAlgorithmInput>
     {
         public ProximityAlgorithmSettings Settings { get; set; }
-        public void ConfigureSettings(ProximityAlgorithmSettings settings)
+        public ProximityAlgorithm(ProximityAlgorithmSettings settings)
         {
             Settings = settings;
         }
-
         public Vector2 CalculateControlInput(RegularAgent agent, ProximityAlgorithmInput input)
         {
             var closestNeighbours = agent.Neighbors

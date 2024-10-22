@@ -10,11 +10,10 @@ namespace SwarmSimulation.Core.Algorithms.Implementation
     public class FormationAlgorithm : IAlgorithm<FormationAlgorithmSettings, FormationAlgorithmInput>
     {
         public FormationAlgorithmSettings Settings { get; set; }
-        public void ConfigureSettings(FormationAlgorithmSettings settings)
+        public FormationAlgorithm(FormationAlgorithmSettings settings)
         {
             Settings = settings;
         }
-
         public Vector2 CalculateControlInput(RegularAgent agent, FormationAlgorithmInput input)
         {
             var controlInput = Vector2.Zero;

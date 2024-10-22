@@ -25,15 +25,12 @@ namespace SwarmSimulation
 
         protected override void InitializeSimulation()
         {
-            _dispersionAlgorithm = 
-                AlgorithmFactory.Get<ProximityAlgorithm, ProximityAlgorithmSettings, ProximityAlgorithmInput>();
-            
             var algorithmSettings = new ProximityAlgorithmSettings
             {
                 DampingCoefficient = 4,
                 StiffnessCoefficient = 15,
             };
-            _dispersionAlgorithm.ConfigureSettings(algorithmSettings);
+            _dispersionAlgorithm = new ProximityAlgorithm(algorithmSettings);
             
             const int perceptionRange = 100;
             _swarm = new Swarm();
