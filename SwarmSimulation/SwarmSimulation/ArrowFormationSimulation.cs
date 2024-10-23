@@ -50,22 +50,12 @@ namespace SwarmSimulation
                 { 56.57f, 28.28f, 63.25f, 0.0f, 80.0f },
                 { 56.57f, 63.25f, 28.28f, 80.0f, 0.0f },
             };
-        
-            // Calculate distances
-            // for (var i = 0; i < _swarm.Agents.Count; i++)
-            // {
-            //     for (var j = 0; j < _swarm.Agents.Count; j++)
-            //     {
-            //         desiredInterAgentDistances[i, j] =
-            //             Vector2.Distance(_swarm.Agents[i].Position, _swarm.Agents[j].Position);
-            //     }
-            // }
             
             var input = new FormationAlgorithmInput
             {
                 DesiredInterAgentDistances = desiredInterAgentDistances
             };
-            _leader.MoveToTarget(new Vector2(500,150), 15.0f);
+            _leader.MoveToTarget(new Vector2(350,150), 15.0f);
             _swarm.MoveToArrowFormation(_arrowFormationAlgorithm, input);
             
             PictureBox.Invalidate();
