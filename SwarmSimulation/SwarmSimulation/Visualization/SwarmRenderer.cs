@@ -1,8 +1,9 @@
 using System.Drawing;
 using System.Linq;
+using SwarmSimulation.Core;
 using SwarmSimulation.Core.Agents.Contracts;
 
-namespace SwarmSimulation.Core
+namespace SwarmSimulation.Visualization
 {
     public static class SwarmRenderer
     {

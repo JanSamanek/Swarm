@@ -1,4 +1,4 @@
-namespace SwarmSimulation.Core.Algorithms.Inputs
+namespace SwarmSimulation.Core.Algorithms.Implementation.Proximity
 {
     public class ProximityAlgorithmInput
     {

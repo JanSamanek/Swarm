@@ -3,18 +3,16 @@ using System.Drawing;
 using System.Numerics;
 using System.Windows.Forms;
 using SwarmSimulation.Core;
-using SwarmSimulation.Core.Algorithms;
 using SwarmSimulation.Core.Algorithms.Contracts;
-using SwarmSimulation.Core.Algorithms.Implementation;
-using SwarmSimulation.Core.Algorithms.Inputs;
-using SwarmSimulation.Core.Algorithms.Settings;
+using SwarmSimulation.Core.Algorithms.Implementation.LineAggregation;
+using SwarmSimulation.Visualization;
 
-namespace SwarmSimulation
+namespace SwarmSimulation.Simulations
 {
     public sealed class LineFormationSimulation : BaseForm
     {
         private Swarm _swarm;
-        private IAlgorithm<LineFormationAlgorithmSettings, LineFormationAlgorithmInput> _lineFormationAlgorithm;
+        private IAlgorithm<LineAggregationAlgorithmSettings, LineAggregationAlgorithmInput> _lineFormationAlgorithm;
         
         public LineFormationSimulation()
         {
@@ -24,12 +22,12 @@ namespace SwarmSimulation
 
         protected override void InitializeSimulation()
         {
-            var algorithmSettings = new LineFormationAlgorithmSettings
+            var algorithmSettings = new LineAggregationAlgorithmSettings
             {
                 GainParallel = 0.9f,
                 GainPerpendicular = 0.6f,
             };
-            _lineFormationAlgorithm = new LineFormationAlgorithm(algorithmSettings);
+            _lineFormationAlgorithm = new LineAggregationAlgorithm(algorithmSettings);
             
             var perceptionRange = 120;
             _swarm = new Swarm();
@@ -44,7 +42,7 @@ namespace SwarmSimulation
 
         protected override void UpdateSimulation(object sender, EventArgs e)
         {
-            var input = new LineFormationAlgorithmInput
+            var input = new LineAggregationAlgorithmInput
             {
                 DesiredDistance = 30,
                 LineOrientationAngleInRadians = (float) Math.PI / 4

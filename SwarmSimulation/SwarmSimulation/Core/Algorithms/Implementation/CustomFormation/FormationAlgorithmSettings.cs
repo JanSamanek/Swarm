@@ -1,4 +1,4 @@
-namespace SwarmSimulation.Core.Algorithms.Settings
+namespace SwarmSimulation.Core.Algorithms.Implementation.CustomFormation
 {
     public class FormationAlgorithmSettings
     {

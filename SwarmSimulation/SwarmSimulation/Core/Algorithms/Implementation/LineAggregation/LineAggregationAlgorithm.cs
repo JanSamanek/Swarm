@@ -2,24 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using SwarmSimulation.Core.Agents;
 using SwarmSimulation.Core.Agents.Contracts;
 using SwarmSimulation.Core.Agents.Implementation;
 using SwarmSimulation.Core.Algorithms.Contracts;
-using SwarmSimulation.Core.Algorithms.Inputs;
-using SwarmSimulation.Core.Algorithms.Settings;
 using SwarmSimulation.Utilities.Extensions;
 
-namespace SwarmSimulation.Core.Algorithms.Implementation
+namespace SwarmSimulation.Core.Algorithms.Implementation.LineAggregation
 {
-    public class LineFormationAlgorithm : IAlgorithm<LineFormationAlgorithmSettings, LineFormationAlgorithmInput>
+    public class LineAggregationAlgorithm : IAlgorithm<LineAggregationAlgorithmSettings, LineAggregationAlgorithmInput>
     {
-        public LineFormationAlgorithmSettings Settings { get; set; }
-        public LineFormationAlgorithm(LineFormationAlgorithmSettings settings)
+        public LineAggregationAlgorithmSettings Settings { get; set; }
+        public LineAggregationAlgorithm(LineAggregationAlgorithmSettings settings)
         {
             Settings = settings;
         }
-        public Vector2 CalculateControlInput(RegularAgent agent, LineFormationAlgorithmInput input)
+        public Vector2 CalculateControlInput(RegularAgent agent, LineAggregationAlgorithmInput input)
         {
             var orientationAngle = input.LineOrientationAngleInRadians;
 

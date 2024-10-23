@@ -3,14 +3,11 @@ using System.Drawing;
 using System.Numerics;
 using System.Windows.Forms;
 using SwarmSimulation.Core;
-using SwarmSimulation.Core.Algorithms;
 using SwarmSimulation.Core.Algorithms.Contracts;
-using SwarmSimulation.Core.Algorithms.Implementation;
-using SwarmSimulation.Core.Algorithms.Inputs;
-using SwarmSimulation.Core.Algorithms.Settings;
-using SwarmSimulation.Settings;
+using SwarmSimulation.Core.Algorithms.Implementation.Proximity;
+using SwarmSimulation.Visualization;
 
-namespace SwarmSimulation
+namespace SwarmSimulation.Simulations
 {
     public sealed class DispersionSimulation : BaseForm
     {

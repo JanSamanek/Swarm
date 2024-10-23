@@ -1,14 +1,11 @@
 using System;
 using System.Linq;
 using System.Numerics;
-using SwarmSimulation.Core.Agents;
 using SwarmSimulation.Core.Agents.Implementation;
 using SwarmSimulation.Core.Algorithms.Contracts;
-using SwarmSimulation.Core.Algorithms.Inputs;
-using SwarmSimulation.Core.Algorithms.Settings;
 using SwarmSimulation.Utilities;
 
-namespace SwarmSimulation.Core.Algorithms.Implementation
+namespace SwarmSimulation.Core.Algorithms.Implementation.Proximity
 {
     public class ProximityAlgorithm : IAlgorithm<ProximityAlgorithmSettings, ProximityAlgorithmInput>
     {

@@ -1,5 +1,5 @@
 
-namespace SwarmSimulation.Core.Algorithms.Inputs
+namespace SwarmSimulation.Core.Algorithms.Implementation.CustomFormation
 {
     public class FormationAlgorithmInput
     {

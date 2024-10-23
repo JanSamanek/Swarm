@@ -1,11 +1,8 @@
-using System;
 using System.Numerics;
 using SwarmSimulation.Core.Agents.Implementation;
 using SwarmSimulation.Core.Algorithms.Contracts;
-using SwarmSimulation.Core.Algorithms.Inputs;
-using SwarmSimulation.Core.Algorithms.Settings;
 
-namespace SwarmSimulation.Core.Algorithms.Implementation
+namespace SwarmSimulation.Core.Algorithms.Implementation.CustomFormation
 {
     public class FormationAlgorithm : IAlgorithm<FormationAlgorithmSettings, FormationAlgorithmInput>
     {

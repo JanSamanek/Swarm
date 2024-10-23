@@ -4,8 +4,9 @@ using System.Numerics;
 using SwarmSimulation.Core.Agents.Contracts;
 using SwarmSimulation.Core.Agents.Implementation;
 using SwarmSimulation.Core.Algorithms.Contracts;
-using SwarmSimulation.Core.Algorithms.Inputs;
-using SwarmSimulation.Core.Algorithms.Settings;
+using SwarmSimulation.Core.Algorithms.Implementation.CustomFormation;
+using SwarmSimulation.Core.Algorithms.Implementation.LineAggregation;
+using SwarmSimulation.Core.Algorithms.Implementation.Proximity;
 
 namespace SwarmSimulation.Core
 {
@@ -34,8 +35,8 @@ namespace SwarmSimulation.Core
             UpdatePositions(algorithm, input);
         }
         
-        public void MoveToLineFormation(IAlgorithm<LineFormationAlgorithmSettings, LineFormationAlgorithmInput> algorithm, 
-            LineFormationAlgorithmInput input)
+        public void MoveToLineFormation(IAlgorithm<LineAggregationAlgorithmSettings, LineAggregationAlgorithmInput> algorithm, 
+            LineAggregationAlgorithmInput input)
         {
             UpdatePositions(algorithm, input);
         }
