@@ -27,7 +27,7 @@ namespace SwarmSimulation
              
              var algorithmSettings = new FormationAlgorithmSettings
              {
-                ApfGain = 55.0f
+                ApfGain = 135.0f
              };
              _arrowFormationAlgorithm = new FormationAlgorithm(algorithmSettings);
             

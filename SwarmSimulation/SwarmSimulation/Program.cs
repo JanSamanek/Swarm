@@ -13,7 +13,7 @@ namespace SwarmSimulation
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LeaderFollowerSimulation());
+            Application.Run(new ArrowFormationSimulation());
         }
     }
 }
