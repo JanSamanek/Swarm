@@ -75,6 +75,9 @@
         <Compile Include="LineFormationSimulation.cs">
           <SubType>Form</SubType>
         </Compile>
+        <Compile Include="LineStretchingSimulation.cs">
+          <SubType>Form</SubType>
+        </Compile>
         <Compile Include="Program.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
         <Compile Include="Settings\SimulationSettings.cs" />
