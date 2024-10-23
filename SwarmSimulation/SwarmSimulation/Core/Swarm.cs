@@ -26,6 +26,13 @@ namespace SwarmSimulation.Core
             Agents.Add(leader);
             return leader;
         }
+
+        public void MoveToArrowFormation(
+            IAlgorithm<FormationAlgorithmSettings, FormationAlgorithmInput> algorithm,
+            FormationAlgorithmInput input)
+        {
+            UpdatePositions(algorithm, input);
+        }
         
         public void MoveToLineFormation(IAlgorithm<LineFormationAlgorithmSettings, LineFormationAlgorithmInput> algorithm, 
             LineFormationAlgorithmInput input)

@@ -47,6 +47,9 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="ArrowFormationSimulation.cs">
+          <SubType>Form</SubType>
+        </Compile>
         <Compile Include="BaseForm.cs">
           <SubType>Form</SubType>
         </Compile>
@@ -54,12 +57,14 @@
         <Compile Include="Core\Agents\Implementation\RegularAgent.cs" />
         <Compile Include="Core\Agents\Implementation\Agent.cs" />
         <Compile Include="Core\Agents\Implementation\LeaderAgent.cs" />
-        <Compile Include="Core\Algorithms\AlgorithmFactory.cs" />
         <Compile Include="Core\Algorithms\Contracts\IAlgorithm.cs" />
+        <Compile Include="Core\Algorithms\Implementation\FormationAlgorithm.cs" />
         <Compile Include="Core\Algorithms\Implementation\ProximityAlgorithm.cs" />
         <Compile Include="Core\Algorithms\Implementation\LineFormationAlgorithm.cs" />
+        <Compile Include="Core\Algorithms\Inputs\FormationAlgorithmInput.cs" />
         <Compile Include="Core\Algorithms\Inputs\ProximityAlgorithmInput.cs" />
         <Compile Include="Core\Algorithms\Inputs\LineFormationAlgorithmInput.cs" />
+        <Compile Include="Core\Algorithms\Settings\FormationAlgorithmSettings.cs" />
         <Compile Include="Core\Algorithms\Settings\ProximityAlgorithmSettings.cs" />
         <Compile Include="Core\Algorithms\Settings\LineFormationAlgorithmSettings.cs" />
         <Compile Include="Core\Swarm.cs" />
@@ -68,9 +73,6 @@
           <SubType>Form</SubType>
         </Compile>
         <Compile Include="LineFormationSimulation.cs">
-          <SubType>Form</SubType>
-        </Compile>
-        <Compile Include="LineStretchingSimulation.cs">
           <SubType>Form</SubType>
         </Compile>
         <Compile Include="Program.cs"/>

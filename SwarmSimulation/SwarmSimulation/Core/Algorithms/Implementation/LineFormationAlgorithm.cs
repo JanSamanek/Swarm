@@ -15,7 +15,7 @@ namespace SwarmSimulation.Core.Algorithms.Implementation
     public class LineFormationAlgorithm : IAlgorithm<LineFormationAlgorithmSettings, LineFormationAlgorithmInput>
     {
         public LineFormationAlgorithmSettings Settings { get; set; }
-        public void ConfigureSettings(LineFormationAlgorithmSettings settings)
+        public LineFormationAlgorithm(LineFormationAlgorithmSettings settings)
         {
             Settings = settings;
         }
