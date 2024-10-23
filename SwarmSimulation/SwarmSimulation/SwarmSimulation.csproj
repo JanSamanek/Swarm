@@ -75,7 +75,7 @@
         <Compile Include="LineFormationSimulation.cs">
           <SubType>Form</SubType>
         </Compile>
-        <Compile Include="LineStretchingSimulation.cs">
+        <Compile Include="LeaderFollowerSimulation.cs">
           <SubType>Form</SubType>
         </Compile>
         <Compile Include="Program.cs"/>

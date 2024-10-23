@@ -27,8 +27,8 @@ namespace SwarmSimulation
         {
             var algorithmSettings = new ProximityAlgorithmSettings
             {
-                DampingCoefficient = 4,
-                StiffnessCoefficient = 15,
+                DampingCoefficient = 4.4f,
+                InterAgentStiffnessCoefficient = 15.2f,
             };
             _dispersionAlgorithm = new ProximityAlgorithm(algorithmSettings);
             

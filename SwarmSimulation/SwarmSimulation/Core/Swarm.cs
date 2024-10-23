@@ -45,7 +45,12 @@ namespace SwarmSimulation.Core
         {
             UpdatePositions(algorithm, input);
         }
-        
+
+        public void FollowLeader(IAlgorithm<ProximityAlgorithmSettings, ProximityAlgorithmInput> algorithm, 
+            ProximityAlgorithmInput input)
+        {
+            UpdatePositions(algorithm, input);
+        }
         private void UpdatePositions<TSettings, TInput>(IAlgorithm<TSettings,TInput> algorithm, TInput input)
         {
             UpdateNeighbours();
