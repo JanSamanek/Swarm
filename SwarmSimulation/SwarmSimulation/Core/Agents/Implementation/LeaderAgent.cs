@@ -5,18 +5,20 @@ namespace SwarmSimulation.Core.Agents.Implementation
 {
     public class LeaderAgent : Agent, IAgent
     {
-        public LeaderAgent(int id, Vector2 position, int perceptionRange)
+        public LeaderAgent(int id, Vector2 position, float perceptionRange)
             : base(id, position, perceptionRange)
         {
         }
 
         private Vector2 CalculateControlInputToTarget(Vector2 targetPosition, float speedToTarget)
         {
-            if (targetPosition == Position)
+            var distanceVector = targetPosition - Position;
+            const int error = 2;
+            if (distanceVector.Length() < error)
             {
                 return Vector2.Zero;
             }
-            var direction = Vector2.Normalize(targetPosition - Position);
+            var direction = Vector2.Normalize(distanceVector);
             return speedToTarget * direction;
         }
         

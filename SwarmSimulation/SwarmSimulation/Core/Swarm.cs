@@ -7,6 +7,8 @@ using SwarmSimulation.Core.Algorithms.Contracts;
 using SwarmSimulation.Core.Algorithms.Implementation.CustomFormation;
 using SwarmSimulation.Core.Algorithms.Implementation.LineAggregation;
 using SwarmSimulation.Core.Algorithms.Implementation.Proximity;
+using SwarmSimulation.Environment;
+using SwarmSimulation.Environment.Obstacles.Contracts;
 
 namespace SwarmSimulation.Core
 {
@@ -15,13 +17,13 @@ namespace SwarmSimulation.Core
         public List<IAgent> Agents { get; } = new List<IAgent>();
         private int AgentCounter { get; set; }
 
-        public RegularAgent AddAgent(Vector2 position, int perceptionRange)
+        public RegularAgent AddAgent(Vector2 position, float perceptionRange)
         {
             var regular = new RegularAgent(AgentCounter++, position, perceptionRange);
             Agents.Add(regular);
             return regular;
         }
-        public LeaderAgent AddLeader(Vector2 position, int perceptionRange)
+        public LeaderAgent AddLeader(Vector2 position, float perceptionRange)
         {
             var leader = new LeaderAgent(AgentCounter++, position, perceptionRange);
             Agents.Add(leader);
@@ -52,7 +54,7 @@ namespace SwarmSimulation.Core
         {
             UpdatePositions(algorithm, input);
         }
-        private void UpdatePositions<TSettings, TInput>(IAlgorithm<TSettings,TInput> algorithm, TInput input)
+        private void UpdatePositions<TSettings, TInput> (IAlgorithm<TSettings,TInput> algorithm, TInput input)
         {
             UpdateNeighbours();
             foreach (var agent in Agents.Where(a => a is RegularAgent))

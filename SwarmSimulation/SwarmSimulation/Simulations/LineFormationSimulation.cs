@@ -29,7 +29,7 @@ namespace SwarmSimulation.Simulations
             };
             _lineFormationAlgorithm = new LineAggregationAlgorithm(algorithmSettings);
             
-            var perceptionRange = 120;
+            const float perceptionRange = 120;
             _swarm = new Swarm();
             _swarm.AddAgent(new Vector2(380, 370), perceptionRange);
             _swarm.AddAgent(new Vector2(400, 310), perceptionRange);
@@ -55,7 +55,7 @@ namespace SwarmSimulation.Simulations
         protected override void OnPaint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(Color.Black);
-            SwarmRenderer.DrawAgents(_swarm, e.Graphics, (20, 20), drawId:true);
+            SwarmRenderer.DrawAgents(_swarm, e.Graphics, (10, 10));
         }
     }
 }

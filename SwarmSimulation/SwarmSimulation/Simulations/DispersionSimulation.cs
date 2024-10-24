@@ -29,7 +29,7 @@ namespace SwarmSimulation.Simulations
             };
             _dispersionAlgorithm = new ProximityAlgorithm(algorithmSettings);
             
-            const int perceptionRange = 100;
+            const float perceptionRange = 100;
             _swarm = new Swarm();
             _swarm.AddAgent(new Vector2(490, 300), perceptionRange);
             _swarm.AddAgent(new Vector2(495, 295), perceptionRange);

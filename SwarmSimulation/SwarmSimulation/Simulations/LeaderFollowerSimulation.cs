@@ -34,7 +34,7 @@ namespace SwarmSimulation.Simulations
             };
             _leaderFollowerAlgorithm = new ProximityAlgorithm(algorithmSettings); 
             
-            const int perceptionRange = 100;
+            const float perceptionRange = 100;
             _swarm = new Swarm();
 
             _leader1 = _swarm.AddLeader(new Vector2(500, 300), perceptionRange);
@@ -51,9 +51,9 @@ namespace SwarmSimulation.Simulations
             var input = new ProximityAlgorithmInput
             {
                 DesiredDistance = 50,
-                NeighboursToCalculateFrom = 1
+                NeighboursToCalculateFrom = 3
             };
-            _leader1.MoveToTarget(new Vector2(300, 300), 15.0f);
+            _leader1.MoveToTarget(new Vector2(300, 300), 35.0f);
             _swarm.FollowLeader(_leaderFollowerAlgorithm, input);
             
             PictureBox.Invalidate();

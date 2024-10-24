@@ -5,7 +5,7 @@ namespace SwarmSimulation.Core.Agents.Implementation
 {
     public class RegularAgent : Agent, IAgent
     {
-        public RegularAgent(int id, Vector2 position, int perceptionRange) 
+        public RegularAgent(int id, Vector2 position, float perceptionRange) 
             : base(id, position, perceptionRange)
         {
         }

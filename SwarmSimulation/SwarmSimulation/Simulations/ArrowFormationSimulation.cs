@@ -30,7 +30,7 @@ namespace SwarmSimulation.Simulations
              };
              _arrowFormationAlgorithm = new FormationAlgorithm(algorithmSettings);
             
-            const int perceptionRange = 200;
+            const float perceptionRange = 200;
             _swarm = new Swarm();
             _leader = _swarm.AddLeader(new Vector2(500,300), perceptionRange);
             _swarm.AddAgent(new Vector2(480,320), perceptionRange);
