@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Numerics;
 using System.Windows.Forms;
 using SwarmSimulation.Core;
+using SwarmSimulation.Core.Agents.Contracts;
 using SwarmSimulation.Core.Agents.Implementation;
 using SwarmSimulation.Core.Algorithms;
 using SwarmSimulation.Core.Algorithms.Contracts;
@@ -14,6 +16,7 @@ namespace SwarmSimulation.Simulations
     public sealed class DispersionSimulation : BaseForm
     {
         private Swarm _swarm;
+        private IEnumerable<IAgent> _regularAgents;
         private IAlgorithm<ProximityAlgorithmInput> _dispersionAlgorithm;
         
         public DispersionSimulation()
@@ -33,21 +36,25 @@ namespace SwarmSimulation.Simulations
             
             const float perceptionRange = 100;
             _swarm = new Swarm();
-            _swarm.AddAgent(new Vector2(490, 300), perceptionRange);
-            _swarm.AddAgent(new Vector2(495, 295), perceptionRange);
-            _swarm.AddAgent(new Vector2(505, 295), perceptionRange);
-            _swarm.AddAgent(new Vector2(495, 305), perceptionRange);
-            _swarm.AddAgent(new Vector2(505, 305), perceptionRange);
-            _swarm.AddAgent(new Vector2(510, 300), perceptionRange);
-            _swarm.AddAgent(new Vector2(490, 310), perceptionRange);
-            _swarm.AddAgent(new Vector2(510, 310), perceptionRange);
-            _swarm.AddAgent(new Vector2(495, 315), perceptionRange);
-            _swarm.AddAgent(new Vector2(505, 315), perceptionRange);
-            _swarm.AddAgent(new Vector2(500, 290), perceptionRange);
-            _swarm.AddAgent(new Vector2(490, 320), perceptionRange);
-            _swarm.AddAgent(new Vector2(510, 290), perceptionRange);
-            _swarm.AddAgent(new Vector2(500, 300), perceptionRange);
-            _swarm.AddAgent(new Vector2(500, 310), perceptionRange);
+            var positions = new List<Vector2>
+            {
+                new Vector2(490, 300),
+                new Vector2(495, 295),
+                new Vector2(505, 295),
+                new Vector2(495, 305),
+                new Vector2(505, 305),
+                new Vector2(510, 300),
+                new Vector2(490, 310),
+                new Vector2(510, 310),
+                new Vector2(495, 315),
+                new Vector2(505, 315),
+                new Vector2(500, 290),
+                new Vector2(490, 320),
+                new Vector2(510, 290),
+                new Vector2(500, 300),
+                new Vector2(500, 310)
+            };
+            _regularAgents = _swarm.AddAgents(positions, perceptionRange);
         }
 
         protected override void UpdateSimulation(object sender, EventArgs e)
@@ -57,8 +64,7 @@ namespace SwarmSimulation.Simulations
                 DesiredDistance = 50,
                 NeighboursToCalculateFrom = 2
             };
-            AlgorithmExecutor.ExecuteAlgorithmOn<RegularAgent, ProximityAlgorithmInput>(_swarm, _dispersionAlgorithm,
-                input);
+            SwarmController.ExecuteAlgorithm(_swarm, _swarm.Agents, _dispersionAlgorithm, input);
             
             PictureBox.Invalidate();
         }

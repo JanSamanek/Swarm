@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Numerics;
 using System.Windows.Forms;
 using SwarmSimulation.Core;
+using SwarmSimulation.Core.Agents.Contracts;
 using SwarmSimulation.Core.Agents.Implementation;
 using SwarmSimulation.Core.Algorithms;
 using SwarmSimulation.Core.Algorithms.Contracts;
@@ -18,7 +19,7 @@ namespace SwarmSimulation.Simulations
     public sealed class ObstacleAvoidanceSimulation : BaseForm
     {
         private Swarm _swarm;
-        private int _leaderId;
+        private IAgent _leader;
         private IAlgorithm<AdaptiveMoveToTargetAlgorithmInput> _moveToTargetAlgorithm;
 
 
@@ -45,7 +46,7 @@ namespace SwarmSimulation.Simulations
              
             const float perceptionRange = 100;
             _swarm = new Swarm();
-            _leaderId = _swarm.AddLeader(new Vector2(580,320), perceptionRange);
+            _leader = _swarm.AddLeader(new Vector2(580,320), perceptionRange);
             
             Arena.Instance.SetSize(700, 700);
             Arena.Instance.AddCircularObstacle(new Vector2(500, 300), 50);
@@ -65,7 +66,7 @@ namespace SwarmSimulation.Simulations
                     Distance = 5f
                 }
             };
-            AlgorithmExecutor.ExecuteAlgorithmOn(_swarm, _leaderId, _moveToTargetAlgorithm, input);
+            SwarmController.ExecuteAlgorithm(_swarm, _leader, _moveToTargetAlgorithm, input);
             
             PictureBox.Invalidate();
         }

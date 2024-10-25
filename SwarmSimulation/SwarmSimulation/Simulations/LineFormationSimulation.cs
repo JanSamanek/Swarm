@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Numerics;
 using System.Windows.Forms;
 using SwarmSimulation.Core;
+using SwarmSimulation.Core.Agents.Contracts;
 using SwarmSimulation.Core.Agents.Implementation;
 using SwarmSimulation.Core.Algorithms;
 using SwarmSimulation.Core.Algorithms.Contracts;
@@ -14,6 +16,7 @@ namespace SwarmSimulation.Simulations
     public sealed class LineFormationSimulation : BaseForm
     {
         private Swarm _swarm;
+        private IEnumerable<IAgent> _regularAgents;
         private IAlgorithm<LineAggregationAlgorithmInput> _lineFormationAlgorithm;
         
         public LineFormationSimulation()
@@ -33,13 +36,17 @@ namespace SwarmSimulation.Simulations
             
             const float perceptionRange = 120;
             _swarm = new Swarm();
-            _swarm.AddAgent(new Vector2(380, 370), perceptionRange);
-            _swarm.AddAgent(new Vector2(400, 310), perceptionRange);
-            _swarm.AddAgent(new Vector2(480, 300), perceptionRange);
-            _swarm.AddAgent(new Vector2(345, 320), perceptionRange);
-            _swarm.AddAgent(new Vector2(520, 340), perceptionRange);
-            _swarm.AddAgent(new Vector2(325, 380), perceptionRange);
-            _swarm.AddAgent(new Vector2(430, 270), perceptionRange);
+            var positions = new List<Vector2>
+            {
+                new Vector2(380, 370),
+                new Vector2(400, 310),
+                new Vector2(480, 300),
+                new Vector2(345, 320),
+                new Vector2(520, 340),
+                new Vector2(325, 380),
+                new Vector2(430, 270)
+            };
+            _regularAgents = _swarm.AddAgents(positions, perceptionRange);
         }
 
         protected override void UpdateSimulation(object sender, EventArgs e)
@@ -49,8 +56,7 @@ namespace SwarmSimulation.Simulations
                 DesiredDistance = 30,
                 LineOrientationAngleInRadians = (float) Math.PI / 4
             };
-            AlgorithmExecutor.ExecuteAlgorithmOn<RegularAgent, LineAggregationAlgorithmInput>(_swarm,
-                _lineFormationAlgorithm, input);
+            SwarmController.ExecuteAlgorithm(_swarm, _regularAgents, _lineFormationAlgorithm, input);
             
             PictureBox.Invalidate();
         }

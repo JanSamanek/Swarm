@@ -51,7 +51,7 @@
         <Compile Include="Core\Agents\Implementation\RegularAgent.cs" />
         <Compile Include="Core\Agents\Implementation\Agent.cs" />
         <Compile Include="Core\Agents\Implementation\LeaderAgent.cs" />
-        <Compile Include="Core\Algorithms\AlgorithmExecutor.cs" />
+        <Compile Include="Core\Algorithms\SwarmController.cs" />
         <Compile Include="Core\Algorithms\Contracts\IAlgorithm.cs" />
         <Compile Include="Core\Algorithms\Implementation\CustomFormation\FormationAlgorithm.cs" />
         <Compile Include="Core\Algorithms\Implementation\CustomFormation\FormationAlgorithmInput.cs" />

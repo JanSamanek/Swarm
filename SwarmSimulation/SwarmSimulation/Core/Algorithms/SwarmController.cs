@@ -3,38 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using SwarmSimulation.Core.Agents.Contracts;
-using SwarmSimulation.Core.Agents.Implementation;
 using SwarmSimulation.Core.Algorithms.Contracts;
 
 namespace SwarmSimulation.Core.Algorithms
 {
-    public static class AlgorithmExecutor
+    public static class SwarmController
     {
-        public static void ExecuteAlgorithmOn<TAgent, TInput>(Swarm swarm, IAlgorithm<TInput> algorithm, TInput input)
-        where TAgent : IAgent
-        {
-            UpdateNeighbours(swarm);
-            foreach (var agent in swarm.Agents.OfType<TAgent>())
-            {
-                ExecuteAlgorithm(agent, algorithm, input);
-            }
-        }
-
-        public static void ExecuteAlgorithmOn<TInput>(Swarm swarm, int agentId, IAlgorithm<TInput> algorithm,
+        public static void ExecuteAlgorithm<TInput>(Swarm swarm, IEnumerable<IAgent> agents, IAlgorithm<TInput> algorithm, 
             TInput input)
         {
-            var agent = swarm.Agents.FirstOrDefault(a => a.Id == agentId);
-            if (agent == null)
-            {
-                throw new Exception($"Agent with id {agentId} not found");
-            }
             UpdateNeighbours(swarm);
-            ExecuteAlgorithm(agent, algorithm, input);
+            foreach (var agent in agents)
+            {
+                ApplyAlgorithm(swarm, agent, algorithm, input);
+            }
         }
 
-        private static void ExecuteAlgorithm<TInput>(IAgent agent, IAlgorithm<TInput> algorithm, TInput input)
+        public static void ExecuteAlgorithm<TInput>(Swarm swarm, IAgent agent, IAlgorithm<TInput> algorithm,
+            TInput input)
         {
-            var controlInput = algorithm.CalculateControlInput( agent, input);
+            UpdateNeighbours(swarm);
+            ApplyAlgorithm(swarm, agent, algorithm, input);
+        }
+        
+        private static void ApplyAlgorithm<TInput>(Swarm swarm, IAgent agent, IAlgorithm<TInput> algorithm, TInput input)
+        {            
+            var controlInput = algorithm.CalculateControlInput(agent, input);
             agent.Move(controlInput);
         }
         
