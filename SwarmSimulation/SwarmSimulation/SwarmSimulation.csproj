@@ -51,6 +51,7 @@
         <Compile Include="Core\Agents\Implementation\RegularAgent.cs" />
         <Compile Include="Core\Agents\Implementation\Agent.cs" />
         <Compile Include="Core\Agents\Implementation\LeaderAgent.cs" />
+        <Compile Include="Core\Algorithms\AlgorithmExecutor.cs" />
         <Compile Include="Core\Algorithms\Contracts\IAlgorithm.cs" />
         <Compile Include="Core\Algorithms\Implementation\CustomFormation\FormationAlgorithm.cs" />
         <Compile Include="Core\Algorithms\Implementation\CustomFormation\FormationAlgorithmInput.cs" />
@@ -58,6 +59,12 @@
         <Compile Include="Core\Algorithms\Implementation\LineAggregation\LineAggregationAlgorithm.cs" />
         <Compile Include="Core\Algorithms\Implementation\LineAggregation\LineAggregationAlgorithmInput.cs" />
         <Compile Include="Core\Algorithms\Implementation\LineAggregation\LineAggregationAlgorithmSettings.cs" />
+        <Compile Include="Core\Algorithms\Implementation\MoveToTarget\MoveToTargetAlgorithm.cs" />
+        <Compile Include="Core\Algorithms\Implementation\MoveToTarget\MoveToTargetAlgorithmInput.cs" />
+        <Compile Include="Core\Algorithms\Implementation\MoveToTarget\MoveToTargetAlgorithmSettings.cs" />
+        <Compile Include="Core\Algorithms\Implementation\AdaptiveMoveToTarget\AdaptiveMoveToTargetAlgorithm.cs" />
+        <Compile Include="Core\Algorithms\Implementation\AdaptiveMoveToTarget\AdaptiveMoveToTargetAlgorithmInput.cs" />
+        <Compile Include="Core\Algorithms\Implementation\AdaptiveMoveToTarget\AdaptiveMoveToTargetAlgorithmSettings.cs" />
         <Compile Include="Core\Algorithms\Implementation\ObstacleAvoidanceAPF\ObstacleAvoidanceAlgorithm.cs" />
         <Compile Include="Core\Algorithms\Implementation\ObstacleAvoidanceAPF\ObstacleAvoidanceAlgorithmInput.cs" />
         <Compile Include="Core\Algorithms\Implementation\ObstacleAvoidanceAPF\ObstacleAvoidanceAlgorithmSettings.cs" />

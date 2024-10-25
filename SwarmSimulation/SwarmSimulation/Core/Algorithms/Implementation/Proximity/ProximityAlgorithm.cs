@@ -1,32 +1,34 @@
 using System;
 using System.Linq;
 using System.Numerics;
+using System.Runtime.InteropServices;
+using SwarmSimulation.Core.Agents.Contracts;
 using SwarmSimulation.Core.Agents.Implementation;
 using SwarmSimulation.Core.Algorithms.Contracts;
 using SwarmSimulation.Utilities;
 
 namespace SwarmSimulation.Core.Algorithms.Implementation.Proximity
 {
-    public class ProximityAlgorithm : IAlgorithm<ProximityAlgorithmSettings, ProximityAlgorithmInput>
+    public class ProximityAlgorithm : IAlgorithm<ProximityAlgorithmInput>
     {
-        public ProximityAlgorithmSettings Settings { get; set; }
+        private readonly ProximityAlgorithmSettings _settings;
         public ProximityAlgorithm(ProximityAlgorithmSettings settings)
         {
-            Settings = settings;
+            _settings = settings;
         }
-        public Vector2 CalculateControlInput(RegularAgent agent, ProximityAlgorithmInput input)
+        public Vector2 CalculateControlInput(IAgent agent, ProximityAlgorithmInput input)
         {
             var toCalculateFrom = agent.Neighbors
                 .OrderBy(neighbour => Vector2.Distance(neighbour.Position, agent.Position))
                 .Take(input.NeighboursToCalculateFrom)
                 .ToList();
 
-            var nearbyLeaders = agent.Neighbors.Where(a => a is LeaderAgent).ToList();
+            var nearbyLeaders = agent.Neighbors.OfType<LeaderAgent>().ToList();
             if (nearbyLeaders.Any())
             {
                 var random = new Random();
                 var randomIndex = random.Next(nearbyLeaders.Count);
-                var selectedLeader = (LeaderAgent) nearbyLeaders[randomIndex];
+                var selectedLeader = nearbyLeaders[randomIndex];
                 toCalculateFrom.Add(selectedLeader);
             }
             
@@ -38,9 +40,9 @@ namespace SwarmSimulation.Core.Algorithms.Implementation.Proximity
                 var relativeVelocity = agent.Velocity - neighbour.Velocity;
 
                 var stiffnessCoefficient = neighbour is LeaderAgent
-                    ? Settings.LeaderStiffnessCoefficient
-                    : Settings.InterAgentStiffnessCoefficient;
-                var dampingCoefficient = Settings.DampingCoefficient;
+                    ? _settings.LeaderStiffnessCoefficient
+                    : _settings.InterAgentStiffnessCoefficient;
+                var dampingCoefficient = _settings.DampingCoefficient;
                 
                 var springContribution = stiffnessCoefficient * (desiredDistanceVector - distanceVector);
                 var damperContribution =+ dampingCoefficient * relativeVelocity;

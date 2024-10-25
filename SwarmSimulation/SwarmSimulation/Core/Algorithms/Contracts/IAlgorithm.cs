@@ -1,12 +1,10 @@
 using System.Numerics;
-using SwarmSimulation.Core.Agents;
-using SwarmSimulation.Core.Agents.Implementation;
+using SwarmSimulation.Core.Agents.Contracts;
 
 namespace SwarmSimulation.Core.Algorithms.Contracts
 {
-    public interface IAlgorithm<TSettings, in TInput>
+    public interface IAlgorithm<in TInput>
     {
-        TSettings Settings { get; set; }
-        Vector2 CalculateControlInput(RegularAgent agent, TInput input);
+        Vector2 CalculateControlInput(IAgent agent, TInput input);
     }
 }

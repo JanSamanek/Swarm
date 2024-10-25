@@ -4,8 +4,10 @@ using System.Numerics;
 using System.Windows.Forms;
 using SwarmSimulation.Core;
 using SwarmSimulation.Core.Agents.Implementation;
+using SwarmSimulation.Core.Algorithms;
 using SwarmSimulation.Core.Algorithms.Contracts;
 using SwarmSimulation.Core.Algorithms.Implementation.CustomFormation;
+using SwarmSimulation.Core.Algorithms.Implementation.MoveToTarget;
 using SwarmSimulation.Visualization;
 
 namespace SwarmSimulation.Simulations
@@ -13,8 +15,10 @@ namespace SwarmSimulation.Simulations
     public sealed class ArrowFormationSimulation : BaseForm
     {
         private Swarm _swarm;
-        private LeaderAgent _leader;
-        private IAlgorithm<FormationAlgorithmSettings, FormationAlgorithmInput> _arrowFormationAlgorithm;
+        private int _leaderId;
+        private IAlgorithm<FormationAlgorithmInput> _arrowFormationAlgorithm;
+        private IAlgorithm<MoveToTargetAlgorithmInput> _moveToTargetAlgorithm;
+
         public ArrowFormationSimulation()
         {
             Text = @"Swarm arrow formation simulation";
@@ -30,9 +34,15 @@ namespace SwarmSimulation.Simulations
              };
              _arrowFormationAlgorithm = new FormationAlgorithm(algorithmSettings);
             
+             var moveToTargetAlgorithmSettings = new MoveToTargetAlgorithmSettings
+             {
+                 TargetPositionTolerance = 1f
+             };
+             _moveToTargetAlgorithm = new MoveToTargetAlgorithm(moveToTargetAlgorithmSettings);
+             
             const float perceptionRange = 200;
             _swarm = new Swarm();
-            _leader = _swarm.AddLeader(new Vector2(500,300), perceptionRange);
+            _leaderId = _swarm.AddLeader(new Vector2(500,300), perceptionRange);
             _swarm.AddAgent(new Vector2(480,320), perceptionRange);
             _swarm.AddAgent(new Vector2(520,320), perceptionRange);
             _swarm.AddAgent(new Vector2(460,340), perceptionRange);
@@ -41,7 +51,7 @@ namespace SwarmSimulation.Simulations
 
         protected override void UpdateSimulation(object sender, EventArgs e)
         {
-            var desiredInterAgentDistances = new float[5, 5]
+            var desiredInterAgentDistances = new [,]
             {
                 { 0.0f, 28.28f, 28.28f, 56.57f, 56.57f },
                 { 28.28f, 0.0f, 40.0f, 28.28f, 63.25f },
@@ -50,12 +60,19 @@ namespace SwarmSimulation.Simulations
                 { 56.57f, 63.25f, 28.28f, 80.0f, 0.0f },
             };
             
-            var input = new FormationAlgorithmInput
+            var formationAlgorithmInput = new FormationAlgorithmInput
             {
                 DesiredInterAgentDistances = desiredInterAgentDistances
             };
-            _leader.MoveToTarget(new Vector2(350,150), 15.0f);
-            _swarm.MoveToArrowFormation(_arrowFormationAlgorithm, input);
+            AlgorithmExecutor.ExecuteAlgorithmOn<RegularAgent, FormationAlgorithmInput>(_swarm,
+                _arrowFormationAlgorithm, formationAlgorithmInput);
+
+            var moveToTargetAlgorithmInput = new MoveToTargetAlgorithmInput
+            {
+                Speed = 15.0f,
+                TargetPosition = new Vector2(350, 150)
+            };
+            AlgorithmExecutor.ExecuteAlgorithmOn(_swarm, _leaderId, _moveToTargetAlgorithm, moveToTargetAlgorithmInput);
             
             PictureBox.Invalidate();
         }

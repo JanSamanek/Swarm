@@ -3,6 +3,8 @@ using System.Drawing;
 using System.Numerics;
 using System.Windows.Forms;
 using SwarmSimulation.Core;
+using SwarmSimulation.Core.Agents.Implementation;
+using SwarmSimulation.Core.Algorithms;
 using SwarmSimulation.Core.Algorithms.Contracts;
 using SwarmSimulation.Core.Algorithms.Implementation.Proximity;
 using SwarmSimulation.Visualization;
@@ -12,7 +14,7 @@ namespace SwarmSimulation.Simulations
     public sealed class DispersionSimulation : BaseForm
     {
         private Swarm _swarm;
-        private IAlgorithm<ProximityAlgorithmSettings, ProximityAlgorithmInput> _dispersionAlgorithm;
+        private IAlgorithm<ProximityAlgorithmInput> _dispersionAlgorithm;
         
         public DispersionSimulation()
         {
@@ -55,7 +57,8 @@ namespace SwarmSimulation.Simulations
                 DesiredDistance = 50,
                 NeighboursToCalculateFrom = 2
             };
-            _swarm.Disperse(_dispersionAlgorithm, input);
+            AlgorithmExecutor.ExecuteAlgorithmOn<RegularAgent, ProximityAlgorithmInput>(_swarm, _dispersionAlgorithm,
+                input);
             
             PictureBox.Invalidate();
         }

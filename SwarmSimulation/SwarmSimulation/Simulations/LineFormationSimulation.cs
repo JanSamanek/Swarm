@@ -3,6 +3,8 @@ using System.Drawing;
 using System.Numerics;
 using System.Windows.Forms;
 using SwarmSimulation.Core;
+using SwarmSimulation.Core.Agents.Implementation;
+using SwarmSimulation.Core.Algorithms;
 using SwarmSimulation.Core.Algorithms.Contracts;
 using SwarmSimulation.Core.Algorithms.Implementation.LineAggregation;
 using SwarmSimulation.Visualization;
@@ -12,7 +14,7 @@ namespace SwarmSimulation.Simulations
     public sealed class LineFormationSimulation : BaseForm
     {
         private Swarm _swarm;
-        private IAlgorithm<LineAggregationAlgorithmSettings, LineAggregationAlgorithmInput> _lineFormationAlgorithm;
+        private IAlgorithm<LineAggregationAlgorithmInput> _lineFormationAlgorithm;
         
         public LineFormationSimulation()
         {
@@ -47,8 +49,9 @@ namespace SwarmSimulation.Simulations
                 DesiredDistance = 30,
                 LineOrientationAngleInRadians = (float) Math.PI / 4
             };
+            AlgorithmExecutor.ExecuteAlgorithmOn<RegularAgent, LineAggregationAlgorithmInput>(_swarm,
+                _lineFormationAlgorithm, input);
             
-            _swarm.MoveToLineFormation(_lineFormationAlgorithm, input);
             PictureBox.Invalidate();
         }
         

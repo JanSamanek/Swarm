@@ -9,14 +9,14 @@ using SwarmSimulation.Utilities.Extensions;
 
 namespace SwarmSimulation.Core.Algorithms.Implementation.LineAggregation
 {
-    public class LineAggregationAlgorithm : IAlgorithm<LineAggregationAlgorithmSettings, LineAggregationAlgorithmInput>
+    public class LineAggregationAlgorithm : IAlgorithm<LineAggregationAlgorithmInput>
     {
-        public LineAggregationAlgorithmSettings Settings { get; set; }
+        private readonly LineAggregationAlgorithmSettings _settings;
         public LineAggregationAlgorithm(LineAggregationAlgorithmSettings settings)
         {
-            Settings = settings;
+            _settings = settings;
         }
-        public Vector2 CalculateControlInput(RegularAgent agent, LineAggregationAlgorithmInput input)
+        public Vector2 CalculateControlInput(IAgent agent, LineAggregationAlgorithmInput input)
         {
             var orientationAngle = input.LineOrientationAngleInRadians;
 
@@ -30,8 +30,8 @@ namespace SwarmSimulation.Core.Algorithms.Implementation.LineAggregation
                 var parallelDistance = new Vector2(0, distance.Y);
                 var perpendicularDistance = new Vector2(distance.X, 0);
                 
-                controlInputParallel += Settings.GainParallel * parallelDistance;
-                controlInputPerpendicular += Settings.GainPerpendicular 
+                controlInputParallel += _settings.GainParallel * parallelDistance;
+                controlInputPerpendicular += _settings.GainPerpendicular 
                                              * (perpendicularDistance.Length() - input.DesiredDistance)
                                              * perpendicularDistance;
             }
@@ -39,7 +39,7 @@ namespace SwarmSimulation.Core.Algorithms.Implementation.LineAggregation
             var controlInput = controlInputParallel + controlInputPerpendicular;
             return controlInput.Rotate(-orientationAngle);
         }
-        private static IEnumerable<IAgent> GetAdjacentAgents(RegularAgent agent, float orientationAngle)
+        private static IEnumerable<IAgent> GetAdjacentAgents(IAgent agent, float orientationAngle)
         {
             var closest = agent.Neighbors
                 .OrderBy(neighbour 

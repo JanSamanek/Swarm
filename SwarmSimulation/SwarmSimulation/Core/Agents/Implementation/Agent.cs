@@ -15,7 +15,6 @@ namespace SwarmSimulation.Core.Agents.Implementation
             Position = position;
             PerceptionRange = perceptionRange;
         }
-
         public int Id { get; }
         public Vector2 Position { get; private set; }
         public Vector2 Velocity { get; private set; } = Vector2.Zero;
