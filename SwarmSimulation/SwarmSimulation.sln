@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwarmSimulation", "SwarmSimulation\SwarmSimulation.csproj", "{C0F3A715-AAF2-4B1C-A702-F40B8919B308}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwarmSimulation.Tests", "SwarmSimulation.Tests\SwarmSimulation.Tests.csproj", "{96708235-94D9-4D26-9C42-30A6D888072E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{C0F3A715-AAF2-4B1C-A702-F40B8919B308}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0F3A715-AAF2-4B1C-A702-F40B8919B308}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0F3A715-AAF2-4B1C-A702-F40B8919B308}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96708235-94D9-4D26-9C42-30A6D888072E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96708235-94D9-4D26-9C42-30A6D888072E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96708235-94D9-4D26-9C42-30A6D888072E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96708235-94D9-4D26-9C42-30A6D888072E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

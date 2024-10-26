@@ -1,7 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Threading.Tasks;
 using SwarmSimulation.Core.Agents.Contracts;
 using SwarmSimulation.Core.Algorithms.Contracts;
 
@@ -13,20 +13,17 @@ namespace SwarmSimulation.Core.Algorithms
             TInput input)
         {
             UpdateNeighbours(swarm);
-            foreach (var agent in agents)
-            {
-                ApplyAlgorithm(swarm, agent, algorithm, input);
-            }
+            Parallel.ForEach(agents, agent => ApplyAlgorithm(agent, algorithm, input));
         }
 
         public static void ExecuteAlgorithm<TInput>(Swarm swarm, IAgent agent, IAlgorithm<TInput> algorithm,
             TInput input)
         {
             UpdateNeighbours(swarm);
-            ApplyAlgorithm(swarm, agent, algorithm, input);
+            ApplyAlgorithm(agent, algorithm, input);
         }
         
-        private static void ApplyAlgorithm<TInput>(Swarm swarm, IAgent agent, IAlgorithm<TInput> algorithm, TInput input)
+        private static void ApplyAlgorithm<TInput>(IAgent agent, IAlgorithm<TInput> algorithm, TInput input)
         {            
             var controlInput = algorithm.CalculateControlInput(agent, input);
             agent.Move(controlInput);

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Numerics;
+using System.Threading.Tasks;
 using SwarmSimulation.Core.Agents.Contracts;
 using SwarmSimulation.Environment;
 using SwarmSimulation.Environment.Obstacles.Contracts;
@@ -31,14 +32,14 @@ namespace SwarmSimulation.Core.Agents.Implementation
         public IEnumerable<IObstacle> DetectObstacles()
         {
             var obstaclesInRange = new List<IObstacle>();
-            foreach (var obstacle in Arena.Instance.Obstacles)
+            Parallel.ForEach(Arena.Instance.Obstacles, obstacle =>
             {
                 var distanceVector = obstacle.GetDistanceVectorToAgent(Position);
                 if (distanceVector.Length() < PerceptionRange)
                 {
                     obstaclesInRange.Add(obstacle);
                 }
-            }
+            });
             return obstaclesInRange;
         }
     }

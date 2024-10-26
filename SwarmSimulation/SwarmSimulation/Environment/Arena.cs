@@ -4,6 +4,7 @@ using SwarmSimulation.Core;
 using SwarmSimulation.Environment.Obstacles;
 using SwarmSimulation.Environment.Obstacles.Contracts;
 using SwarmSimulation.Environment.Obstacles.Implementation;
+using SwarmSimulation.Properties;
 
 namespace SwarmSimulation.Environment
 {
@@ -11,14 +12,15 @@ namespace SwarmSimulation.Environment
     {
         private static Arena _instance;
         public static Arena Instance => _instance ?? (_instance = new Arena());
-        public int Width {get; set;}
-        public int Height {get; set;}
+        private int _width;
+        private int _height;
         public List<IObstacle> Obstacles { get; set; } = new List<IObstacle>(); 
+        public List<Resource> Resources { get; set; } = new List<Resource>();
         
         public void SetSize(int width, int height)
         {
-            Width = width;
-            Height = height;
+            _width = width;
+            _height = height;
         }
         
         public void AddCircularObstacle(Vector2 center, int radius)
@@ -31,5 +33,9 @@ namespace SwarmSimulation.Environment
             Obstacles.Add(new RectangularObstacle(center, width, height));
         }
 
+        public void AddResource(Vector2 position, int capacity)
+        {
+            Resources.Add(new Resource(position, capacity));
+        }
     }
 }
