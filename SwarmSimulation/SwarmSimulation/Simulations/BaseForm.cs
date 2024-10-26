@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using SwarmSimulation.Settings;
+using SwarmSimulation.Utilities;
 
 namespace SwarmSimulation.Simulations
 {
@@ -21,6 +22,7 @@ namespace SwarmSimulation.Simulations
             PictureBox.Paint += OnPaint;
             Controls.Add(PictureBox);
 
+            SimulationTimeManager.SetFps(SimulationSettings.Fps);
             _timer = new Timer
             {
                 Interval = 1000 / SimulationSettings.Fps,

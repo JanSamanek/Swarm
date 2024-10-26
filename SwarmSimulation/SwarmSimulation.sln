@@ -4,6 +4,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwarmSimulation", "SwarmSim
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwarmSimulation.Tests", "SwarmSimulation.Tests\SwarmSimulation.Tests.csproj", "{96708235-94D9-4D26-9C42-30A6D888072E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwarmSimulation.Algorithms", "SwarmSimulation.Algorithms\SwarmSimulation.Algorithms.csproj", "{32E7D9CC-FC18-4E41-9D45-D6500A68471D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwarmSimulation.Agents", "SwarmSimulation.Agents\SwarmSimulation.Agents.csproj", "{B8333DA0-9FBD-401D-B518-6FBB4F87669D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwarmSimulation.Environment", "SwarmSimulation.Environment\SwarmSimulation.Environment.csproj", "{7EB7CD5E-B7B3-4C68-8397-1F32D721D7D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwarmSimulation.Utilities", "SwarmSimulation.Utilities\SwarmSimulation.Utilities.csproj", "{B3B9A174-2D63-4DC3-B8D1-740796382BE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwarmSimulation.Visualization", "SwarmSimulation.Visualization\SwarmSimulation.Visualization.csproj", "{8FBAE4FA-C820-46C0-AF8F-C5DA6AC53557}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +28,25 @@ Global
 		{96708235-94D9-4D26-9C42-30A6D888072E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96708235-94D9-4D26-9C42-30A6D888072E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96708235-94D9-4D26-9C42-30A6D888072E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32E7D9CC-FC18-4E41-9D45-D6500A68471D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32E7D9CC-FC18-4E41-9D45-D6500A68471D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32E7D9CC-FC18-4E41-9D45-D6500A68471D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32E7D9CC-FC18-4E41-9D45-D6500A68471D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8333DA0-9FBD-401D-B518-6FBB4F87669D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8333DA0-9FBD-401D-B518-6FBB4F87669D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8333DA0-9FBD-401D-B518-6FBB4F87669D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8333DA0-9FBD-401D-B518-6FBB4F87669D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EB7CD5E-B7B3-4C68-8397-1F32D721D7D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EB7CD5E-B7B3-4C68-8397-1F32D721D7D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EB7CD5E-B7B3-4C68-8397-1F32D721D7D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EB7CD5E-B7B3-4C68-8397-1F32D721D7D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3B9A174-2D63-4DC3-B8D1-740796382BE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3B9A174-2D63-4DC3-B8D1-740796382BE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3B9A174-2D63-4DC3-B8D1-740796382BE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3B9A174-2D63-4DC3-B8D1-740796382BE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FBAE4FA-C820-46C0-AF8F-C5DA6AC53557}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FBAE4FA-C820-46C0-AF8F-C5DA6AC53557}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FBAE4FA-C820-46C0-AF8F-C5DA6AC53557}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FBAE4FA-C820-46C0-AF8F-C5DA6AC53557}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -2,23 +2,19 @@ using System;
 using System.Drawing;
 using System.Numerics;
 using System.Windows.Forms;
-using SwarmSimulation.Core;
-using SwarmSimulation.Core.Agents.Contracts;
-using SwarmSimulation.Core.Agents.Implementation;
-using SwarmSimulation.Core.Algorithms;
-using SwarmSimulation.Core.Algorithms.Contracts;
-using SwarmSimulation.Core.Algorithms.Implementation.AdaptiveMoveToTarget;
-using SwarmSimulation.Core.Algorithms.Implementation.CustomFormation;
-using SwarmSimulation.Core.Algorithms.Implementation.MoveToTarget;
-using SwarmSimulation.Core.Algorithms.Implementation.ObstacleAvoidanceAPF;
+using SwarmSimulation.Algorithms;
+using SwarmSimulation.Algorithms.AdaptiveMoveToTarget;
+using SwarmSimulation.Algorithms.MoveToTarget;
+using SwarmSimulation.Algorithms.ObstacleAvoidanceAPF;
 using SwarmSimulation.Environment;
+using SwarmSimulation.Agents.Agents.Contracts;
 using SwarmSimulation.Visualization;
 
 namespace SwarmSimulation.Simulations
 {
     public sealed class ObstacleAvoidanceSimulation : BaseForm
     {
-        private Swarm _swarm;
+        private Agents.Swarm _swarm;
         private IAgent _leader;
         private IAlgorithm<AdaptiveMoveToTargetAlgorithmInput> _moveToTargetAlgorithm;
 
@@ -45,7 +41,7 @@ namespace SwarmSimulation.Simulations
              _moveToTargetAlgorithm = new AdaptiveMoveToTargetAlgorithm(moveToTargetAlgorithmSettings);
              
             const float perceptionRange = 100;
-            _swarm = new Swarm();
+            _swarm = new Agents.Swarm();
             _leader = _swarm.AddLeader(new Vector2(580,320), perceptionRange);
             
             Arena.Instance.SetSize(700, 700);

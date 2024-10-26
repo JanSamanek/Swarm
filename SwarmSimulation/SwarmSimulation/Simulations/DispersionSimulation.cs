@@ -3,19 +3,16 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Numerics;
 using System.Windows.Forms;
-using SwarmSimulation.Core;
-using SwarmSimulation.Core.Agents.Contracts;
-using SwarmSimulation.Core.Agents.Implementation;
-using SwarmSimulation.Core.Algorithms;
-using SwarmSimulation.Core.Algorithms.Contracts;
-using SwarmSimulation.Core.Algorithms.Implementation.Proximity;
+using SwarmSimulation.Algorithms;
+using SwarmSimulation.Algorithms.Proximity;
+using SwarmSimulation.Agents.Agents.Contracts;
 using SwarmSimulation.Visualization;
 
 namespace SwarmSimulation.Simulations
 {
     public sealed class DispersionSimulation : BaseForm
     {
-        private Swarm _swarm;
+        private Agents.Swarm _swarm;
         private IEnumerable<IAgent> _regularAgents;
         private IAlgorithm<ProximityAlgorithmInput> _dispersionAlgorithm;
         
@@ -35,7 +32,7 @@ namespace SwarmSimulation.Simulations
             _dispersionAlgorithm = new ProximityAlgorithm(algorithmSettings);
             
             const float perceptionRange = 100;
-            _swarm = new Swarm();
+            _swarm = new Agents.Swarm();
             var positions = new List<Vector2>
             {
                 new Vector2(490, 300),

@@ -3,19 +3,16 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Numerics;
 using System.Windows.Forms;
-using SwarmSimulation.Core;
-using SwarmSimulation.Core.Agents.Contracts;
-using SwarmSimulation.Core.Agents.Implementation;
-using SwarmSimulation.Core.Algorithms;
-using SwarmSimulation.Core.Algorithms.Contracts;
-using SwarmSimulation.Core.Algorithms.Implementation.LineAggregation;
+using SwarmSimulation.Algorithms;
+using SwarmSimulation.Algorithms.LineAggregation;
+using SwarmSimulation.Agents.Agents.Contracts;
 using SwarmSimulation.Visualization;
 
 namespace SwarmSimulation.Simulations
 {
     public sealed class LineFormationSimulation : BaseForm
     {
-        private Swarm _swarm;
+        private Agents.Swarm _swarm;
         private IEnumerable<IAgent> _regularAgents;
         private IAlgorithm<LineAggregationAlgorithmInput> _lineFormationAlgorithm;
         
@@ -35,7 +32,7 @@ namespace SwarmSimulation.Simulations
             _lineFormationAlgorithm = new LineAggregationAlgorithm(algorithmSettings);
             
             const float perceptionRange = 120;
-            _swarm = new Swarm();
+            _swarm = new Agents.Swarm();
             var positions = new List<Vector2>
             {
                 new Vector2(380, 370),

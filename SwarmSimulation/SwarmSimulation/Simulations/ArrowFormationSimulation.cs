@@ -1,23 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Numerics;
 using System.Windows.Forms;
-using SwarmSimulation.Core;
-using SwarmSimulation.Core.Agents.Contracts;
-using SwarmSimulation.Core.Agents.Implementation;
-using SwarmSimulation.Core.Algorithms;
-using SwarmSimulation.Core.Algorithms.Contracts;
-using SwarmSimulation.Core.Algorithms.Implementation.CustomFormation;
-using SwarmSimulation.Core.Algorithms.Implementation.MoveToTarget;
+using SwarmSimulation.Algorithms;
+using SwarmSimulation.Algorithms.CustomFormation;
+using SwarmSimulation.Algorithms.MoveToTarget;
+using SwarmSimulation.Agents.Agents.Contracts;
 using SwarmSimulation.Visualization;
 
 namespace SwarmSimulation.Simulations
 {
     public sealed class ArrowFormationSimulation : BaseForm
     {
-        private Swarm _swarm;
+        private Agents.Swarm _swarm;
         private IEnumerable<IAgent> _regularAgents;
         private IAgent _leader;
         private IAlgorithm<FormationAlgorithmInput> _arrowFormationAlgorithm;
@@ -45,7 +41,7 @@ namespace SwarmSimulation.Simulations
              _moveToTargetAlgorithm = new MoveToTargetAlgorithm(moveToTargetAlgorithmSettings);
              
             const float perceptionRange = 200;
-            _swarm = new Swarm();
+            _swarm = new Agents.Swarm();
             _leader= _swarm.AddLeader(new Vector2(500,300), perceptionRange);
             var positions = new List<Vector2>
             {

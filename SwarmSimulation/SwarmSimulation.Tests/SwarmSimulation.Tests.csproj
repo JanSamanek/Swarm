@@ -118,6 +118,10 @@
         <None Include="App.config"/>
     </ItemGroup>
     <ItemGroup>
+      <ProjectReference Include="..\SwarmSimulation.Utilities\SwarmSimulation.Utilities.csproj">
+        <Project>{b3b9a174-2d63-4dc3-b8d1-740796382be4}</Project>
+        <Name>SwarmSimulation.Utilities</Name>
+      </ProjectReference>
       <ProjectReference Include="..\SwarmSimulation\SwarmSimulation.csproj">
         <Project>{c0f3a715-aaf2-4b1c-a702-f40b8919b308}</Project>
         <Name>SwarmSimulation</Name>
