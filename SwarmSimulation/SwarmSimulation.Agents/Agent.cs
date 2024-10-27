@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using System.Numerics;
 using System.Threading.Tasks;
-using SwarmSimulation.Agents.Agents.Contracts;
 using SwarmSimulation.Environment;
 using SwarmSimulation.Environment.Obstacles;
 using SwarmSimulation.Utilities;
 
-namespace SwarmSimulation.Agents.Agents
+namespace SwarmSimulation.Agents
 {
     public class Agent
     {
@@ -41,20 +40,6 @@ namespace SwarmSimulation.Agents.Agents
                 }
             });
             return obstaclesInRange;
-        }
-
-        public IEnumerable<Resource> DetectResources()
-        {
-            var resourcesInRange = new List<Resource>();
-            Parallel.ForEach(Arena.Instance.Resources, resource =>
-            {
-                var distance = (resource.Position - Position).Length();
-                if (distance < PerceptionRange)
-                {
-                    resourcesInRange.Add(resource);
-                }
-            });
-            return resourcesInRange;
         }
     }
 }

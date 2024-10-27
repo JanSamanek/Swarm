@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
 using System.Numerics;
-using SwarmSimulation.Agents.Agents.Basic;
-using SwarmSimulation.Agents.Agents.Contracts;
+using SwarmSimulation.Agents;
+using SwarmSimulation.Agents.Basic;
 using SwarmSimulation.Utilities;
 
 namespace SwarmSimulation.Algorithms.Proximity

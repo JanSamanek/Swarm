@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using System.Numerics;
-using SwarmSimulation.Environment;
 using SwarmSimulation.Environment.Obstacles;
 
-namespace SwarmSimulation.Agents.Agents.Contracts
+namespace SwarmSimulation.Agents
 {
     public interface IAgent
     {
@@ -14,7 +13,5 @@ namespace SwarmSimulation.Agents.Agents.Contracts
         List<IAgent> Neighbors { get; set; }
         void Move(Vector2 controlInput);
         IEnumerable<IObstacle> DetectObstacles();
-        IEnumerable<Resource> DetectResources();
-        
     }
 }

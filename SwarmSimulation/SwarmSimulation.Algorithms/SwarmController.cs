@@ -2,20 +2,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
-using SwarmSimulation.Agents.Agents.Contracts;
+using SwarmSimulation.Agents;
 
 namespace SwarmSimulation.Algorithms
 {
     public static class SwarmController
     {
-        public static void ExecuteAlgorithm<TInput>(Agents.Swarm swarm, IEnumerable<IAgent> agents, IAlgorithm<TInput> algorithm, 
+        public static void ExecuteAlgorithm<TInput>(Swarm swarm, IEnumerable<IAgent> agents, IAlgorithm<TInput> algorithm, 
             TInput input)
         {
             UpdateNeighbours(swarm);
             Parallel.ForEach(agents, agent => ApplyAlgorithm(agent, algorithm, input));
         }
 
-        public static void ExecuteAlgorithm<TInput>(Agents.Swarm swarm, IAgent agent, IAlgorithm<TInput> algorithm,
+        public static void ExecuteAlgorithm<TInput>(Swarm swarm, IAgent agent, IAlgorithm<TInput> algorithm,
             TInput input)
         {
             UpdateNeighbours(swarm);
@@ -28,7 +28,7 @@ namespace SwarmSimulation.Algorithms
             agent.Move(controlInput);
         }
         
-        private static  void UpdateNeighbours(Agents.Swarm swarm)
+        private static  void UpdateNeighbours(Swarm swarm)
         {
             foreach (var agentToUpdate in swarm.Agents)
             {

@@ -8,15 +8,22 @@ namespace SwarmSimulation.Environment
     {
         private static Arena _instance;
         public static Arena Instance => _instance ?? (_instance = new Arena());
+        
         private int _width;
         private int _height;
-        public List<IObstacle> Obstacles { get; set; } = new List<IObstacle>(); 
-        public List<Resource> Resources { get; set; } = new List<Resource>();
+        public Nest Nest { get; private set; }
+        public List<IObstacle> Obstacles { get; } = new List<IObstacle>(); 
+        public List<Resource> Resources { get; } = new List<Resource>();
         
         public void SetSize(int width, int height)
         {
             _width = width;
             _height = height;
+        }
+
+        public void AddNest(Vector2 center, float width, float height)
+        {
+            Nest = new Nest(center, width, height);
         }
         
         public void AddCircularObstacle(Vector2 center, int radius)

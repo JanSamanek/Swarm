@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using SwarmSimulation.Agents.Agents.Contracts;
+using SwarmSimulation.Agents;
 using SwarmSimulation.Utilities.Extensions;
 
 namespace SwarmSimulation.Algorithms.LineAggregation

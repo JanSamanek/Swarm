@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Numerics;
 using System.Windows.Forms;
+using SwarmSimulation.Agents;
 using SwarmSimulation.Algorithms;
 using SwarmSimulation.Algorithms.LineAggregation;
-using SwarmSimulation.Agents.Agents.Contracts;
 using SwarmSimulation.Visualization;
 
 namespace SwarmSimulation.Simulations
@@ -32,7 +32,7 @@ namespace SwarmSimulation.Simulations
             _lineFormationAlgorithm = new LineAggregationAlgorithm(algorithmSettings);
             
             const float perceptionRange = 120;
-            _swarm = new Agents.Swarm();
+            _swarm = new Swarm();
             var positions = new List<Vector2>
             {
                 new Vector2(380, 370),

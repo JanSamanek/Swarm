@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using System.Numerics;
-using SwarmSimulation.Agents.Agents.Basic;
-using SwarmSimulation.Agents.Agents.Contracts;
-using SwarmSimulation.Core.Agents.Implementation.Basic;
+using SwarmSimulation.Agents.Basic;
 
 namespace SwarmSimulation.Agents
 {

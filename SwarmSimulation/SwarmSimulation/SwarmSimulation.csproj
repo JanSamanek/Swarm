@@ -78,6 +78,9 @@
         <Compile Include="Simulations\DispersionSimulation.cs">
           <SubType>Form</SubType>
         </Compile>
+        <Compile Include="Simulations\ForagingLewyWalk.cs">
+          <SubType>Form</SubType>
+        </Compile>
         <Compile Include="Simulations\LeaderFollowerSimulation.cs">
           <SubType>Form</SubType>
         </Compile>

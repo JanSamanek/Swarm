@@ -1,5 +1,5 @@
 using System.Numerics;
-using SwarmSimulation.Agents.Agents.Contracts;
+using SwarmSimulation.Agents;
 
 namespace SwarmSimulation.Algorithms.MoveToTarget
 {

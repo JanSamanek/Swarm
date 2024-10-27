@@ -1,8 +1,6 @@
 using System.Numerics;
-using SwarmSimulation.Agents.Agents;
-using SwarmSimulation.Agents.Agents.Contracts;
 
-namespace SwarmSimulation.Core.Agents.Implementation.Basic
+namespace SwarmSimulation.Agents.Basic
 {
     public class RegularAgent : Agent, IAgent
     {

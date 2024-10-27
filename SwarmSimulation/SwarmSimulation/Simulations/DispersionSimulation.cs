@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Numerics;
 using System.Windows.Forms;
+using SwarmSimulation.Agents;
 using SwarmSimulation.Algorithms;
 using SwarmSimulation.Algorithms.Proximity;
-using SwarmSimulation.Agents.Agents.Contracts;
 using SwarmSimulation.Visualization;
 
 namespace SwarmSimulation.Simulations
 {
     public sealed class DispersionSimulation : BaseForm
     {
-        private Agents.Swarm _swarm;
+        private Swarm _swarm;
         private IEnumerable<IAgent> _regularAgents;
         private IAlgorithm<ProximityAlgorithmInput> _dispersionAlgorithm;
         

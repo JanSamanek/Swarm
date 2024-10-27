@@ -2,19 +2,19 @@ using System;
 using System.Drawing;
 using System.Numerics;
 using System.Windows.Forms;
+using SwarmSimulation.Agents;
 using SwarmSimulation.Algorithms;
 using SwarmSimulation.Algorithms.AdaptiveMoveToTarget;
 using SwarmSimulation.Algorithms.MoveToTarget;
 using SwarmSimulation.Algorithms.ObstacleAvoidanceAPF;
 using SwarmSimulation.Environment;
-using SwarmSimulation.Agents.Agents.Contracts;
 using SwarmSimulation.Visualization;
 
 namespace SwarmSimulation.Simulations
 {
     public sealed class ObstacleAvoidanceSimulation : BaseForm
     {
-        private Agents.Swarm _swarm;
+        private Swarm _swarm;
         private IAgent _leader;
         private IAlgorithm<AdaptiveMoveToTargetAlgorithmInput> _moveToTargetAlgorithm;
 

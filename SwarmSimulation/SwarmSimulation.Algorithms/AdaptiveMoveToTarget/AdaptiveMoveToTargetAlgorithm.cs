@@ -1,7 +1,7 @@
 using System.Numerics;
+using SwarmSimulation.Agents;
 using SwarmSimulation.Algorithms.MoveToTarget;
 using SwarmSimulation.Algorithms.ObstacleAvoidanceAPF;
-using SwarmSimulation.Agents.Agents.Contracts;
 
 namespace SwarmSimulation.Algorithms.AdaptiveMoveToTarget
 {

@@ -12,9 +12,9 @@ namespace SwarmSimulation.Tests
     {
         private readonly Panel _panel =  new Panel { Dock = DockStyle.Fill };
         private readonly FormsPlot _formsPlot = new FormsPlot { Dock = DockStyle.Fill };
-        private readonly TrackBar _slider = new TrackBar() 
+        private readonly TrackBar _slider = new TrackBar
         {
-            Minimum = 100,
+            Minimum = 0,
             Maximum = 200,
             Value = 100, 
             Dock = DockStyle.Bottom,
@@ -55,7 +55,7 @@ namespace SwarmSimulation.Tests
         private void UpdatePlot()
         {
             var lewyParameter = _slider.Value / 100f;
-            var lewyData = DataGenerator.GenerateLewyDistribution(lewyParameter);
+            var lewyData = DataGenerator.GenerateLewyDistribution(lewyParameter, max: 100);
             
             var hist = new ScottPlot.Statistics.Histogram(lewyData, 500);
                 
@@ -65,7 +65,7 @@ namespace SwarmSimulation.Tests
             scatter.LineWidth = 2;
             scatter.PathStrategy = new CubicSpline();
             _formsPlot.Plot.Axes.Margins(top: 0);
-            _formsPlot.Plot.Axes.SetLimits(left: -50, right: 50, bottom: 0);
+            _formsPlot.Plot.Axes.SetLimits(left: -100, right: 100, bottom: 0);
             
             _sliderLabel.Text = $@"Lewy Parameter: {lewyParameter:F2}";
             _formsPlot.Refresh();

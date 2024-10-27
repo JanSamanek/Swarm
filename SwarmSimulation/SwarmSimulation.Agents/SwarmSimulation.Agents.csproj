@@ -40,12 +40,15 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Agents\Agent.cs" />
-        <Compile Include="Agents\Basic\LeaderAgent.cs" />
-        <Compile Include="Agents\Basic\RegularAgent.cs" />
-        <Compile Include="Agents\Foraging\ForagingAgent.cs" />
-        <Compile Include="Agents\Foraging\ForagingState.cs" />
-        <Compile Include="Agents\IAgent.cs" />
+        <Compile Include="Agent.cs" />
+        <Compile Include="Basic\LeaderAgent.cs" />
+        <Compile Include="Basic\RegularAgent.cs" />
+        <Compile Include="Foraging\ForagingAgent.cs" />
+        <Compile Include="Foraging\States\Harvesting.cs" />
+        <Compile Include="Foraging\States\Exploring.cs" />
+        <Compile Include="Foraging\States\IState.cs" />
+        <Compile Include="Foraging\States\ReturningToNest.cs" />
+        <Compile Include="IAgent.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
         <Compile Include="Swarm.cs" />
     </ItemGroup>

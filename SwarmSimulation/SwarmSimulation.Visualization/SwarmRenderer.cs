@@ -1,12 +1,12 @@
 using System.Drawing;
 using System.Linq;
-using SwarmSimulation.Agents.Agents.Contracts;
+using SwarmSimulation.Agents;
 
 namespace SwarmSimulation.Visualization
 {
     public static class SwarmRenderer
     {
-        public static void DrawAgents(Agents.Swarm swarm, Graphics graphics, (int Width, int Height) size,
+        public static void DrawAgents(Swarm swarm, Graphics graphics, (int Width, int Height) size,
             bool drawPerceptionRange = false, bool drawId = false)
         {
             var agentsList = swarm.Agents.ToList();

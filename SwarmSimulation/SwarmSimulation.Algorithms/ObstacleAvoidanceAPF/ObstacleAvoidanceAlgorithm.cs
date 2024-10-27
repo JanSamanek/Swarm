@@ -1,6 +1,6 @@
 using System;
 using System.Numerics;
-using SwarmSimulation.Agents.Agents.Contracts;
+using SwarmSimulation.Agents;
 
 namespace SwarmSimulation.Algorithms.ObstacleAvoidanceAPF
 {

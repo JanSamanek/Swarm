@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Numerics;
 using System.Windows.Forms;
+using SwarmSimulation.Agents;
 using SwarmSimulation.Algorithms;
 using SwarmSimulation.Algorithms.MoveToTarget;
 using SwarmSimulation.Algorithms.Proximity;
-using SwarmSimulation.Agents.Agents.Contracts;
 using SwarmSimulation.Visualization;
 
 namespace SwarmSimulation.Simulations
 {
     public sealed class LeaderFollowerSimulation : BaseForm
     {
-        private Agents.Swarm _swarm;
+        private Swarm _swarm;
         private IEnumerable<IAgent> _regularAgents;
         private IAgent _leader;
 
@@ -44,7 +44,7 @@ namespace SwarmSimulation.Simulations
             _moveToTargetAlgorithm = new MoveToTargetAlgorithm(moveToTargetAlgorithmSettings);
             
             const float perceptionRange = 100;
-            _swarm = new Agents.Swarm();
+            _swarm = new Swarm();
             _leader = _swarm.AddLeader(new Vector2(500, 300), perceptionRange);
 
             var positions = new List<Vector2>

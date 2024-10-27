@@ -1,20 +1,58 @@
+using System;
+using System.Linq;
 using System.Numerics;
-using SwarmSimulation.Agents.Agents.Contracts;
+using SwarmSimulation.Agents;
+using SwarmSimulation.Agents.Foraging;
+using SwarmSimulation.Agents.Foraging.States;
+using SwarmSimulation.Algorithms.AdaptiveMoveToTarget;
+using SwarmSimulation.Algorithms.MoveToTarget;
+using SwarmSimulation.Algorithms.ObstacleAvoidanceAPF;
+using SwarmSimulation.Environment;
+using SwarmSimulation.Utilities.Extensions;
+using SwarmSimulation.Utilities.Random;
 
 namespace SwarmSimulation.Algorithms.ForagingLewyWalk
 {
     public class ForagingLewyWalkAlgorithm : IAlgorithm<ForagingLewyWalkAlgorithmInput>
     {
-        private ForagingLewyWalkAlgorithmSettings _settings;
-
+        private readonly ForagingLewyWalkAlgorithmSettings _settings;
+        private readonly AdaptiveMoveToTargetAlgorithm _adaptiveMoveToTargetAlgorithm;
+        private readonly Random _random = new Random();
+        
         public ForagingLewyWalkAlgorithm(ForagingLewyWalkAlgorithmSettings settings)
         {
             _settings = settings;
+            _adaptiveMoveToTargetAlgorithm =
+                new AdaptiveMoveToTargetAlgorithm(settings.AdaptiveMoveToTargetAlgorithmSettings);
         }
 
         public Vector2 CalculateControlInput(IAgent agent, ForagingLewyWalkAlgorithmInput input)
         {
-            throw new System.NotImplementedException();
+            var foragingAgent = (ForagingAgent) agent;
+
+            foragingAgent.State.Execute(foragingAgent);
+            
+            var moveInput = new AdaptiveMoveToTargetAlgorithmInput
+            {
+                ObstacleAvoidanceAlgorithmInput = new ObstacleAvoidanceAlgorithmInput {
+                    Distance = input.ObstacleAvoidanceAlgorithmInput.Distance,
+                },
+                MoveToTargetAlgorithmInput = new MoveToTargetAlgorithmInput {
+                    Speed = input.MoveSpeed,
+                    TargetPosition = foragingAgent.Target,
+                }
+            };
+            var controlInput = _adaptiveMoveToTargetAlgorithm.CalculateControlInput(foragingAgent, moveInput);
+            
+            return controlInput;
+        }
+        
+        private Vector2 GenerateNewDirection()
+        {
+            var randomAngle = (float) (_random.NextDouble() * 2 * Math.PI);
+            var baseVector = new Vector2(0, 1);
+            return Vector2.Normalize(baseVector.Rotate(randomAngle));
         }
     }
+    
 }
