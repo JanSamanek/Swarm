@@ -6,7 +6,7 @@ namespace SwarmSimulation.Environment.Utilities
     {
         public static ConcurrentBag<Resource> ResourceGarbage { get; private set; }  = new ConcurrentBag<Resource>();
 
-        public static void ClearGarbage()
+        public static void ClearHarvestedResources()
         {
             foreach (var resource in ResourceGarbage)
             {

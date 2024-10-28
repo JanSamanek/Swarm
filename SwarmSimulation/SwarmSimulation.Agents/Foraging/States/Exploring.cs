@@ -9,7 +9,10 @@ namespace SwarmSimulation.Agents.Foraging.States
     public class Exploring : IState
     {
         private readonly Random _random = new Random();
-
+        private static float _lewyParameter;
+        private static float _maxFlightLength;
+        private static float _lewyScale;
+        
         public Exploring(ForagingAgent agent)
         {
             OnEnter(agent);
@@ -19,7 +22,7 @@ namespace SwarmSimulation.Agents.Foraging.States
         private void OnEnter(ForagingAgent agent)
         {
             var direction = GenerateNewDirection();
-            var length = (float) LewyRandom.Next(1, 600, scale:400);
+            var length = (float) LewyRandom.Next(_lewyParameter, _maxFlightLength, _lewyScale);
             agent.Target = agent.Position + direction * length;
         }
 
@@ -30,6 +33,13 @@ namespace SwarmSimulation.Agents.Foraging.States
             {
                 agent.State = new Harvesting(agent, resources.First());
             }
+        }
+
+        public static void ConfigureLewyWalk(float lewyParameter, float maxFlightLength, float scale)
+        {
+            _maxFlightLength = maxFlightLength;
+            _lewyParameter = lewyParameter;
+            _lewyScale = scale;
         }
         
         private Vector2 GenerateNewDirection()

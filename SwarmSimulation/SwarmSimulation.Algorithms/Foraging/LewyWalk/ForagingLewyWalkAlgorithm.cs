@@ -2,6 +2,7 @@ using System;
 using System.Numerics;
 using SwarmSimulation.Agents;
 using SwarmSimulation.Agents.Foraging;
+using SwarmSimulation.Agents.Foraging.States;
 using SwarmSimulation.Algorithms.AdaptiveMoveToTarget;
 using SwarmSimulation.Algorithms.MoveToTarget;
 using SwarmSimulation.Algorithms.ObstacleAvoidanceAPF;
@@ -20,6 +21,7 @@ namespace SwarmSimulation.Algorithms.Foraging.LewyWalk
             _settings = settings;
             _adaptiveMoveToTargetAlgorithm =
                 new AdaptiveMoveToTargetAlgorithm(settings.AdaptiveMoveToTargetAlgorithmSettings);
+            Exploring.ConfigureLewyWalk(settings.LewyParameter, settings.MaxFlightLength, settings.LewyScale);
         }
 
         public Vector2 CalculateControlInput(IAgent agent, ForagingLewyWalkAlgorithmInput input)

@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -24,19 +25,17 @@ namespace SwarmSimulation.Agents.Foraging
             resource.Harvest();
             CarriesResource = true;
             return true;
-            // TODO: Implement async wait
         }
 
         public bool DropResource()
         {
             CarriesResource = false;
             return true;
-            // TODO: Implement async wait
         }
         
         public IEnumerable<Resource> DetectResources()
         {
-            var resourcesInRange = new List<Resource>();
+            var resourcesInRange = new ConcurrentBag<Resource>();
             Parallel.ForEach(Arena.Instance.Resources, resource =>
             {
                 var distance = (resource.Position - Position).Length();

@@ -7,17 +7,19 @@ namespace SwarmSimulation.Environment
 {
     public class ArenaBuilder
     {
-        public ArenaBuilder Initialize(Vector2 position, float width, float height, float padding=5)
+        private int _padding;
+        public ArenaBuilder Initialize(Vector2 position, float width, float height, int padding=5)
         {
             Arena.Instance.Width = (int) width;
             Arena.Instance.Height = (int) height;
-            var left = position.X + padding/2 - width / 2;
+            _padding = padding;
+            var left = position.X + (float) padding/2 - width / 2;
             AddRectangularObstacle(new Vector2(left, position.Y), padding, height);
-            var right = position.X - padding / 2 + width/2;
+            var right = position.X - (float) padding / 2 + width/2;
             AddRectangularObstacle(new Vector2(right, position.Y), padding, height);
-            var top = position.Y - padding/2 + height / 2;
+            var top = position.Y - (float) padding/2 + height / 2;
             AddRectangularObstacle(new Vector2(position.X, top), width, padding);
-            var bottom = position.Y + padding/2 - height / 2;
+            var bottom = position.Y + (float) padding/2 - height / 2;
             AddRectangularObstacle(new Vector2(position.X, bottom), width, padding);
             return this;
         }
@@ -39,26 +41,26 @@ namespace SwarmSimulation.Environment
             Arena.Instance.Obstacles.Add(new RectangularObstacle(center, width, height));
             return this;
         }
-
-        public ArenaBuilder AddResource(Vector2 position, int capacity)
-        {
-            Arena.Instance.Resources.Add(new Resource(position, capacity));
-            return this;
-        }
-
+        
         public ArenaBuilder GenerateResources(int count)
         {
             var random = new Random();
 
             while (Arena.Instance.Resources.Count < count)
             {
-                var position = new Vector2(random.Next(0, Arena.Instance.Width), random.Next(0, Arena.Instance.Height));
+                var position = new Vector2(random.Next(_padding, Arena.Instance.Width - _padding),
+                    random.Next(_padding, Arena.Instance.Height - _padding));
                 var isValid = Arena.Instance.Obstacles.All(obstacle => !obstacle.IsPointInside(position));
                 if (isValid)
                 {
                     AddResource(position, 1);
                 }
             }
+            return this;
+        }
+        private ArenaBuilder AddResource(Vector2 position, int capacity)
+        {
+            Arena.Instance.Resources.Add(new Resource(position, capacity));
             return this;
         }
 

@@ -6,6 +6,7 @@ namespace SwarmSimulation.Algorithms.Foraging.LewyWalk
     {
         public float LewyParameter { get; set; }
         public float MaxFlightLength { get; set; }
+        public float LewyScale { get; set; }
         public AdaptiveMoveToTargetAlgorithmSettings AdaptiveMoveToTargetAlgorithmSettings { get; set; }
     }
 }

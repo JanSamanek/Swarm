@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Threading.Tasks;
@@ -30,7 +31,7 @@ namespace SwarmSimulation.Agents
         
         public IEnumerable<IObstacle> DetectObstacles()
         {
-            var obstaclesInRange = new List<IObstacle>();
+            var obstaclesInRange = new ConcurrentBag<IObstacle>();
             Parallel.ForEach(Arena.Instance.Obstacles, obstacle =>
             {
                 var distanceVector = obstacle.GetDistanceVectorFromBorder(Position);

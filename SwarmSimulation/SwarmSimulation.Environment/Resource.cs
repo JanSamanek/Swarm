@@ -28,7 +28,6 @@ namespace SwarmSimulation.Environment
         {
             IsConsumed = true;
             GarbageCollector.ResourceGarbage.Add(this);
-            // Arena.Instance.Resources.Remove(this);
         }
     }
 }
