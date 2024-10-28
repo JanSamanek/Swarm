@@ -29,16 +29,9 @@ namespace SwarmSimulation.Simulations
         {
             var settings = new ForagingLewyWalkAlgorithmSettings
             {
-                AdaptiveMoveToTargetAlgorithmSettings = new AdaptiveMoveToTargetAlgorithmSettings
+                MoveToTargetAlgorithmSettings = new MoveToTargetAlgorithmSettings
                 {
-                    MoveToTargetAlgorithmSettings = new MoveToTargetAlgorithmSettings
-                    {
-                        TargetPositionTolerance = 5
-                    },
-                    ObstacleAvoidanceAlgorithmSettings = new ObstacleAvoidanceAlgorithmSettings
-                    {
-                        ApfGain = 150f
-                    }
+                    TargetPositionTolerance = 5
                 },
                 LewyParameter = 1,
                 MaxFlightLength = 100,
@@ -64,10 +57,6 @@ namespace SwarmSimulation.Simulations
         {
             var input = new ForagingLewyWalkAlgorithmInput
             {
-                ObstacleAvoidanceAlgorithmInput = new ObstacleAvoidanceAlgorithmInput
-                {
-                    Distance = 5
-                },
                 MoveSpeed = 20
             };
             

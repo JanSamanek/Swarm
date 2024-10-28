@@ -1,4 +1,4 @@
-using SwarmSimulation.Algorithms.AdaptiveMoveToTarget;
+using SwarmSimulation.Algorithms.MoveToTarget;
 
 namespace SwarmSimulation.Algorithms.Foraging.LewyWalk
 {
@@ -7,6 +7,6 @@ namespace SwarmSimulation.Algorithms.Foraging.LewyWalk
         public float LewyParameter { get; set; }
         public float MaxFlightLength { get; set; }
         public float LewyScale { get; set; }
-        public AdaptiveMoveToTargetAlgorithmSettings AdaptiveMoveToTargetAlgorithmSettings { get; set; }
+        public MoveToTargetAlgorithmSettings MoveToTargetAlgorithmSettings { get; set; }
     }
 }

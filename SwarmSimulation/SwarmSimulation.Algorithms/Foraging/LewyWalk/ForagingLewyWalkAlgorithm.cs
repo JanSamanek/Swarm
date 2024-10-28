@@ -3,9 +3,7 @@ using System.Numerics;
 using SwarmSimulation.Agents;
 using SwarmSimulation.Agents.Foraging;
 using SwarmSimulation.Agents.Foraging.States;
-using SwarmSimulation.Algorithms.AdaptiveMoveToTarget;
 using SwarmSimulation.Algorithms.MoveToTarget;
-using SwarmSimulation.Algorithms.ObstacleAvoidanceAPF;
 using SwarmSimulation.Utilities.Extensions;
 
 namespace SwarmSimulation.Algorithms.Foraging.LewyWalk
@@ -13,14 +11,14 @@ namespace SwarmSimulation.Algorithms.Foraging.LewyWalk
     public class ForagingLewyWalkAlgorithm : IAlgorithm<ForagingLewyWalkAlgorithmInput>
     {
         private readonly ForagingLewyWalkAlgorithmSettings _settings;
-        private readonly AdaptiveMoveToTargetAlgorithm _adaptiveMoveToTargetAlgorithm;
+        private readonly MoveToTargetAlgorithm _moveToTargetAlgorithm;
         private readonly Random _random = new Random();
         
         public ForagingLewyWalkAlgorithm(ForagingLewyWalkAlgorithmSettings settings)
         {
             _settings = settings;
-            _adaptiveMoveToTargetAlgorithm =
-                new AdaptiveMoveToTargetAlgorithm(settings.AdaptiveMoveToTargetAlgorithmSettings);
+            _moveToTargetAlgorithm =
+                new MoveToTargetAlgorithm(settings.MoveToTargetAlgorithmSettings);
             Exploring.ConfigureLewyWalk(settings.LewyParameter, settings.MaxFlightLength, settings.LewyScale);
         }
 
@@ -30,17 +28,12 @@ namespace SwarmSimulation.Algorithms.Foraging.LewyWalk
 
             foragingAgent.State.Execute(foragingAgent);
             
-            var moveInput = new AdaptiveMoveToTargetAlgorithmInput
+            var moveInput = new MoveToTargetAlgorithmInput
             {
-                ObstacleAvoidanceAlgorithmInput = new ObstacleAvoidanceAlgorithmInput {
-                    Distance = input.ObstacleAvoidanceAlgorithmInput.Distance,
-                },
-                MoveToTargetAlgorithmInput = new MoveToTargetAlgorithmInput {
                     Speed = input.MoveSpeed,
                     TargetPosition = foragingAgent.Target,
-                }
             };
-            var controlInput = _adaptiveMoveToTargetAlgorithm.CalculateControlInput(foragingAgent, moveInput);
+            var controlInput = _moveToTargetAlgorithm.CalculateControlInput(foragingAgent, moveInput);
             
             return controlInput;
         }

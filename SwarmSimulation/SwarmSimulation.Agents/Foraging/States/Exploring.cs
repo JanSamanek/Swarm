@@ -18,7 +18,6 @@ namespace SwarmSimulation.Agents.Foraging.States
             OnEnter(agent);
         }
         
-        // TODO: incorporate settings
         private void OnEnter(ForagingAgent agent)
         {
             var direction = GenerateNewDirection();
@@ -32,6 +31,12 @@ namespace SwarmSimulation.Agents.Foraging.States
             if (resources.Any())
             {
                 agent.State = new Harvesting(agent, resources.First());
+                return;
+            }
+
+            if (agent.HasApproachedTarget(agent.Target))
+            {
+                agent.State = new Exploring(agent);
             }
         }
 
