@@ -43,12 +43,22 @@
         <Compile Include="AdaptiveMoveToTarget\AdaptiveMoveToTargetAlgorithm.cs" />
         <Compile Include="AdaptiveMoveToTarget\AdaptiveMoveToTargetAlgorithmInput.cs" />
         <Compile Include="AdaptiveMoveToTarget\AdaptiveMoveToTargetAlgorithmSettings.cs" />
+        <Compile Include="Agents\AgentCore.cs" />
+        <Compile Include="Agents\BasicAgent.cs" />
+        <Compile Include="Agents\ForagingAgent.cs" />
+        <Compile Include="Agents\IAgent.cs" />
+        <Compile Include="Agents\LeaderAgent.cs" />
+        <Compile Include="Agents\Swarm.cs" />
         <Compile Include="CustomFormation\FormationAlgorithm.cs" />
         <Compile Include="CustomFormation\FormationAlgorithmInput.cs" />
         <Compile Include="CustomFormation\FormationAlgorithmSettings.cs" />
         <Compile Include="Foraging\LewyWalk\ForagingLewyWalkAlgorithm.cs" />
         <Compile Include="Foraging\LewyWalk\ForagingLewyWalkAlgorithmInput.cs" />
         <Compile Include="Foraging\LewyWalk\ForagingLewyWalkAlgorithmSettings.cs" />
+        <Compile Include="Foraging\States\Exploring.cs" />
+        <Compile Include="Foraging\States\Harvesting.cs" />
+        <Compile Include="Foraging\States\IState.cs" />
+        <Compile Include="Foraging\States\ReturningToNest.cs" />
         <Compile Include="IAlgorithm.cs" />
         <Compile Include="LineAggregation\LineAggregationAlgorithm.cs" />
         <Compile Include="LineAggregation\LineAggregationAlgorithmInput.cs" />
@@ -63,16 +73,13 @@
         <Compile Include="Proximity\ProximityAlgorithm.cs" />
         <Compile Include="Proximity\ProximityAlgorithmInput.cs" />
         <Compile Include="Proximity\ProximityAlgorithmSettings.cs" />
-        <Compile Include="SwarmController.cs" />
+        <Compile Include="Utilities\SwarmBuilder.cs" />
+        <Compile Include="Utilities\SwarmController.cs" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\SwarmSimulation.Environment\SwarmSimulation.Environment.csproj">
         <Project>{7eb7cd5e-b7b3-4c68-8397-1f32d721d7d4}</Project>
         <Name>SwarmSimulation.Environment</Name>
-      </ProjectReference>
-      <ProjectReference Include="..\SwarmSimulation.Agents\SwarmSimulation.Agents.csproj">
-        <Project>{b8333da0-9fbd-401d-b518-6fbb4f87669d}</Project>
-        <Name>SwarmSimulation.Agents</Name>
       </ProjectReference>
       <ProjectReference Include="..\SwarmSimulation.Utilities\SwarmSimulation.Utilities.csproj">
         <Project>{b3b9a174-2d63-4dc3-b8d1-740796382be4}</Project>

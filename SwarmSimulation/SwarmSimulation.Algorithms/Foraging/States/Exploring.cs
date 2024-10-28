@@ -1,10 +1,11 @@
 using System;
 using System.Linq;
 using System.Numerics;
+using SwarmSimulation.Algorithms.Agents;
 using SwarmSimulation.Utilities.Extensions;
 using SwarmSimulation.Utilities.Random;
 
-namespace SwarmSimulation.Agents.Foraging.States
+namespace SwarmSimulation.Algorithms.Foraging.States
 {
     public class Exploring : IState
     {
@@ -39,7 +40,12 @@ namespace SwarmSimulation.Agents.Foraging.States
                 agent.State = new Exploring(agent);
             }
         }
-
+        private Vector2 GenerateNewDirection()
+        {
+            var randomAngle = (float) (_random.NextDouble() * 2 * Math.PI);
+            var baseVector = new Vector2(0, 1);
+            return Vector2.Normalize(baseVector.Rotate(randomAngle));
+        }
         public static void ConfigureLewyWalk(float lewyParameter, float maxFlightLength, float scale)
         {
             _maxFlightLength = maxFlightLength;
@@ -47,11 +53,5 @@ namespace SwarmSimulation.Agents.Foraging.States
             _lewyScale = scale;
         }
         
-        private Vector2 GenerateNewDirection()
-        {
-            var randomAngle = (float) (_random.NextDouble() * 2 * Math.PI);
-            var baseVector = new Vector2(0, 1);
-            return Vector2.Normalize(baseVector.Rotate(randomAngle));
-        }
     }
 }

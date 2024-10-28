@@ -1,12 +1,12 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
-using SwarmSimulation.Agents.Foraging.States;
+using SwarmSimulation.Agents;
+using SwarmSimulation.Algorithms.Foraging.States;
 using SwarmSimulation.Environment;
 
-namespace SwarmSimulation.Agents.Foraging
+namespace SwarmSimulation.Algorithms.Agents
 {
     public class ForagingAgent : AgentCore, IAgent
     {

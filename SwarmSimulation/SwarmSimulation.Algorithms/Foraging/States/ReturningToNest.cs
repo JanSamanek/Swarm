@@ -1,6 +1,7 @@
+using SwarmSimulation.Algorithms.Agents;
 using SwarmSimulation.Environment;
 
-namespace SwarmSimulation.Agents.Foraging.States
+namespace SwarmSimulation.Algorithms.Foraging.States
 {
     public class ReturningToNest : IState
     {

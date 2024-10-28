@@ -2,7 +2,8 @@ using System.Drawing;
 using System.Linq;
 using System.Numerics;
 using SwarmSimulation.Agents;
-using SwarmSimulation.Agents.Foraging;
+using SwarmSimulation.Algorithms;
+using SwarmSimulation.Algorithms.Agents;
 
 namespace SwarmSimulation.Visualization
 {

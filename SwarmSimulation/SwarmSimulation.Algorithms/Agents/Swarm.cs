@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using SwarmSimulation.Agents;
 
-namespace SwarmSimulation.Agents
+namespace SwarmSimulation.Algorithms.Agents
 {
     public class Swarm
     {

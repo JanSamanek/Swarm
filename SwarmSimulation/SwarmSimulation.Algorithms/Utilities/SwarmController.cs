@@ -3,9 +3,10 @@ using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
 using SwarmSimulation.Agents;
+using SwarmSimulation.Algorithms.Agents;
 using SwarmSimulation.Environment.Utilities;
 
-namespace SwarmSimulation.Algorithms
+namespace SwarmSimulation.Algorithms.Utilities
 {
     public static class SwarmController
     {

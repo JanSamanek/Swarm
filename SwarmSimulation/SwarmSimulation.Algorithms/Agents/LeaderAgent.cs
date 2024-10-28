@@ -1,6 +1,7 @@
 using System.Numerics;
+using SwarmSimulation.Agents;
 
-namespace SwarmSimulation.Agents.Basic
+namespace SwarmSimulation.Algorithms.Agents
 {
     public class LeaderAgent : AgentCore, IAgent
     {

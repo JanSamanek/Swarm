@@ -3,11 +3,12 @@ using System.Drawing;
 using System.Numerics;
 using System.Windows.Forms;
 using SwarmSimulation.Agents;
-using SwarmSimulation.Agents.Basic;
 using SwarmSimulation.Algorithms;
 using SwarmSimulation.Algorithms.AdaptiveMoveToTarget;
+using SwarmSimulation.Algorithms.Agents;
 using SwarmSimulation.Algorithms.MoveToTarget;
 using SwarmSimulation.Algorithms.ObstacleAvoidanceAPF;
+using SwarmSimulation.Algorithms.Utilities;
 using SwarmSimulation.Environment;
 using SwarmSimulation.Visualization;
 

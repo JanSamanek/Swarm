@@ -2,13 +2,11 @@ using System;
 using System.Drawing;
 using System.Numerics;
 using System.Windows.Forms;
-using SwarmSimulation.Agents;
-using SwarmSimulation.Agents.Foraging;
 using SwarmSimulation.Algorithms;
-using SwarmSimulation.Algorithms.AdaptiveMoveToTarget;
+using SwarmSimulation.Algorithms.Agents;
 using SwarmSimulation.Algorithms.Foraging.LewyWalk;
 using SwarmSimulation.Algorithms.MoveToTarget;
-using SwarmSimulation.Algorithms.ObstacleAvoidanceAPF;
+using SwarmSimulation.Algorithms.Utilities;
 using SwarmSimulation.Environment;
 using SwarmSimulation.Visualization;
 
@@ -35,7 +33,7 @@ namespace SwarmSimulation.Simulations
                 },
                 LewyParameter = 1,
                 MaxFlightLength = 100,
-                LewyScale = 400
+                LewyScale = 200
             };
 
             _foragingAlgorithm = new ForagingLewyWalkAlgorithm(settings);

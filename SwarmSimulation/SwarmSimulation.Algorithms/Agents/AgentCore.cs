@@ -2,11 +2,12 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Threading.Tasks;
+using SwarmSimulation.Agents;
 using SwarmSimulation.Environment;
 using SwarmSimulation.Environment.Obstacles;
 using SwarmSimulation.Utilities;
 
-namespace SwarmSimulation.Agents
+namespace SwarmSimulation.Algorithms.Agents
 {
     public class AgentCore
     {

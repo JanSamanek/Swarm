@@ -4,9 +4,10 @@ using System.Drawing;
 using System.Numerics;
 using System.Windows.Forms;
 using SwarmSimulation.Agents;
-using SwarmSimulation.Agents.Basic;
 using SwarmSimulation.Algorithms;
+using SwarmSimulation.Algorithms.Agents;
 using SwarmSimulation.Algorithms.LineAggregation;
+using SwarmSimulation.Algorithms.Utilities;
 using SwarmSimulation.Visualization;
 
 namespace SwarmSimulation.Simulations

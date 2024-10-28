@@ -122,10 +122,6 @@
         <Project>{7eb7cd5e-b7b3-4c68-8397-1f32d721d7d4}</Project>
         <Name>SwarmSimulation.Environment</Name>
       </ProjectReference>
-      <ProjectReference Include="..\SwarmSimulation.Agents\SwarmSimulation.Agents.csproj">
-        <Project>{b8333da0-9fbd-401d-b518-6fbb4f87669d}</Project>
-        <Name>SwarmSimulation.Agents</Name>
-      </ProjectReference>
       <ProjectReference Include="..\SwarmSimulation.Utilities\SwarmSimulation.Utilities.csproj">
         <Project>{b3b9a174-2d63-4dc3-b8d1-740796382be4}</Project>
         <Name>SwarmSimulation.Utilities</Name>

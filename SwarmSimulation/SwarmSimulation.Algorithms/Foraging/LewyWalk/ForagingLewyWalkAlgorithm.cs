@@ -1,8 +1,8 @@
 using System;
 using System.Numerics;
 using SwarmSimulation.Agents;
-using SwarmSimulation.Agents.Foraging;
-using SwarmSimulation.Agents.Foraging.States;
+using SwarmSimulation.Algorithms.Agents;
+using SwarmSimulation.Algorithms.Foraging.States;
 using SwarmSimulation.Algorithms.MoveToTarget;
 using SwarmSimulation.Utilities.Extensions;
 

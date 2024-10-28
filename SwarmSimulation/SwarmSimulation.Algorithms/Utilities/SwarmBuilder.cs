@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Numerics;
+using SwarmSimulation.Agents;
+using SwarmSimulation.Algorithms.Agents;
 using SwarmSimulation.Environment;
 
-namespace SwarmSimulation.Agents
+namespace SwarmSimulation.Algorithms.Utilities
 {
     public static class SwarmBuilder
     {
