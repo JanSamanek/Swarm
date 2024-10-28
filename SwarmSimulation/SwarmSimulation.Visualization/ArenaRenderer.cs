@@ -6,9 +6,12 @@ namespace SwarmSimulation.Visualization
 {
     public static class ArenaRenderer
     {
-        public static void DrawArena(Arena arena, Graphics graphics)
+        public static void DrawArena(Arena arena, Graphics graphics, bool drawNest=false)
         {
-            DrawNest(arena.Nest, graphics);
+            if (drawNest)
+            {
+                DrawNest(arena.Nest, graphics);
+            }
             
             foreach (var obstacle in arena.Obstacles)
             {
@@ -35,12 +38,12 @@ namespace SwarmSimulation.Visualization
                 (int)(nest.Center.Y - nest.Height / 2),(int) nest.Width,
                 (int) nest.Height);
             
-            graphics.FillRectangle(Brushes.Chartreuse, rect);
+            graphics.FillRectangle(Brushes.YellowGreen, rect);
         }
 
         private static void DrawResource(Resource resource, Graphics graphics)
         {
-            graphics.FillEllipse(Brushes.Firebrick, (int)resource.Position.X - 2, (int)resource.Position.Y - 2, 4, 4);
+            graphics.FillEllipse(Brushes.Firebrick, (int)resource.Position.X - 3, (int)resource.Position.Y - 3, 6, 6);
         }
         
         private static void DrawCircularObstacle(CircularObstacle obstacle, Graphics graphics)

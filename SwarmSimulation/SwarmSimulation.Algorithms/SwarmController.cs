@@ -15,6 +15,13 @@ namespace SwarmSimulation.Algorithms
             Parallel.ForEach(agents, agent => ApplyAlgorithm(agent, algorithm, input));
         }
 
+        public static void ExecuteAlgorithm<TInput>(Swarm swarm, IAlgorithm<TInput> algorithm, 
+            TInput input)
+        {
+            UpdateNeighbours(swarm);
+            Parallel.ForEach(swarm.Agents, agent => ApplyAlgorithm(agent, algorithm, input));
+        }
+        
         public static void ExecuteAlgorithm<TInput>(Swarm swarm, IAgent agent, IAlgorithm<TInput> algorithm,
             TInput input)
         {

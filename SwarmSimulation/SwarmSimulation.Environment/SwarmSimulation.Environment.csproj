@@ -41,6 +41,7 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Arena.cs" />
+        <Compile Include="ArenaBuilder.cs" />
         <Compile Include="Nest.cs" />
         <Compile Include="Obstacles\CircularObstacle.cs" />
         <Compile Include="Obstacles\IObstacle.cs" />

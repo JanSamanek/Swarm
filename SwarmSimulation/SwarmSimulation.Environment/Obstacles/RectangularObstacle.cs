@@ -1,3 +1,4 @@
+using System;
 using System.Numerics;
 
 namespace SwarmSimulation.Environment.Obstacles
@@ -14,30 +15,35 @@ namespace SwarmSimulation.Environment.Obstacles
         public Vector2 Center { get; }
         public float Width { get; }
         public float Height { get; }
-        public Vector2 GetDistanceVectorToAgent(Vector2 agentPosition)
+        public Vector2 GetDistanceVectorFromBorder(Vector2 point)
         {
-            var distanceVectorToAgent = agentPosition - Center;
-            var distanceFromBorder = Vector2.Zero;
+            var distanceVectorToAgent = point - Center;
+            var halfWidth = Width / 2;
+            var halfHeight = Height / 2;
             
-            if (agentPosition.X > Center.X + Width / 2)
-            {
-                distanceFromBorder.X = distanceVectorToAgent.X - Width / 2;
-            }
-            else if (agentPosition.X < Center.X - Width / 2)
-            {
-                distanceFromBorder.X = distanceVectorToAgent.X + Width / 2;
-            }
+            var distanceX = Math.Max(0, Math.Abs(distanceVectorToAgent.X) - halfWidth) * Math.Sign(distanceVectorToAgent.X);
+            var distanceY = Math.Max(0, Math.Abs(distanceVectorToAgent.Y) - halfHeight) * Math.Sign(distanceVectorToAgent.Y);
 
-            if (agentPosition.Y > Center.Y + Height / 2)
-            {
-                distanceFromBorder.Y = distanceVectorToAgent.Y - Height / 2;
-            }
-            else if (agentPosition.Y < Center.Y - Height / 2)
-            {
-                distanceFromBorder.Y = distanceVectorToAgent.Y + Height / 2;
-            }
-            
-            return distanceFromBorder;
+            if (Math.Abs(distanceVectorToAgent.X) <= halfWidth)
+                distanceX = -(halfWidth - Math.Abs(distanceVectorToAgent.X)) * Math.Sign(distanceVectorToAgent.X);
+
+            if (Math.Abs(distanceVectorToAgent.Y) <= halfHeight)
+                distanceY = -(halfHeight - Math.Abs(distanceVectorToAgent.Y)) * Math.Sign(distanceVectorToAgent.Y);
+
+            return new Vector2(distanceX, distanceY);
+        }
+
+        public bool IsPointInside(Vector2 point)
+        {
+            var halfWidth = Width / 2;
+            var halfHeight = Height / 2;
+
+            var left = Center.X - halfWidth;
+            var right = Center.X + halfWidth;
+            var top = Center.Y - halfHeight;
+            var bottom = Center.Y + halfHeight;
+
+            return point.X >= left && point.X <= right && point.Y >= bottom && point.Y <= top;
         }
     }
 }

@@ -60,7 +60,7 @@ namespace SwarmSimulation.Simulations
                 DesiredDistance = 50,
                 NeighboursToCalculateFrom = 2
             };
-            SwarmController.ExecuteAlgorithm(_swarm, _swarm.Agents, _dispersionAlgorithm, input);
+            SwarmController.ExecuteAlgorithm(_swarm, _dispersionAlgorithm, input);
             
             PictureBox.Invalidate();
         }

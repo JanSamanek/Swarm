@@ -13,12 +13,20 @@ namespace SwarmSimulation.Environment.Obstacles
             Center = center;
         }
 
-        public Vector2 GetDistanceVectorToAgent(Vector2 agentPosition)
+        public Vector2 GetDistanceVectorFromBorder(Vector2 point)
         {
-            var distanceVectorToAgent = agentPosition - Center;
-            var direction = Vector2.Normalize(distanceVectorToAgent);
-            var distanceFromBorder = distanceVectorToAgent - direction * Radius;
+            var vectorToPoint = point - Center;
+            var direction = Vector2.Normalize(vectorToPoint);
+            var borderPoint = Center + direction * Radius;
+            var distanceFromBorder = point - borderPoint;
             return distanceFromBorder;
+        }
+
+        public bool IsPointInside(Vector2 point)
+        {
+            var vectorToPoint = point - Center;
+            var distanceSquared = vectorToPoint.LengthSquared();
+            return distanceSquared < Radius * Radius;
         }
     }
 }

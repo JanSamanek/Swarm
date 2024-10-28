@@ -20,7 +20,7 @@ namespace SwarmSimulation.Agents.Foraging
 
         public bool Harvest(Resource resource)
         {
-            resource.Capacity -= 1;
+            resource.Harvest();
             CarriesResource = true;
             return true;
             // TODO: Implement async wait

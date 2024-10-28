@@ -53,7 +53,7 @@ namespace SwarmSimulation.Simulations
                 DesiredDistance = 30,
                 LineOrientationAngleInRadians = (float) Math.PI / 4
             };
-            SwarmController.ExecuteAlgorithm(_swarm, _swarm.Agents, _lineFormationAlgorithm, input);
+            SwarmController.ExecuteAlgorithm(_swarm, _lineFormationAlgorithm, input);
             
             PictureBox.Invalidate();
         }

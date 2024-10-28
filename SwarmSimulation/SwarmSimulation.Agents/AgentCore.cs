@@ -33,7 +33,7 @@ namespace SwarmSimulation.Agents
             var obstaclesInRange = new List<IObstacle>();
             Parallel.ForEach(Arena.Instance.Obstacles, obstacle =>
             {
-                var distanceVector = obstacle.GetDistanceVectorToAgent(Position);
+                var distanceVector = obstacle.GetDistanceVectorFromBorder(Position);
                 if (distanceVector.Length() < PerceptionRange)
                 {
                     obstaclesInRange.Add(obstacle);

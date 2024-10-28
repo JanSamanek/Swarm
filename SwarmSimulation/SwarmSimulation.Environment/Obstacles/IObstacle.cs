@@ -4,6 +4,7 @@ namespace SwarmSimulation.Environment.Obstacles
 {
     public interface IObstacle
     {
-        Vector2 GetDistanceVectorToAgent(Vector2 agentPosition);
+        Vector2 GetDistanceVectorFromBorder(Vector2 point);
+        bool IsPointInside(Vector2 point);
     }
 }

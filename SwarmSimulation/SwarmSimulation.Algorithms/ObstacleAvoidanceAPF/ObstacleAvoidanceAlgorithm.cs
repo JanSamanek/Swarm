@@ -19,7 +19,7 @@ namespace SwarmSimulation.Algorithms.ObstacleAvoidanceAPF
             var controlInput = Vector2.Zero;
             foreach (var obstacle in obstacles)
             {
-                var distanceVector = obstacle.GetDistanceVectorToAgent(agent.Position);
+                var distanceVector = obstacle.GetDistanceVectorFromBorder(agent.Position);
                 controlInput += CalculateApf(distanceVector, input.Distance);
             }
 

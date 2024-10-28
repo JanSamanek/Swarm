@@ -45,8 +45,10 @@ namespace SwarmSimulation.Simulations
             _swarm = new Swarm();
             _leader = SwarmBuilder.AddAgent<LeaderAgent>(_swarm, new Vector2(580,320), perceptionRange);
             
-            Arena.Instance.Initialize(new Vector2(500, 300), 600, 600);
-            Arena.Instance.AddCircularObstacle(new Vector2(500, 300), 50);
+            var arenaBuilder = new ArenaBuilder();
+            arenaBuilder.Initialize(new Vector2(500, 300), 500, 500)
+                .AddCircularObstacle(new Vector2(500, 300), 50)
+                .Build();
          }
 
         protected override void UpdateSimulation(object sender, EventArgs e)
