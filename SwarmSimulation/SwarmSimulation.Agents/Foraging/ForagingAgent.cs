@@ -6,13 +6,13 @@ using SwarmSimulation.Environment;
 
 namespace SwarmSimulation.Agents.Foraging
 {
-    public class ForagingAgent : Agent, IAgent
+    public class ForagingAgent : AgentCore, IAgent
     {
         public bool CarriesResource { get; set; }
         public IState State { get; set; }
         public Vector2 Target { get; set; }
         
-        protected ForagingAgent(int id, Vector2 position, float perceptionRange) 
+        public ForagingAgent(int id, Vector2 position, float perceptionRange) 
             : base(id, position, perceptionRange)
         {
             State = new Exploring(this);

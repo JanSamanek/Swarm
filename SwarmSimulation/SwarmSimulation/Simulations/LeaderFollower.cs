@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Numerics;
 using System.Windows.Forms;
 using SwarmSimulation.Agents;
+using SwarmSimulation.Agents.Basic;
 using SwarmSimulation.Algorithms;
 using SwarmSimulation.Algorithms.MoveToTarget;
 using SwarmSimulation.Algorithms.Proximity;
@@ -11,16 +13,15 @@ using SwarmSimulation.Visualization;
 
 namespace SwarmSimulation.Simulations
 {
-    public sealed class LeaderFollowerSimulation : BaseForm
+    public sealed class LeaderFollower : BaseForm
     {
         private Swarm _swarm;
-        private IEnumerable<IAgent> _regularAgents;
         private IAgent _leader;
 
         private IAlgorithm<ProximityAlgorithmInput> _leaderFollowerAlgorithm;
         private IAlgorithm<MoveToTargetAlgorithmInput> _moveToTargetAlgorithm;
         
-        public LeaderFollowerSimulation()
+        public LeaderFollower()
         {
             Text = @"Swarm line stretching simulation";
             StartSimulation();
@@ -44,8 +45,6 @@ namespace SwarmSimulation.Simulations
             _moveToTargetAlgorithm = new MoveToTargetAlgorithm(moveToTargetAlgorithmSettings);
             
             const float perceptionRange = 100;
-            _swarm = new Swarm();
-            _leader = _swarm.AddLeader(new Vector2(500, 300), perceptionRange);
 
             var positions = new List<Vector2>
             {
@@ -56,7 +55,8 @@ namespace SwarmSimulation.Simulations
                 new Vector2(475, 256),
                 new Vector2(525, 256)
             };
-            _regularAgents = _swarm.AddAgents(positions, perceptionRange);
+            _swarm = SwarmBuilder.CreateSwarm<BasicAgent>(positions, perceptionRange);
+            _leader = SwarmBuilder.AddAgent<LeaderAgent>(_swarm, new Vector2(500, 300), perceptionRange);
         }
 
         protected override void UpdateSimulation(object sender, EventArgs e)
@@ -66,7 +66,7 @@ namespace SwarmSimulation.Simulations
                 DesiredDistance = 50,
                 NeighboursToCalculateFrom = 3
             };
-            SwarmController.ExecuteAlgorithm(_swarm, _regularAgents, _leaderFollowerAlgorithm, proximityAlgorithmInput);
+            SwarmController.ExecuteAlgorithm(_swarm, _swarm.Agents.OfType<BasicAgent>(), _leaderFollowerAlgorithm, proximityAlgorithmInput);
 
             var moveToTargetAlgorithmInput = new MoveToTargetAlgorithmInput
             {

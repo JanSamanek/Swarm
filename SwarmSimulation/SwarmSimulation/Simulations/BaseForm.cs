@@ -32,6 +32,7 @@ namespace SwarmSimulation.Simulations
 
         protected void StartSimulation()
         {
+            DoubleBuffered = true;
             InitializeSimulation();
             _timer.Start();
         }

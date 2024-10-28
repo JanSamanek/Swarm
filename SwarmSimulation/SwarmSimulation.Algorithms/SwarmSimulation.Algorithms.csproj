@@ -46,9 +46,9 @@
         <Compile Include="CustomFormation\FormationAlgorithm.cs" />
         <Compile Include="CustomFormation\FormationAlgorithmInput.cs" />
         <Compile Include="CustomFormation\FormationAlgorithmSettings.cs" />
-        <Compile Include="ForagingLewyWalk\ForagingLewyWalkAlgorithm.cs" />
-        <Compile Include="ForagingLewyWalk\ForagingLewyWalkAlgorithmInput.cs" />
-        <Compile Include="ForagingLewyWalk\ForagingLewyWalkAlgorithmSettings.cs" />
+        <Compile Include="Foraging\LewyWalk\ForagingLewyWalkAlgorithm.cs" />
+        <Compile Include="Foraging\LewyWalk\ForagingLewyWalkAlgorithmInput.cs" />
+        <Compile Include="Foraging\LewyWalk\ForagingLewyWalkAlgorithmSettings.cs" />
         <Compile Include="IAlgorithm.cs" />
         <Compile Include="LineAggregation\LineAggregationAlgorithm.cs" />
         <Compile Include="LineAggregation\LineAggregationAlgorithmInput.cs" />
@@ -78,6 +78,9 @@
         <Project>{b3b9a174-2d63-4dc3-b8d1-740796382be4}</Project>
         <Name>SwarmSimulation.Utilities</Name>
       </ProjectReference>
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Foraging\" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

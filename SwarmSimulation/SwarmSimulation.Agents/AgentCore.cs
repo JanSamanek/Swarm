@@ -7,9 +7,9 @@ using SwarmSimulation.Utilities;
 
 namespace SwarmSimulation.Agents
 {
-    public class Agent
+    public class AgentCore
     {
-        protected Agent(int id, Vector2 position, float perceptionRange)
+        protected AgentCore(int id, Vector2 position, float perceptionRange)
         {
             Id = id;
             Position = position;

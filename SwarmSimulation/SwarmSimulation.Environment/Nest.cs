@@ -20,8 +20,8 @@ namespace SwarmSimulation.Environment
 
         public Vector2 GetRandomPositionInNest()
         {
-            var x = Width/2 * ((float) _random.NextDouble() * 2 -1);
-            var y = Height/2 * ((float) _random.NextDouble() * 2 -1);
+            var x = Width/2 * ((float) _random.NextDouble() * 2 - 1);
+            var y = Height/2 * ((float) _random.NextDouble() * 2 - 1);
             return new Vector2(Center.X + x, Center.Y + y);
         }
     }

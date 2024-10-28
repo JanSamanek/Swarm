@@ -1,6 +1,6 @@
 using SwarmSimulation.Algorithms.AdaptiveMoveToTarget;
 
-namespace SwarmSimulation.Algorithms.ForagingLewyWalk
+namespace SwarmSimulation.Algorithms.Foraging.LewyWalk
 {
     public class ForagingLewyWalkAlgorithmSettings
     {

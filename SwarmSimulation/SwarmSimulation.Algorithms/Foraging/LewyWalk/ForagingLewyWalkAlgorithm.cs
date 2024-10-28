@@ -1,17 +1,13 @@
 using System;
-using System.Linq;
 using System.Numerics;
 using SwarmSimulation.Agents;
 using SwarmSimulation.Agents.Foraging;
-using SwarmSimulation.Agents.Foraging.States;
 using SwarmSimulation.Algorithms.AdaptiveMoveToTarget;
 using SwarmSimulation.Algorithms.MoveToTarget;
 using SwarmSimulation.Algorithms.ObstacleAvoidanceAPF;
-using SwarmSimulation.Environment;
 using SwarmSimulation.Utilities.Extensions;
-using SwarmSimulation.Utilities.Random;
 
-namespace SwarmSimulation.Algorithms.ForagingLewyWalk
+namespace SwarmSimulation.Algorithms.Foraging.LewyWalk
 {
     public class ForagingLewyWalkAlgorithm : IAlgorithm<ForagingLewyWalkAlgorithmInput>
     {

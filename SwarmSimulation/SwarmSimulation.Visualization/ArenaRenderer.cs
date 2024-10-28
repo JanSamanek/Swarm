@@ -32,10 +32,10 @@ namespace SwarmSimulation.Visualization
         private static void DrawNest(Nest nest, Graphics graphics)
         {
             var rect = new Rectangle((int)(nest.Center.X - nest.Width / 2),
-                (int)(nest.Center.Y - nest.Width / 2),(int) nest.Width,
+                (int)(nest.Center.Y - nest.Height / 2),(int) nest.Width,
                 (int) nest.Height);
             
-            graphics.FillRectangle(Brushes.Bisque, rect);
+            graphics.FillRectangle(Brushes.Chartreuse, rect);
         }
 
         private static void DrawResource(Resource resource, Graphics graphics)
@@ -53,7 +53,7 @@ namespace SwarmSimulation.Visualization
         private static void DrawRectangularObstacle(RectangularObstacle obstacle, Graphics graphics)
         {
             var rect = new Rectangle((int)(obstacle.Center.X - obstacle.Width / 2),
-                (int)(obstacle.Center.Y - obstacle.Width / 2),(int) obstacle.Width,
+                (int)(obstacle.Center.Y - obstacle.Height / 2),(int) obstacle.Width,
                 (int) obstacle.Height);
             
             graphics.FillRectangle(Brushes.White, rect);
