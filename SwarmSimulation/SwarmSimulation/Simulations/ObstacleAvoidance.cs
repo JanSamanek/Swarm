@@ -36,7 +36,7 @@ namespace SwarmSimulation.Simulations
                  },
                  ObstacleAvoidanceAlgorithmSettings = new ObstacleAvoidanceAlgorithmSettings
                  {
-                     ApfGain = 5f
+                     ApfGain = 2100f
                  }
              };
              _moveToTargetAlgorithm = new AdaptiveMoveToTargetAlgorithm(moveToTargetAlgorithmSettings);
@@ -47,6 +47,7 @@ namespace SwarmSimulation.Simulations
             
             var arenaBuilder = new ArenaBuilder();
             arenaBuilder.Initialize(new Vector2(500, 300), 500, 500)
+                // .AddRectangularObstacle(new Vector2(500, 300), 50, 60)
                 .AddCircularObstacle(new Vector2(500, 300), 50)
                 .Build();
          }
@@ -62,7 +63,7 @@ namespace SwarmSimulation.Simulations
                 },
                 ObstacleAvoidanceAlgorithmInput = new ObstacleAvoidanceAlgorithmInput
                 {
-                    Distance = 5f
+                    Distance = 10f
                 }
             };
             SwarmController.ExecuteAlgorithm(_swarm, _leader, _moveToTargetAlgorithm, input);
@@ -74,7 +75,7 @@ namespace SwarmSimulation.Simulations
         {
             e.Graphics.Clear(Color.Black);
             ArenaRenderer.DrawArena(Arena.Instance, e.Graphics);
-            SwarmRenderer.DrawAgents(_swarm, e.Graphics, (10, 10));
+            SwarmRenderer.DrawAgents(_swarm, e.Graphics, 10);
         }
     }
 }

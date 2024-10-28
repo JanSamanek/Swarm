@@ -1,12 +1,14 @@
 using System.Drawing;
 using System.Linq;
+using System.Numerics;
 using SwarmSimulation.Agents;
+using SwarmSimulation.Agents.Foraging;
 
 namespace SwarmSimulation.Visualization
 {
     public static class SwarmRenderer
     {
-        public static void DrawAgents(Swarm swarm, Graphics graphics, (int Width, int Height) size,
+        public static void DrawAgents(Swarm swarm, Graphics graphics, float radius,
             bool drawPerceptionRange = false, bool drawId = false)
         {
             var agentsList = swarm.Agents.ToList();
@@ -21,10 +23,10 @@ namespace SwarmSimulation.Visualization
             
             foreach (var agent in agentsList)
             {
-                DrawAgent(agent, graphics, size);
+                DrawAgent(agent, graphics, radius);
                 if (drawId)
                 {
-                    DrawId(agent, graphics, size);
+                    DrawId(agent, graphics, radius);
                 }
             }
         }
@@ -32,26 +34,37 @@ namespace SwarmSimulation.Visualization
         private static void DrawPerceptionRange(IAgent agent, Graphics graphics)
         {
             var range = agent.PerceptionRange;
-            graphics.FillEllipse(Brushes.Firebrick, (int) agent.Position.X - range / 2, (int) agent.Position.Y - range / 2, 
-                range, range);
+            DrawCircle(graphics, agent.Position, range, Brushes.Firebrick);
         }
 
-        private static void DrawAgent(IAgent agent, Graphics graphics, (int Width, int Height) size)
+        private static void DrawAgent(IAgent agent, Graphics graphics,  float radius)
         {
-            graphics.FillEllipse(Brushes.White, (int) agent.Position.X - size.Width / 2, (int) agent.Position.Y - size.Height / 2, 
-                size.Width, size.Height);
+            if (agent is ForagingAgent foragingAgent && foragingAgent.CarriesResource)
+            {
+                DrawCircle(graphics, foragingAgent.Position, radius, Brushes.Red);
+            }
+            else
+            {
+                DrawCircle(graphics, agent.Position, radius, Brushes.White);
+            }
         }
         
-        private static void DrawId(IAgent agent, Graphics graphics, (int Width, int Height) agentSize)
+        private static void DrawId(IAgent agent, Graphics graphics,  float agentRadius)
         {
             var font = new Font("Arial", 10);
             var stringSize = graphics.MeasureString(agent.Id.ToString(), font);
 
-            var (width, height) = agentSize;
+            var (width, height) = (agentRadius, agentRadius);
             var textX = agent.Position.X - (float) width / 2 + (width - stringSize.Width) / 2;
             var textY = agent.Position.Y - (float) height / 2 + (width - stringSize.Height) / 2;
 
             graphics.DrawString(agent.Id.ToString(), font, Brushes.Black, textX, textY);
+        }
+
+        private static void DrawCircle( Graphics graphics, Vector2 center, float radius, Brush brush)
+        {
+            graphics.FillEllipse(brush, (int) center.X - radius / 2, (int) center.Y - radius / 2, 
+                radius, radius);
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
 using SwarmSimulation.Agents.Foraging.States;
@@ -8,7 +9,7 @@ namespace SwarmSimulation.Agents.Foraging
 {
     public class ForagingAgent : AgentCore, IAgent
     {
-        public bool CarriesResource { get; set; }
+        public bool CarriesResource { get; private set; }
         public IState State { get; set; }
         public Vector2 Target { get; set; }
         

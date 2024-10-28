@@ -15,6 +15,5 @@ namespace SwarmSimulation.Environment
         public Nest Nest { get; set; }
         public List<IObstacle> Obstacles { get; } = new List<IObstacle>(); 
         public List<Resource> Resources { get; } = new List<Resource>();
-        
     }
 }

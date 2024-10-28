@@ -1,4 +1,3 @@
-using System;
 using System.Numerics;
 
 namespace SwarmSimulation.Environment.Obstacles
@@ -18,19 +17,27 @@ namespace SwarmSimulation.Environment.Obstacles
         public Vector2 GetDistanceVectorFromBorder(Vector2 point)
         {
             var distanceVectorToAgent = point - Center;
-            var halfWidth = Width / 2;
-            var halfHeight = Height / 2;
+            var distanceFromBorder = Vector2.Zero;
             
-            var distanceX = Math.Max(0, Math.Abs(distanceVectorToAgent.X) - halfWidth) * Math.Sign(distanceVectorToAgent.X);
-            var distanceY = Math.Max(0, Math.Abs(distanceVectorToAgent.Y) - halfHeight) * Math.Sign(distanceVectorToAgent.Y);
+            if (point.X > Center.X + Width / 2)
+            {
+                distanceFromBorder.X = distanceVectorToAgent.X - Width / 2;
+            }
+            else if (point.X < Center.X - Width / 2)
+            {
+                distanceFromBorder.X = distanceVectorToAgent.X + Width / 2;
+            }
 
-            if (Math.Abs(distanceVectorToAgent.X) <= halfWidth)
-                distanceX = -(halfWidth - Math.Abs(distanceVectorToAgent.X)) * Math.Sign(distanceVectorToAgent.X);
-
-            if (Math.Abs(distanceVectorToAgent.Y) <= halfHeight)
-                distanceY = -(halfHeight - Math.Abs(distanceVectorToAgent.Y)) * Math.Sign(distanceVectorToAgent.Y);
-
-            return new Vector2(distanceX, distanceY);
+            if (point.Y > Center.Y + Height / 2)
+            {
+                distanceFromBorder.Y = distanceVectorToAgent.Y - Height / 2;
+            }
+            else if (point.Y < Center.Y - Height / 2)
+            {
+                distanceFromBorder.Y = distanceVectorToAgent.Y + Height / 2;
+            }
+            
+            return distanceFromBorder;
         }
 
         public bool IsPointInside(Vector2 point)

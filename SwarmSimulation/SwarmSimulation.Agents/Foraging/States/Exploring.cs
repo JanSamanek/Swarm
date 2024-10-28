@@ -19,7 +19,7 @@ namespace SwarmSimulation.Agents.Foraging.States
         private void OnEnter(ForagingAgent agent)
         {
             var direction = GenerateNewDirection();
-            var length = (float) LewyRandom.Next(1, 100);
+            var length = (float) LewyRandom.Next(1, 600, scale:400);
             agent.Target = agent.Position + direction * length;
         }
 

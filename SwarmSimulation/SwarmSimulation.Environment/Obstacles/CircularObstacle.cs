@@ -17,9 +17,7 @@ namespace SwarmSimulation.Environment.Obstacles
         {
             var vectorToPoint = point - Center;
             var direction = Vector2.Normalize(vectorToPoint);
-            var borderPoint = Center + direction * Radius;
-            var distanceFromBorder = point - borderPoint;
-            return distanceFromBorder;
+            return vectorToPoint - Radius * direction;
         }
 
         public bool IsPointInside(Vector2 point)

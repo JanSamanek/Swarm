@@ -1,10 +1,12 @@
 using System.Numerics;
+using SwarmSimulation.Environment.Utilities;
 
 namespace SwarmSimulation.Environment
 {
     public class Resource
     {
-        public Vector2 Position { get; set; }
+        public Vector2 Position { get; }
+        public bool IsConsumed { get; private set; }
         private int _capacity;
         
         public Resource(Vector2 position ,int capacity)
@@ -24,7 +26,9 @@ namespace SwarmSimulation.Environment
 
         private void Destroy()
         {
-            Arena.Instance.Resources.Remove(this);
+            IsConsumed = true;
+            GarbageCollector.ResourceGarbage.Add(this);
+            // Arena.Instance.Resources.Remove(this);
         }
     }
 }

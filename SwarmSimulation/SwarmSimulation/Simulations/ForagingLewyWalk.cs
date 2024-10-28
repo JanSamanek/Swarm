@@ -37,7 +37,7 @@ namespace SwarmSimulation.Simulations
                     },
                     ObstacleAvoidanceAlgorithmSettings = new ObstacleAvoidanceAlgorithmSettings
                     {
-                        ApfGain = 5
+                        ApfGain = 150f
                     }
                 },
                 LewyParameter = 1,
@@ -79,7 +79,7 @@ namespace SwarmSimulation.Simulations
         {
             e.Graphics.Clear(Color.Black);
             ArenaRenderer.DrawArena(Arena.Instance, e.Graphics, drawNest:true);
-            SwarmRenderer.DrawAgents(_swarm, e.Graphics, (10, 10));
+            SwarmRenderer.DrawAgents(_swarm, e.Graphics, 10);
         }
     }
 }

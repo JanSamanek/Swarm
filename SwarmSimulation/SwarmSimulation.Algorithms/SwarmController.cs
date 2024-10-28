@@ -3,6 +3,7 @@ using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
 using SwarmSimulation.Agents;
+using SwarmSimulation.Environment.Utilities;
 
 namespace SwarmSimulation.Algorithms
 {
@@ -13,6 +14,7 @@ namespace SwarmSimulation.Algorithms
         {
             UpdateNeighbours(swarm);
             Parallel.ForEach(agents, agent => ApplyAlgorithm(agent, algorithm, input));
+            GarbageCollector.ClearGarbage();
         }
 
         public static void ExecuteAlgorithm<TInput>(Swarm swarm, IAlgorithm<TInput> algorithm, 
@@ -20,6 +22,7 @@ namespace SwarmSimulation.Algorithms
         {
             UpdateNeighbours(swarm);
             Parallel.ForEach(swarm.Agents, agent => ApplyAlgorithm(agent, algorithm, input));
+            GarbageCollector.ClearGarbage();
         }
         
         public static void ExecuteAlgorithm<TInput>(Swarm swarm, IAgent agent, IAlgorithm<TInput> algorithm,

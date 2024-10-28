@@ -18,6 +18,11 @@ namespace SwarmSimulation.Agents.Foraging.States
 
         public void Execute(ForagingAgent agent)
         {
+            if (_resource.IsConsumed)
+            {
+                agent.State = new Exploring(agent);
+            }
+            
             if (!agent.HasApproachedTarget(_resource.Position)) 
                 return;
             

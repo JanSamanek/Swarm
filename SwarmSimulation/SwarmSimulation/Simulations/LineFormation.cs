@@ -61,7 +61,7 @@ namespace SwarmSimulation.Simulations
         protected override void OnPaint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(Color.Black);
-            SwarmRenderer.DrawAgents(_swarm, e.Graphics, (10, 10));
+            SwarmRenderer.DrawAgents(_swarm, e.Graphics, 10);
         }
     }
 }
