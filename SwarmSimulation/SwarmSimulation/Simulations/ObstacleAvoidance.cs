@@ -38,7 +38,7 @@ namespace SwarmSimulation.Simulations
              
             const float perceptionRange = 100;
             _swarm = new Swarm();
-            _leader = SwarmBuilder.AddAgent<LeaderAgent>(_swarm, new Vector2(580,320), 10, perceptionRange);
+            _leader = SwarmBuilder.AddAgent<LeaderAgent>(_swarm, new Vector2(580,320), 5, perceptionRange);
             
             var arenaBuilder = new ArenaBuilder();
             arenaBuilder.Initialize(new Vector2(500, 300), 500, 500)

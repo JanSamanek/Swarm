@@ -54,9 +54,9 @@ namespace SwarmSimulation.Visualization
             var font = new Font("Arial", 10);
             var stringSize = graphics.MeasureString(agent.Id.ToString(), font);
 
-            var (width, height) = (agentRadius, agentRadius);
-            var textX = agent.Position.X - (float) width / 2 + (width - stringSize.Width) / 2;
-            var textY = agent.Position.Y - (float) height / 2 + (width - stringSize.Height) / 2;
+            var diameter = agentRadius * 2;
+            var textX = agent.Position.X -  diameter + (diameter + stringSize.Width) / 2;
+            var textY = agent.Position.Y -  diameter + (diameter + stringSize.Height) / 2;
 
             graphics.DrawString(agent.Id.ToString(), font, Brushes.Black, textX, textY);
         }
@@ -64,7 +64,7 @@ namespace SwarmSimulation.Visualization
         private static void DrawCircle( Graphics graphics, Vector2 center, float radius, Brush brush)
         {
             graphics.FillEllipse(brush, (int) center.X - radius / 2, (int) center.Y - radius / 2, 
-                radius, radius);
+                radius*2, radius*2);
         }
     }
 }

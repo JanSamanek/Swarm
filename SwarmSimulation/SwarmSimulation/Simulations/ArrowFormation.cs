@@ -38,7 +38,7 @@ namespace SwarmSimulation.Simulations
              
             const float perceptionRange = 200;
 
-            _swarm = SwarmBuilder.CreateSwarm<LeaderAgent>(new Vector2(500,300), 10, perceptionRange);
+            _swarm = SwarmBuilder.CreateSwarm<LeaderAgent>(new Vector2(500,300), 5, perceptionRange);
             var positions = new List<Vector2>
             {
                 new Vector2(480, 320),
@@ -46,7 +46,7 @@ namespace SwarmSimulation.Simulations
                 new Vector2(460, 340),
                 new Vector2(540, 340)
             };
-            SwarmBuilder.AddAgents<BasicAgent>(_swarm, positions, 10, perceptionRange);
+            SwarmBuilder.AddAgents<BasicAgent>(_swarm, positions, 5, perceptionRange);
         }
 
         protected override void UpdateSimulation(object sender, EventArgs e)

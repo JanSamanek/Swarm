@@ -51,8 +51,8 @@ namespace SwarmSimulation.Simulations
                 new Vector2(475, 256),
                 new Vector2(525, 256)
             };
-            _swarm = SwarmBuilder.CreateSwarm<BasicAgent>(positions, 10, perceptionRange);
-            _leader = SwarmBuilder.AddAgent<LeaderAgent>(_swarm, new Vector2(500, 300), 10, perceptionRange);
+            _swarm = SwarmBuilder.CreateSwarm<BasicAgent>(positions, 5, perceptionRange);
+            _leader = SwarmBuilder.AddAgent<LeaderAgent>(_swarm, new Vector2(500, 300), 5, perceptionRange);
         }
 
         protected override void UpdateSimulation(object sender, EventArgs e)

@@ -50,7 +50,7 @@ namespace SwarmSimulation.Simulations
                 new Vector2(500, 300),
                 new Vector2(500, 310)
             };
-            _swarm = SwarmBuilder.CreateSwarm<BasicAgent>(positions, 10, perceptionRange);
+            _swarm = SwarmBuilder.CreateSwarm<BasicAgent>(positions, 5, perceptionRange);
         }
 
         protected override void UpdateSimulation(object sender, EventArgs e)
