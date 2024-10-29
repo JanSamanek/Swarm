@@ -50,6 +50,12 @@
         <Compile Include="Resource.cs" />
         <Compile Include="Utilities\GarbageCollector.cs" />
     </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\SwarmSimulation.Engine\SwarmSimulation.Engine.csproj">
+        <Project>{ed675520-dcbb-4321-b1b7-af0c4b9c84b6}</Project>
+        <Name>SwarmSimulation.Engine</Name>
+      </ProjectReference>
+    </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
          Other similar extension points exist, see Microsoft.Common.targets.

@@ -2,20 +2,19 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Threading.Tasks;
-using SwarmSimulation.Agents;
 using SwarmSimulation.Algorithms.Foraging.States;
 using SwarmSimulation.Environment;
 
 namespace SwarmSimulation.Algorithms.Agents
 {
-    public class ForagingAgent : AgentCore, IAgent
+    public class ForagingAgent : AgentCore
     {
         public bool CarriesResource { get; private set; }
         public IState State { get; set; }
         public Vector2 Target { get; set; }
         
-        public ForagingAgent(int id, Vector2 position, float perceptionRange) 
-            : base(id, position, perceptionRange)
+        public ForagingAgent(int id, Vector2 position, float size, float perceptionRange) 
+            : base(id, position, size, perceptionRange)
         {
             State = new Exploring(this);
         }
@@ -45,11 +44,6 @@ namespace SwarmSimulation.Algorithms.Agents
                 }
             });
             return resourcesInRange;
-        }
-
-        public bool HasApproachedTarget(Vector2 target, float tolerance=5)
-        {
-            return Vector2.Distance(Position, target) <= tolerance;
         }
     }
 }

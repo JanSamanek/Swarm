@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Numerics;
-using SwarmSimulation.Agents;
 using SwarmSimulation.Algorithms.Agents;
 using SwarmSimulation.Utilities;
 

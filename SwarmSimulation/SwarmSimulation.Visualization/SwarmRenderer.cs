@@ -1,7 +1,6 @@
 using System.Drawing;
 using System.Linq;
 using System.Numerics;
-using SwarmSimulation.Agents;
 using SwarmSimulation.Algorithms;
 using SwarmSimulation.Algorithms.Agents;
 
@@ -9,7 +8,7 @@ namespace SwarmSimulation.Visualization
 {
     public static class SwarmRenderer
     {
-        public static void DrawAgents(Swarm swarm, Graphics graphics, float radius,
+        public static void DrawAgents(Swarm swarm, Graphics graphics,
             bool drawPerceptionRange = false, bool drawId = false)
         {
             var agentsList = swarm.Agents.ToList();
@@ -24,10 +23,10 @@ namespace SwarmSimulation.Visualization
             
             foreach (var agent in agentsList)
             {
-                DrawAgent(agent, graphics, radius);
+                DrawAgent(agent, graphics, agent.Size);
                 if (drawId)
                 {
-                    DrawId(agent, graphics, radius);
+                    DrawId(agent, graphics, agent.Size);
                 }
             }
         }

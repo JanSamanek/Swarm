@@ -65,7 +65,6 @@
         <Compile Include="LineAggregation\LineAggregationAlgorithmSettings.cs" />
         <Compile Include="MoveToTarget\MoveToTargetAlgorithm.cs" />
         <Compile Include="MoveToTarget\MoveToTargetAlgorithmInput.cs" />
-        <Compile Include="MoveToTarget\MoveToTargetAlgorithmSettings.cs" />
         <Compile Include="ObstacleAvoidanceAPF\ObstacleAvoidanceAlgorithm.cs" />
         <Compile Include="ObstacleAvoidanceAPF\ObstacleAvoidanceAlgorithmInput.cs" />
         <Compile Include="ObstacleAvoidanceAPF\ObstacleAvoidanceAlgorithmSettings.cs" />
@@ -77,6 +76,10 @@
         <Compile Include="Utilities\SwarmController.cs" />
     </ItemGroup>
     <ItemGroup>
+      <ProjectReference Include="..\SwarmSimulation.Engine\SwarmSimulation.Engine.csproj">
+        <Project>{ed675520-dcbb-4321-b1b7-af0c4b9c84b6}</Project>
+        <Name>SwarmSimulation.Engine</Name>
+      </ProjectReference>
       <ProjectReference Include="..\SwarmSimulation.Environment\SwarmSimulation.Environment.csproj">
         <Project>{7eb7cd5e-b7b3-4c68-8397-1f32d721d7d4}</Project>
         <Name>SwarmSimulation.Environment</Name>

@@ -1,6 +1,5 @@
 using System;
 using System.Numerics;
-using SwarmSimulation.Agents;
 using SwarmSimulation.Algorithms.Agents;
 using SwarmSimulation.Algorithms.Foraging.States;
 using SwarmSimulation.Algorithms.MoveToTarget;
@@ -18,7 +17,7 @@ namespace SwarmSimulation.Algorithms.Foraging.LewyWalk
         {
             _settings = settings;
             _moveToTargetAlgorithm =
-                new MoveToTargetAlgorithm(settings.MoveToTargetAlgorithmSettings);
+                new MoveToTargetAlgorithm();
             Exploring.ConfigureLewyWalk(settings.LewyParameter, settings.MaxFlightLength, settings.LewyScale);
         }
 
@@ -34,15 +33,7 @@ namespace SwarmSimulation.Algorithms.Foraging.LewyWalk
                     TargetPosition = foragingAgent.Target,
             };
             var controlInput = _moveToTargetAlgorithm.CalculateControlInput(foragingAgent, moveInput);
-            
             return controlInput;
-        }
-        
-        private Vector2 GenerateNewDirection()
-        {
-            var randomAngle = (float) (_random.NextDouble() * 2 * Math.PI);
-            var baseVector = new Vector2(0, 1);
-            return Vector2.Normalize(baseVector.Rotate(randomAngle));
         }
     }
     

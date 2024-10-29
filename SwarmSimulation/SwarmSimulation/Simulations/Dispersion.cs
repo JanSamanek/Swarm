@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Numerics;
 using System.Windows.Forms;
-using SwarmSimulation.Agents;
 using SwarmSimulation.Algorithms;
 using SwarmSimulation.Algorithms.Agents;
 using SwarmSimulation.Algorithms.Proximity;
@@ -51,7 +50,7 @@ namespace SwarmSimulation.Simulations
                 new Vector2(500, 300),
                 new Vector2(500, 310)
             };
-            _swarm = SwarmBuilder.CreateSwarm<BasicAgent>(positions, perceptionRange);
+            _swarm = SwarmBuilder.CreateSwarm<BasicAgent>(positions, 10, perceptionRange);
         }
 
         protected override void UpdateSimulation(object sender, EventArgs e)
@@ -69,7 +68,7 @@ namespace SwarmSimulation.Simulations
         protected override void OnPaint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(Color.Black);
-            SwarmRenderer.DrawAgents(_swarm, e.Graphics, 10);
+            SwarmRenderer.DrawAgents(_swarm, e.Graphics);
         }
     }
 }

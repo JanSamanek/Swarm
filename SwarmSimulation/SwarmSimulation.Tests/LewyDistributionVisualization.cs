@@ -55,7 +55,7 @@ namespace SwarmSimulation.Tests
         private void UpdatePlot()
         {
             var lewyParameter = _slider.Value / 100f;
-            var lewyData = DataGenerator.GenerateLewyDistribution(lewyParameter, max: 100);
+            var lewyData = DataGenerator.GenerateLewyDistribution(lewyParameter, min: 1, max: 100);
             
             var hist = new ScottPlot.Statistics.Histogram(lewyData, 500);
                 

@@ -1,4 +1,5 @@
 using System.Numerics;
+using SwarmSimulation.Engine.Collider;
 
 namespace SwarmSimulation.Environment.Obstacles
 {
@@ -6,11 +7,13 @@ namespace SwarmSimulation.Environment.Obstacles
     {
         public float Radius { get; }
         public Vector2 Center { get; }
+        public ICollider Collider { get; }
 
         public CircularObstacle(Vector2 center, float radius)
         {
             Radius = radius;
             Center = center;
+            Collider = new CircleCollider(center, radius);
         }
 
         public Vector2 GetDistanceVectorFromBorder(Vector2 point)

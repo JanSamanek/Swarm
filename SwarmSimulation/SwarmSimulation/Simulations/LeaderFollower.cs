@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Linq;
 using System.Numerics;
 using System.Windows.Forms;
-using SwarmSimulation.Agents;
 using SwarmSimulation.Algorithms;
 using SwarmSimulation.Algorithms.Agents;
 using SwarmSimulation.Algorithms.MoveToTarget;
@@ -38,12 +37,8 @@ namespace SwarmSimulation.Simulations
                 LeaderStiffnessCoefficient = 288f
             };
             _leaderFollowerAlgorithm = new ProximityAlgorithm(leaderFollowerAlgorithmSettings);
-
-            var moveToTargetAlgorithmSettings = new MoveToTargetAlgorithmSettings
-            {
-                TargetPositionTolerance = 1f
-            };
-            _moveToTargetAlgorithm = new MoveToTargetAlgorithm(moveToTargetAlgorithmSettings);
+            
+            _moveToTargetAlgorithm = new MoveToTargetAlgorithm();
             
             const float perceptionRange = 100;
 
@@ -56,8 +51,8 @@ namespace SwarmSimulation.Simulations
                 new Vector2(475, 256),
                 new Vector2(525, 256)
             };
-            _swarm = SwarmBuilder.CreateSwarm<BasicAgent>(positions, perceptionRange);
-            _leader = SwarmBuilder.AddAgent<LeaderAgent>(_swarm, new Vector2(500, 300), perceptionRange);
+            _swarm = SwarmBuilder.CreateSwarm<BasicAgent>(positions, 10, perceptionRange);
+            _leader = SwarmBuilder.AddAgent<LeaderAgent>(_swarm, new Vector2(500, 300), 10, perceptionRange);
         }
 
         protected override void UpdateSimulation(object sender, EventArgs e)
@@ -82,7 +77,7 @@ namespace SwarmSimulation.Simulations
         protected override void OnPaint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(Color.Black);
-            SwarmRenderer.DrawAgents(_swarm, e.Graphics, 10);
+            SwarmRenderer.DrawAgents(_swarm, e.Graphics);
         }
     }
 }

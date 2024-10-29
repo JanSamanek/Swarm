@@ -1,5 +1,5 @@
 using System.Numerics;
-using SwarmSimulation.Agents;
+using SwarmSimulation.Algorithms.Agents;
 using SwarmSimulation.Algorithms.MoveToTarget;
 using SwarmSimulation.Algorithms.ObstacleAvoidanceAPF;
 
@@ -13,7 +13,7 @@ namespace SwarmSimulation.Algorithms.AdaptiveMoveToTarget
         public AdaptiveMoveToTargetAlgorithm(AdaptiveMoveToTargetAlgorithmSettings settings)
         {
             _obstacleAvoidanceAlgorithm = new ObstacleAvoidanceAlgorithm(settings.ObstacleAvoidanceAlgorithmSettings);
-            _moveToTargetAlgorithm = new MoveToTargetAlgorithm(settings.MoveToTargetAlgorithmSettings);
+            _moveToTargetAlgorithm = new MoveToTargetAlgorithm();
         }
 
         public Vector2 CalculateControlInput(IAgent agent, AdaptiveMoveToTargetAlgorithmInput input)

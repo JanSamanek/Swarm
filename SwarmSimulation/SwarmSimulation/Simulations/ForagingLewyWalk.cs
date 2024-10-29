@@ -27,13 +27,9 @@ namespace SwarmSimulation.Simulations
         {
             var settings = new ForagingLewyWalkAlgorithmSettings
             {
-                MoveToTargetAlgorithmSettings = new MoveToTargetAlgorithmSettings
-                {
-                    TargetPositionTolerance = 5
-                },
                 LewyParameter = 1,
                 MaxFlightLength = 100,
-                LewyScale = 200
+                LewyScale = 3
             };
 
             _foragingAlgorithm = new ForagingLewyWalkAlgorithm(settings);
@@ -48,7 +44,7 @@ namespace SwarmSimulation.Simulations
                 .GenerateResources(30)
                 .Build();
             
-            _swarm = SwarmBuilder.CreateSwarmInNest<ForagingAgent>(Arena.Instance.Nest, 10, 80);
+            _swarm = SwarmBuilder.CreateSwarmInNest<ForagingAgent>(Arena.Instance.Nest, 10, 10, 80);
         }
 
         protected override void UpdateSimulation(object sender, EventArgs e)
@@ -67,7 +63,7 @@ namespace SwarmSimulation.Simulations
         {
             e.Graphics.Clear(Color.Black);
             ArenaRenderer.DrawArena(Arena.Instance, e.Graphics, drawNest:true);
-            SwarmRenderer.DrawAgents(_swarm, e.Graphics, 10);
+            SwarmRenderer.DrawAgents(_swarm, e.Graphics);
         }
     }
 }

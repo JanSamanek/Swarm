@@ -1,4 +1,5 @@
 using System.Numerics;
+using SwarmSimulation.Engine.Collider;
 
 namespace SwarmSimulation.Environment.Obstacles
 {
@@ -9,11 +10,14 @@ namespace SwarmSimulation.Environment.Obstacles
             Center = center;
             Width = width;
             Height = height;
+            Collider = new RectangleCollider(center, width, height);
         }
 
         public Vector2 Center { get; }
         public float Width { get; }
         public float Height { get; }
+        public ICollider Collider { get; }
+        
         public Vector2 GetDistanceVectorFromBorder(Vector2 point)
         {
             var distanceVectorToAgent = point - Center;

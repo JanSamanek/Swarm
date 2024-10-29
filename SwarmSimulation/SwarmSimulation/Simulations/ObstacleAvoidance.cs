@@ -2,7 +2,6 @@ using System;
 using System.Drawing;
 using System.Numerics;
 using System.Windows.Forms;
-using SwarmSimulation.Agents;
 using SwarmSimulation.Algorithms;
 using SwarmSimulation.Algorithms.AdaptiveMoveToTarget;
 using SwarmSimulation.Algorithms.Agents;
@@ -20,7 +19,6 @@ namespace SwarmSimulation.Simulations
         private IAgent _leader;
         private IAlgorithm<AdaptiveMoveToTargetAlgorithmInput> _moveToTargetAlgorithm;
 
-
         public ObstacleAvoidance()
         {
             Text = @"Swarm obstacle avoidance simulation";
@@ -31,10 +29,6 @@ namespace SwarmSimulation.Simulations
          {
              var moveToTargetAlgorithmSettings = new AdaptiveMoveToTargetAlgorithmSettings
              {
-                 MoveToTargetAlgorithmSettings = new MoveToTargetAlgorithmSettings
-                 {
-                     TargetPositionTolerance = 1f
-                 },
                  ObstacleAvoidanceAlgorithmSettings = new ObstacleAvoidanceAlgorithmSettings
                  {
                      ApfGain = 2100f
@@ -44,7 +38,7 @@ namespace SwarmSimulation.Simulations
              
             const float perceptionRange = 100;
             _swarm = new Swarm();
-            _leader = SwarmBuilder.AddAgent<LeaderAgent>(_swarm, new Vector2(580,320), perceptionRange);
+            _leader = SwarmBuilder.AddAgent<LeaderAgent>(_swarm, new Vector2(580,320), 10, perceptionRange);
             
             var arenaBuilder = new ArenaBuilder();
             arenaBuilder.Initialize(new Vector2(500, 300), 500, 500)
@@ -76,7 +70,7 @@ namespace SwarmSimulation.Simulations
         {
             e.Graphics.Clear(Color.Black);
             ArenaRenderer.DrawArena(Arena.Instance, e.Graphics);
-            SwarmRenderer.DrawAgents(_swarm, e.Graphics, 10);
+            SwarmRenderer.DrawAgents(_swarm, e.Graphics);
         }
     }
 }

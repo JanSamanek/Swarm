@@ -22,7 +22,7 @@ namespace SwarmSimulation.Algorithms.Foraging.States
         private void OnEnter(ForagingAgent agent)
         {
             var direction = GenerateNewDirection();
-            var length = (float) LewyRandom.Next(_lewyParameter, _maxFlightLength, _lewyScale);
+            var length = (float) LewyRandom.Next(_lewyParameter, 1, _maxFlightLength, _lewyScale);
             agent.Target = agent.Position + direction * length;
         }
 
@@ -35,7 +35,7 @@ namespace SwarmSimulation.Algorithms.Foraging.States
                 return;
             }
 
-            if (agent.HasApproachedTarget(agent.Target))
+            if (agent.HasApproachedTarget(agent.Target) || agent.DetectCollision())
             {
                 agent.State = new Exploring(agent);
             }

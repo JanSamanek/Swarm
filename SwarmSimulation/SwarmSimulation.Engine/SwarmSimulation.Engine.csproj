@@ -5,11 +5,11 @@
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{B3B9A174-2D63-4DC3-B8D1-740796382BE4}</ProjectGuid>
+        <ProjectGuid>{ED675520-DCBB-4321-B1B7-AF0C4B9C84B6}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>SwarmSimulation.Utilities</RootNamespace>
-        <AssemblyName>SwarmSimulation.Utilities</AssemblyName>
+        <RootNamespace>SwarmSimulation.Engine</RootNamespace>
+        <AssemblyName>SwarmSimulation.Engine</AssemblyName>
         <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
     </PropertyGroup>
@@ -40,12 +40,17 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Extensions\Vector2Extensions.cs" />
-        <Compile Include="Mathematics\MathUtils.cs" />
+        <Compile Include="Collider\CircleCollider.cs" />
+        <Compile Include="Collider\ColliderManager.cs" />
+        <Compile Include="Collider\ICollider.cs" />
+        <Compile Include="Collider\RectangleCollider.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
-        <Compile Include="Random\GausianRandom.cs" />
-        <Compile Include="Random\LewyRandom.cs" />
-        <Compile Include="SimulationTimeManager.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\SwarmSimulation.Utilities\SwarmSimulation.Utilities.csproj">
+        <Project>{b3b9a174-2d63-4dc3-b8d1-740796382be4}</Project>
+        <Name>SwarmSimulation.Utilities</Name>
+      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

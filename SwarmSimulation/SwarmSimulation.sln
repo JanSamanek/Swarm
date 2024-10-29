@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwarmSimulation.Utilities",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwarmSimulation.Visualization", "SwarmSimulation.Visualization\SwarmSimulation.Visualization.csproj", "{8FBAE4FA-C820-46C0-AF8F-C5DA6AC53557}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwarmSimulation.Engine", "SwarmSimulation.Engine\SwarmSimulation.Engine.csproj", "{ED675520-DCBB-4321-B1B7-AF0C4B9C84B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{8FBAE4FA-C820-46C0-AF8F-C5DA6AC53557}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FBAE4FA-C820-46C0-AF8F-C5DA6AC53557}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FBAE4FA-C820-46C0-AF8F-C5DA6AC53557}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED675520-DCBB-4321-B1B7-AF0C4B9C84B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED675520-DCBB-4321-B1B7-AF0C4B9C84B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED675520-DCBB-4321-B1B7-AF0C4B9C84B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED675520-DCBB-4321-B1B7-AF0C4B9C84B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

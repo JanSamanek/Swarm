@@ -4,13 +4,13 @@ namespace SwarmSimulation.Tests.Utilities
 {
     public static class DataGenerator
     {
-        public static double[] GenerateLewyDistribution(float lewyParameter, float max, int sampleSize=1000)
+        public static double[] GenerateLewyDistribution(float lewyParameter, float min, float max, int sampleSize=1000)
         {
             var data = new double[sampleSize];
 
             for (var i = 0; i < sampleSize; i++)
             {
-                data[i] = LewyRandom.Next(lewyParameter, max);
+                data[i] = LewyRandom.Next(lewyParameter, min, max);
             }
             return data;
         }
