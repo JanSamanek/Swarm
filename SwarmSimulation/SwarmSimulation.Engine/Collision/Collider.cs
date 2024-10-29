@@ -33,15 +33,18 @@ namespace SwarmSimulation.Engine.Collision
         public abstract bool IsColliding(Collider other);
         public void CheckCollisions(List<Collider> otherColliders)
         {
-            Parallel.ForEach(otherColliders.Where(other => other != this), other =>
+            Parallel.ForEach(otherColliders, other =>
             {
-                if (IsColliding(other))
+                if (other != this)
                 {
-                    AddCollision(other);
-                }
-                else
-                {
-                    RemoveCollision(other);
+                    if (IsColliding(other))
+                    {
+                        AddCollision(other);
+                    }
+                    else
+                    {
+                        RemoveCollision(other);
+                    }
                 }
             });
         }
