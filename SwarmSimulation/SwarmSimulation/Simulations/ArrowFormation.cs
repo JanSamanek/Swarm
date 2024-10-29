@@ -49,7 +49,7 @@ namespace SwarmSimulation.Simulations
             SwarmBuilder.AddAgents<BasicAgent>(_swarm, positions, 5, perceptionRange);
         }
 
-        protected override void UpdateSimulation(object sender, EventArgs e)
+        protected override void UpdateSimulation()
         {
             var desiredInterAgentDistances = new [,]
             {

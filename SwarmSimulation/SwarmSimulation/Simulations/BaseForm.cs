@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using SwarmSimulation.Engine.Collision;
 using SwarmSimulation.Settings;
 using SwarmSimulation.Utilities;
 
@@ -27,9 +28,14 @@ namespace SwarmSimulation.Simulations
             {
                 Interval = 1000 / SimulationSettings.Fps,
             };
-            _timer.Tick += UpdateSimulation;
+            _timer.Tick += Update;
         }
 
+        private void Update(object sender, EventArgs e)
+        {
+            ColliderManager.Update();
+            UpdateSimulation();
+        }
         protected void StartSimulation()
         {
             DoubleBuffered = true;
@@ -37,7 +43,7 @@ namespace SwarmSimulation.Simulations
             _timer.Start();
         }
         protected abstract void InitializeSimulation();
-        protected abstract void UpdateSimulation(object sender, EventArgs e);
+        protected abstract void UpdateSimulation();
         protected abstract void OnPaint(object sender, PaintEventArgs e);
     }
 }

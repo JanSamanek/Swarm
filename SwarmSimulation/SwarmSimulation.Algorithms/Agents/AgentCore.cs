@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Threading;
 using System.Threading.Tasks;
-using SwarmSimulation.Engine.Collider;
+using SwarmSimulation.Engine.Collision;
 using SwarmSimulation.Environment;
 using SwarmSimulation.Environment.Obstacles;
 using SwarmSimulation.Utilities;
 
 namespace SwarmSimulation.Algorithms.Agents
 {
-    public class AgentCore : IAgent
+    public abstract class AgentCore : IAgent
     {
         protected AgentCore(int id, Vector2 position, float size, float perceptionRange)
         {
@@ -33,7 +33,7 @@ namespace SwarmSimulation.Algorithms.Agents
             }
         }
         public float Size { get; private set; }
-        public ICollider Collider { get; set; } 
+        public Collider Collider { get; set; } 
         public Vector2 Velocity { get; private set; } = Vector2.Zero;
         public float PerceptionRange { get; }
         public List<IAgent> Neighbors { get; set; } = new List<IAgent>();
@@ -63,20 +63,7 @@ namespace SwarmSimulation.Algorithms.Agents
 
         public bool DetectCollision()
         {
-            var collided = false;
-            Parallel.ForEach(ColliderManager.Colliders, (collider, state) =>
-            {
-                if (ReferenceEquals(Collider, collider))
-                {
-                    return;
-                }
-                if (Collider.Intersects(collider))
-                {
-                    collided = true;
-                    state.Stop();
-                }
-            });
-            return collided;
+            return Collider.HasCollided();
         }
         
         public bool HasApproachedTarget(Vector2 target, float tolerance=5)

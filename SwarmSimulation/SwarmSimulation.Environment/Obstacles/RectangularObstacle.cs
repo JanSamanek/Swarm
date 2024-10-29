@@ -1,5 +1,5 @@
 using System.Numerics;
-using SwarmSimulation.Engine.Collider;
+using SwarmSimulation.Engine.Collision;
 
 namespace SwarmSimulation.Environment.Obstacles
 {
@@ -16,7 +16,7 @@ namespace SwarmSimulation.Environment.Obstacles
         public Vector2 Center { get; }
         public float Width { get; }
         public float Height { get; }
-        public ICollider Collider { get; }
+        public Collider Collider { get; }
         
         public Vector2 GetDistanceVectorFromBorder(Vector2 point)
         {

@@ -53,7 +53,7 @@ namespace SwarmSimulation.Simulations
             _swarm = SwarmBuilder.CreateSwarm<BasicAgent>(positions, 5, perceptionRange);
         }
 
-        protected override void UpdateSimulation(object sender, EventArgs e)
+        protected override void UpdateSimulation()
         {
             var input = new ProximityAlgorithmInput
             {

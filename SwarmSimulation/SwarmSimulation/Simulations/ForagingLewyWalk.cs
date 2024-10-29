@@ -47,7 +47,7 @@ namespace SwarmSimulation.Simulations
             _swarm = SwarmBuilder.CreateSwarmInNest<ForagingAgent>(Arena.Instance.Nest, 10, 10, 80);
         }
 
-        protected override void UpdateSimulation(object sender, EventArgs e)
+        protected override void UpdateSimulation()
         {
             var input = new ForagingLewyWalkAlgorithmInput
             {

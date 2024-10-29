@@ -1,8 +1,8 @@
 using System.Numerics;
 
-namespace SwarmSimulation.Engine.Collider
+namespace SwarmSimulation.Engine.Collision
 {
-    public class CircleCollider : ColliderCore, ICollider
+    public class CircleCollider : Collider
     {
         public float Radius { get; }
 
@@ -10,25 +10,30 @@ namespace SwarmSimulation.Engine.Collider
         {
             Center = center;
             Radius = radius;
-            ColliderManager.Colliders.Add(this);
+            ColliderManager.RegisterCollider(this);
         }
         
-        public bool Intersects(ICollider other)
+        public override bool IsColliding(Collider other)
         {
             switch (other)
             {
                 case CircleCollider circle:
                 {
-                    var distance = Vector2.Distance(Center, circle.Center);
-                    return distance < Radius + circle.Radius;
+                    return Intersects(circle);
                 }
                 case RectangleCollider rectangle:
                 {
-                    return rectangle.Intersects(this);
+                    return rectangle.IsColliding(this);
                 }
                 default:
                     return false;
             }
+        }
+
+        private bool Intersects(CircleCollider circle)
+        {
+            var distance = Vector2.Distance(Center, circle.Center);
+            return distance < Radius + circle.Radius;
         }
     }
 }

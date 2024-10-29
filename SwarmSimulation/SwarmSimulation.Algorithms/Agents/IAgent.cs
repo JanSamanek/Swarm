@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Numerics;
-using SwarmSimulation.Engine.Collider;
+using SwarmSimulation.Engine.Collision;
 using SwarmSimulation.Environment.Obstacles;
 
 namespace SwarmSimulation.Algorithms.Agents
@@ -10,7 +10,7 @@ namespace SwarmSimulation.Algorithms.Agents
         int Id  { get; }
         Vector2 Position { get; }
         float Size { get;}
-        ICollider Collider { get; set; } 
+        Collider Collider { get; set; } 
         Vector2 Velocity { get; }
         float PerceptionRange { get; }
         List<IAgent> Neighbors { get; set; }

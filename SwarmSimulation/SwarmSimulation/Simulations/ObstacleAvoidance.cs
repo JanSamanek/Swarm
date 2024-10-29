@@ -47,7 +47,7 @@ namespace SwarmSimulation.Simulations
                 .Build();
          }
 
-        protected override void UpdateSimulation(object sender, EventArgs e)
+        protected override void UpdateSimulation()
         {
             var input = new AdaptiveMoveToTargetAlgorithmInput
             {

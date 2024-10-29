@@ -55,7 +55,7 @@ namespace SwarmSimulation.Simulations
             _leader = SwarmBuilder.AddAgent<LeaderAgent>(_swarm, new Vector2(500, 300), 5, perceptionRange);
         }
 
-        protected override void UpdateSimulation(object sender, EventArgs e)
+        protected override void UpdateSimulation()
         {
             var proximityAlgorithmInput = new ProximityAlgorithmInput
             {

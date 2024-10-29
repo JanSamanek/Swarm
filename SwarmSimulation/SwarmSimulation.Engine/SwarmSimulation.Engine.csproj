@@ -40,11 +40,11 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Collider\CircleCollider.cs" />
-        <Compile Include="Collider\ColliderCore.cs" />
-        <Compile Include="Collider\ColliderManager.cs" />
-        <Compile Include="Collider\ICollider.cs" />
-        <Compile Include="Collider\RectangleCollider.cs" />
+        <Compile Include="Collision\CircleCollider.cs" />
+        <Compile Include="Collision\Collider.cs" />
+        <Compile Include="Collision\ColliderManager.cs" />
+        <Compile Include="Collision\RectangleCollider.cs" />
+        <Compile Include="Physics\RigidBody.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
     <ItemGroup>

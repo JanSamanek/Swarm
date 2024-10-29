@@ -2,9 +2,9 @@ using System;
 using System.Numerics;
 using SwarmSimulation.Utilities.Mathematics;
 
-namespace SwarmSimulation.Engine.Collider
+namespace SwarmSimulation.Engine.Collision
 {
-    public class RectangleCollider : ColliderCore, ICollider
+    public class RectangleCollider : Collider
     { 
         public float Width { get; }
         public float Height { get; }
@@ -14,17 +14,15 @@ namespace SwarmSimulation.Engine.Collider
             Center = center;    
             Width = width;
             Height = height;
-            ColliderManager.Colliders.Add(this);
+            ColliderManager.RegisterCollider(this);
         }
-        public bool Intersects(ICollider other)
+        public override bool IsColliding(Collider other)
         {
             switch (other)
             {
                 case RectangleCollider rectangle:
                 {
-                    var xOverlap = Math.Abs(Center.X - rectangle.Center.X) <= Width / 2 + rectangle.Width / 2;
-                    var yOverlap = Math.Abs(Center.Y - rectangle.Center.Y) <= Height / 2  + rectangle.Height / 2;
-                    return xOverlap && yOverlap;
+                    return Intersects(rectangle);
                 }
                 case CircleCollider circle:
                 {
@@ -47,6 +45,13 @@ namespace SwarmSimulation.Engine.Collider
             var distanceSquared = vector.LengthSquared();
             var radiusSquared = circle.Radius * circle.Radius;
             return distanceSquared <= radiusSquared;
+        }
+
+        private bool Intersects(RectangleCollider rectangle)
+        {
+            var xOverlap = Math.Abs(Center.X - rectangle.Center.X) <= Width / 2 + rectangle.Width / 2;
+            var yOverlap = Math.Abs(Center.Y - rectangle.Center.Y) <= Height / 2  + rectangle.Height / 2;
+            return xOverlap && yOverlap;
         }
     }
 }
