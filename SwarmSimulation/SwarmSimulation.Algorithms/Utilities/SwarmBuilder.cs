@@ -8,7 +8,7 @@ namespace SwarmSimulation.Algorithms.Utilities
 {
     public static class SwarmBuilder
     {
-        public static Swarm CreateSwarmInNest<TAgent>(Nest nest, int agentCount, float agentSize, int perceptionRange) where TAgent : IAgent
+        public static Swarm CreateSwarmInNest<TAgent>(Nest nest, int agentCount, float agentSize, int perceptionRange) where TAgent : Agent
         {
             var positions = new HashSet<Vector2>();
 
@@ -22,7 +22,7 @@ namespace SwarmSimulation.Algorithms.Utilities
         }
         
         public static TAgent AddAgent<TAgent>(Swarm swarm, Vector2 position, float agentSize, float perceptionRange)
-            where TAgent : IAgent
+            where TAgent : Agent
         {
             var agent = (TAgent) Activator.CreateInstance(typeof(TAgent), swarm.Agents.Count, position, agentSize, perceptionRange);
             swarm.Agents.Add(agent);
@@ -30,7 +30,7 @@ namespace SwarmSimulation.Algorithms.Utilities
         }
 
         public static IEnumerable<TAgent> AddAgents<TAgent>(Swarm swarm, IEnumerable<Vector2> positions,float agentSize, float perceptionRange)
-            where TAgent : IAgent
+            where TAgent : Agent
         {
             var agents = new List<TAgent>();
             foreach (var position in positions)
@@ -42,13 +42,13 @@ namespace SwarmSimulation.Algorithms.Utilities
         }
 
         public static Swarm CreateSwarm<TAgent>(Vector2 agentPosition, float agentSize, float perceptionRange)
-            where TAgent : IAgent
+            where TAgent : Agent
         {
             return CreateSwarm<TAgent>(new[] { agentPosition }, agentSize, perceptionRange);
         }
         
         public static Swarm CreateSwarm<TAgent>(IEnumerable<Vector2> positions, float agentSize, float perceptionRange)
-            where TAgent : IAgent
+            where TAgent : Agent
         {
             var swarm = new Swarm();
             foreach (var position in positions)

@@ -43,10 +43,9 @@
         <Compile Include="AdaptiveMoveToTarget\AdaptiveMoveToTargetAlgorithm.cs" />
         <Compile Include="AdaptiveMoveToTarget\AdaptiveMoveToTargetAlgorithmInput.cs" />
         <Compile Include="AdaptiveMoveToTarget\AdaptiveMoveToTargetAlgorithmSettings.cs" />
-        <Compile Include="Agents\AgentCore.cs" />
+        <Compile Include="Agents\Agent.cs" />
         <Compile Include="Agents\BasicAgent.cs" />
         <Compile Include="Agents\ForagingAgent.cs" />
-        <Compile Include="Agents\IAgent.cs" />
         <Compile Include="Agents\LeaderAgent.cs" />
         <Compile Include="Agents\Swarm.cs" />
         <Compile Include="CustomFormation\FormationAlgorithm.cs" />

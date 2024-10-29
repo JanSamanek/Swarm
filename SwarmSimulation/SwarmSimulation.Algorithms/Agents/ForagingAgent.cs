@@ -7,7 +7,7 @@ using SwarmSimulation.Environment;
 
 namespace SwarmSimulation.Algorithms.Agents
 {
-    public class ForagingAgent : AgentCore
+    public class ForagingAgent : Agent
     {
         public bool CarriesResource { get; private set; }
         public IState State { get; set; }

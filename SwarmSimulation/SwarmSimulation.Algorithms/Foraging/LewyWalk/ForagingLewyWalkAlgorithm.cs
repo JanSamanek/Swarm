@@ -18,7 +18,7 @@ namespace SwarmSimulation.Algorithms.Foraging.LewyWalk
             Exploring.ConfigureLewyWalk(settings.LewyParameter, settings.MaxFlightLength, settings.LewyScale);
         }
 
-        public Vector2 CalculateControlInput(IAgent agent, ForagingLewyWalkAlgorithmInput input)
+        public Vector2 CalculateControlInput(Agent agent, ForagingLewyWalkAlgorithmInput input)
         {
             var foragingAgent = (ForagingAgent) agent;
 

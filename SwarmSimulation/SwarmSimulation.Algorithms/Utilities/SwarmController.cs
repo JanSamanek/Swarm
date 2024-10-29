@@ -9,7 +9,7 @@ namespace SwarmSimulation.Algorithms.Utilities
 {
     public static class SwarmController
     {
-        public static void ExecuteAlgorithm<TInput>(Swarm swarm, IEnumerable<IAgent> agents, IAlgorithm<TInput> algorithm, 
+        public static void ExecuteAlgorithm<TInput>(Swarm swarm, IEnumerable<Agent> agents, IAlgorithm<TInput> algorithm, 
             TInput input)
         {
             UpdateNeighbours(swarm);
@@ -25,14 +25,14 @@ namespace SwarmSimulation.Algorithms.Utilities
             GarbageCollector.ClearHarvestedResources();
         }
         
-        public static void ExecuteAlgorithm<TInput>(Swarm swarm, IAgent agent, IAlgorithm<TInput> algorithm,
+        public static void ExecuteAlgorithm<TInput>(Swarm swarm, Agent agent, IAlgorithm<TInput> algorithm,
             TInput input)
         {
             UpdateNeighbours(swarm);
             ApplyAlgorithm(agent, algorithm, input);
         }
         
-        private static void ApplyAlgorithm<TInput>(IAgent agent, IAlgorithm<TInput> algorithm, TInput input)
+        private static void ApplyAlgorithm<TInput>(Agent agent, IAlgorithm<TInput> algorithm, TInput input)
         {            
             var controlInput = algorithm.CalculateControlInput(agent, input);
             agent.Move(controlInput);
@@ -42,7 +42,7 @@ namespace SwarmSimulation.Algorithms.Utilities
         {
             foreach (var agentToUpdate in swarm.Agents)
             {
-                agentToUpdate.Neighbors = new List<IAgent>();
+                agentToUpdate.Neighbors = new List<Agent>();
                 foreach (var agent in swarm.Agents.Where(agent => agentToUpdate.Id != agent.Id))
                 {
                     var distance = Vector2.Distance(agent.Position, agentToUpdate.Position);

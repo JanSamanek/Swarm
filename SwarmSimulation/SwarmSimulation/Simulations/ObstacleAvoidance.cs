@@ -16,7 +16,7 @@ namespace SwarmSimulation.Simulations
     public sealed class ObstacleAvoidance : BaseForm
     {
         private Swarm _swarm;
-        private IAgent _leader;
+        private Agent _leader;
         private IAlgorithm<AdaptiveMoveToTargetAlgorithmInput> _moveToTargetAlgorithm;
 
         public ObstacleAvoidance()

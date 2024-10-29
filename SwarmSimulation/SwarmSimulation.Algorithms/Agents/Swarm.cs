@@ -4,6 +4,6 @@ namespace SwarmSimulation.Algorithms.Agents
 {
     public class Swarm
     {
-        public List<IAgent> Agents { get; } = new List<IAgent>();
+        public List<Agent> Agents { get; } = new List<Agent>();
     }
 }

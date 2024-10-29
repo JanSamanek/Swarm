@@ -10,7 +10,7 @@ namespace SwarmSimulation.Algorithms.CustomFormation
         {
             _settings = settings;
         }
-        public Vector2 CalculateControlInput(IAgent agent, FormationAlgorithmInput input)
+        public Vector2 CalculateControlInput(Agent agent, FormationAlgorithmInput input)
         {
             var controlInput = Vector2.Zero;
             foreach (var neighbour in agent.Neighbors)

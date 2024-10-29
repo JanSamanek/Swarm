@@ -16,7 +16,7 @@ namespace SwarmSimulation.Simulations
     public sealed class LeaderFollower : BaseForm
     {
         private Swarm _swarm;
-        private IAgent _leader;
+        private Agent _leader;
 
         private IAlgorithm<ProximityAlgorithmInput> _leaderFollowerAlgorithm;
         private IAlgorithm<MoveToTargetAlgorithmInput> _moveToTargetAlgorithm;

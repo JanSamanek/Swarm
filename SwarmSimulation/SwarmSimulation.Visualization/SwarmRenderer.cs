@@ -31,13 +31,13 @@ namespace SwarmSimulation.Visualization
             }
         }
 
-        private static void DrawPerceptionRange(IAgent agent, Graphics graphics)
+        private static void DrawPerceptionRange(Agent agent, Graphics graphics)
         {
             var range = agent.PerceptionRange;
             DrawCircle(graphics, agent.Position, range, Brushes.Firebrick);
         }
 
-        private static void DrawAgent(IAgent agent, Graphics graphics,  float radius)
+        private static void DrawAgent(Agent agent, Graphics graphics,  float radius)
         {
             if (agent is ForagingAgent foragingAgent && foragingAgent.CarriesResource)
             {
@@ -49,7 +49,7 @@ namespace SwarmSimulation.Visualization
             }
         }
         
-        private static void DrawId(IAgent agent, Graphics graphics,  float agentRadius)
+        private static void DrawId(Agent agent, Graphics graphics,  float agentRadius)
         {
             var font = new Font("Arial", 10);
             var stringSize = graphics.MeasureString(agent.Id.ToString(), font);

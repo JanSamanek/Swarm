@@ -11,9 +11,9 @@ using SwarmSimulation.Utilities;
 
 namespace SwarmSimulation.Algorithms.Agents
 {
-    public abstract class AgentCore : IAgent
+    public abstract class Agent
     {
-        protected AgentCore(int id, Vector2 position, float size, float perceptionRange)
+        protected Agent(int id, Vector2 position, float size, float perceptionRange)
         {
             Id = id;
             Collider = new CircleCollider(position, size);
@@ -32,19 +32,16 @@ namespace SwarmSimulation.Algorithms.Agents
                 Collider.UpdatePosition(_position);
             }
         }
-        public float Size { get; private set; }
+        public float Size { get; }
         public Collider Collider { get; set; } 
         public Vector2 Velocity { get; private set; } = Vector2.Zero;
         public float PerceptionRange { get; }
-        public List<IAgent> Neighbors { get; set; } = new List<IAgent>();
+        public List<Agent> Neighbors { get; set; } = new List<Agent>();
         
-        // TODO: remove bug position Nan, Nan => parallel computing??
         public void Move(Vector2 controlInput)
         {
-            var dt = SimulationTimeManager.GetDeltaTime();
-            
             Velocity = controlInput;
-            Position += controlInput * dt;
+            Position += controlInput * SimulationTimeManager.GetDeltaTime();;
         }
         
         public IEnumerable<IObstacle> DetectObstacles()

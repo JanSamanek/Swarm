@@ -16,7 +16,7 @@ namespace SwarmSimulation.Algorithms.AdaptiveMoveToTarget
             _moveToTargetAlgorithm = new MoveToTargetAlgorithm();
         }
 
-        public Vector2 CalculateControlInput(IAgent agent, AdaptiveMoveToTargetAlgorithmInput input)
+        public Vector2 CalculateControlInput(Agent agent, AdaptiveMoveToTargetAlgorithmInput input)
         {
             var controlInput = Vector2.Zero;
             controlInput += _moveToTargetAlgorithm.CalculateControlInput(agent, input.MoveToTargetAlgorithmInput);

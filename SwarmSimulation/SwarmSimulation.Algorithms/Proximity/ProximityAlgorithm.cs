@@ -13,7 +13,7 @@ namespace SwarmSimulation.Algorithms.Proximity
         {
             _settings = settings;
         }
-        public Vector2 CalculateControlInput(IAgent agent, ProximityAlgorithmInput input)
+        public Vector2 CalculateControlInput(Agent agent, ProximityAlgorithmInput input)
         {
             var toCalculateFrom = agent.Neighbors
                 .OrderBy(neighbour => Vector2.Distance(neighbour.Position, agent.Position))

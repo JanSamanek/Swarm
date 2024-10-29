@@ -14,7 +14,7 @@ namespace SwarmSimulation.Algorithms.LineAggregation
         {
             _settings = settings;
         }
-        public Vector2 CalculateControlInput(IAgent agent, LineAggregationAlgorithmInput input)
+        public Vector2 CalculateControlInput(Agent agent, LineAggregationAlgorithmInput input)
         {
             var orientationAngle = input.LineOrientationAngleInRadians;
 
@@ -37,7 +37,7 @@ namespace SwarmSimulation.Algorithms.LineAggregation
             var controlInput = controlInputParallel + controlInputPerpendicular;
             return controlInput.Rotate(-orientationAngle);
         }
-        private static IEnumerable<IAgent> GetAdjacentAgents(IAgent agent, float orientationAngle)
+        private static IEnumerable<Agent> GetAdjacentAgents(Agent agent, float orientationAngle)
         {
             var closest = agent.Neighbors
                 .OrderBy(neighbour 
@@ -49,7 +49,7 @@ namespace SwarmSimulation.Algorithms.LineAggregation
             var closestLeft = closest.FirstOrDefault(a => 
                 a.Position.Rotate(orientationAngle).X < agent.Position.Rotate(orientationAngle).X);
 
-            var adjacent = new List<IAgent>();
+            var adjacent = new List<Agent>();
             if (closestRight != null)
             {
                 adjacent.Add(closestRight);

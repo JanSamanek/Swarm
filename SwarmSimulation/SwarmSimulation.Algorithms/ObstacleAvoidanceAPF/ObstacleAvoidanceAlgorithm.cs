@@ -13,7 +13,7 @@ namespace SwarmSimulation.Algorithms.ObstacleAvoidanceAPF
             _settings = settings;
         }
 
-        public Vector2 CalculateControlInput(IAgent agent, ObstacleAvoidanceAlgorithmInput input)
+        public Vector2 CalculateControlInput(Agent agent, ObstacleAvoidanceAlgorithmInput input)
         {
             var obstacles = agent.DetectObstacles();
             var controlInput = Vector2.Zero;

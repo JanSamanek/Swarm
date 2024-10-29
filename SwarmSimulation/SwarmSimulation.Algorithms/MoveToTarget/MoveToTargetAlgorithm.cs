@@ -6,7 +6,7 @@ namespace SwarmSimulation.Algorithms.MoveToTarget
 {
     public class MoveToTargetAlgorithm : IAlgorithm<MoveToTargetAlgorithmInput>
     {
-        public Vector2 CalculateControlInput(IAgent agent, MoveToTargetAlgorithmInput input)
+        public Vector2 CalculateControlInput(Agent agent, MoveToTargetAlgorithmInput input)
         {
             if (agent.HasApproachedTarget(input.TargetPosition))
             {
