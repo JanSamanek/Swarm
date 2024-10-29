@@ -41,6 +41,7 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Collider\CircleCollider.cs" />
+        <Compile Include="Collider\ColliderCore.cs" />
         <Compile Include="Collider\ColliderManager.cs" />
         <Compile Include="Collider\ICollider.cs" />
         <Compile Include="Collider\RectangleCollider.cs" />

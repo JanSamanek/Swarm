@@ -4,11 +4,10 @@ using SwarmSimulation.Utilities.Mathematics;
 
 namespace SwarmSimulation.Engine.Collider
 {
-    public class RectangleCollider : ICollider
+    public class RectangleCollider : ColliderCore, ICollider
     { 
-        public Vector2 Center { get; set; }
-        public float Width { get; set; }
-        public float Height { get; set; }
+        public float Width { get; }
+        public float Height { get; }
         
         public RectangleCollider(Vector2 center, float width, float height)
         {

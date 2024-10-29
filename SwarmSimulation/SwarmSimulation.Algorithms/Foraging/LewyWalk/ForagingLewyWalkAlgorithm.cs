@@ -9,13 +9,10 @@ namespace SwarmSimulation.Algorithms.Foraging.LewyWalk
 {
     public class ForagingLewyWalkAlgorithm : IAlgorithm<ForagingLewyWalkAlgorithmInput>
     {
-        private readonly ForagingLewyWalkAlgorithmSettings _settings;
         private readonly MoveToTargetAlgorithm _moveToTargetAlgorithm;
-        private readonly Random _random = new Random();
         
         public ForagingLewyWalkAlgorithm(ForagingLewyWalkAlgorithmSettings settings)
         {
-            _settings = settings;
             _moveToTargetAlgorithm =
                 new MoveToTargetAlgorithm();
             Exploring.ConfigureLewyWalk(settings.LewyParameter, settings.MaxFlightLength, settings.LewyScale);

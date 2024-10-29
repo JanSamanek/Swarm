@@ -2,10 +2,9 @@ using System.Numerics;
 
 namespace SwarmSimulation.Engine.Collider
 {
-    public class CircleCollider : ICollider
+    public class CircleCollider : ColliderCore, ICollider
     {
-        public float Radius { get; set; }
-        public Vector2 Center { get; set; }
+        public float Radius { get; }
 
         public CircleCollider(Vector2 center, float radius)
         {

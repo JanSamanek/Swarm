@@ -16,13 +16,22 @@ namespace SwarmSimulation.Algorithms.Agents
         protected AgentCore(int id, Vector2 position, float size, float perceptionRange)
         {
             Id = id;
-            Position = position;
             Collider = new CircleCollider(position, size);
+            Position = position;
             Size = size;
             PerceptionRange = perceptionRange;
         }
         public int Id { get; }
-        public Vector2 Position { get; private set; }
+        private Vector2 _position;
+        public Vector2 Position
+        {
+            get => _position;
+            private set
+            {
+                _position = value;
+                Collider.UpdatePosition(_position);
+            }
+        }
         public float Size { get; private set; }
         public ICollider Collider { get; set; } 
         public Vector2 Velocity { get; private set; } = Vector2.Zero;
