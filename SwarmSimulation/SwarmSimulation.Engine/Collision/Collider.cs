@@ -9,6 +9,9 @@ namespace SwarmSimulation.Engine.Collision
         private readonly List<Collider> _collidedWith = new List<Collider>();
         public int ObjectId { get; protected set; }
         public Vector2 Position { get; protected set; }
+        
+        public abstract bool IsColliding(Collider other);
+        public abstract Vector2 GetDirectionTo(Collider other);
         private void AddCollision(Collider other)
         {
             if (!_collidedWith.Contains(other))
@@ -16,7 +19,6 @@ namespace SwarmSimulation.Engine.Collision
                 _collidedWith.Add(other);
             }
         }
-
         private void RemoveCollision(Collider other)
         { 
             if (_collidedWith.Contains(other))
@@ -24,9 +26,7 @@ namespace SwarmSimulation.Engine.Collision
                 _collidedWith.Remove(other);
             }
         }
-
-        public abstract bool IsColliding(Collider other);
-        public  IReadOnlyList<Collider> UpdateCollisions(IEnumerable<Collider> otherColliders)
+        public  IReadOnlyList<Collider> CheckCollisions(IEnumerable<Collider> otherColliders)
         {
             foreach (var other in otherColliders)
             {
@@ -44,12 +44,10 @@ namespace SwarmSimulation.Engine.Collision
             }
             return _collidedWith.AsReadOnly();
         }
-
         public bool HasCollided()
         {
             return _collidedWith.Any();
         }
-
         public void UpdatePosition(Vector2 position)
         {
             Position = position;

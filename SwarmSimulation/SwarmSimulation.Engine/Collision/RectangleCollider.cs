@@ -32,14 +32,30 @@ namespace SwarmSimulation.Engine.Collision
                     return false;
             }
         }
-        
+
+        public override Vector2 GetDirectionTo(Collider other)
+        {
+            switch (other)
+            {
+                case CircleCollider circle:
+                {
+                    return -circle.GetDirectionTo(this);
+                }
+                case RectangleCollider rectangle:
+                {
+                    return Vector2.Zero;
+                }
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
         private bool Intersects(CircleCollider circle)
         {
-            var closestX = MathUtils.Clamp(circle.Position.X, Position.X - Width/2, Position.X +  Width/2);
-            var closestY = MathUtils.Clamp(circle.Position.Y, Position.Y - Height/2, Position.Y + Height/2);
+            var closest = GetClosestPointTo(circle);
     
-            var distanceX = circle.Position.X - closestX;
-            var distanceY = circle.Position.Y - closestY;
+            var distanceX = circle.Position.X - closest.X;
+            var distanceY = circle.Position.Y - closest.Y;
             var vector = new Vector2(distanceX, distanceY);
             
             var distanceSquared = vector.LengthSquared();
@@ -52,6 +68,13 @@ namespace SwarmSimulation.Engine.Collision
             var xOverlap = Math.Abs(Position.X - rectangle.Position.X) <= Width / 2 + rectangle.Width / 2;
             var yOverlap = Math.Abs(Position.Y - rectangle.Position.Y) <= Height / 2  + rectangle.Height / 2;
             return xOverlap && yOverlap;
+        }
+
+        public Vector2 GetClosestPointTo(CircleCollider circle)
+        {
+            var closestX = MathUtils.Clamp(circle.Position.X, Position.X - Width/2, Position.X +  Width/2);
+            var closestY = MathUtils.Clamp(circle.Position.Y, Position.Y - Height/2, Position.Y + Height/2);
+            return new Vector2(closestX, closestY);
         }
     }
 }

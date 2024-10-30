@@ -1,4 +1,7 @@
+using System;
+using System.Diagnostics;
 using System.Numerics;
+using SwarmSimulation.Utilities.Mathematics;
 
 namespace SwarmSimulation.Engine.Collision
 {
@@ -27,6 +30,26 @@ namespace SwarmSimulation.Engine.Collision
                 }
                 default:
                     return false;
+            }
+        }
+
+        public override Vector2 GetDirectionTo(Collider other)
+        {
+            switch (other)
+            {
+                case CircleCollider circle:
+                {
+                    var direction = Vector2.Normalize(circle.Position - Position);
+                    return  direction;
+                }
+                case RectangleCollider rectangle:
+                {
+                    var closest = rectangle.GetClosestPointTo(this);
+                    var direction = Vector2.Normalize(closest - Position);
+                    return direction;
+                }
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
 

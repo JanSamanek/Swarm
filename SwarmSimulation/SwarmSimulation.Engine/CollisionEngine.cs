@@ -17,13 +17,12 @@ namespace SwarmSimulation.Engine
                 var objectId = collider.ObjectId;
                 var simulationObject = SimulationObjectManager.GetSimulationObject(objectId);
                 
-                var collidedWith = collider.UpdateCollisions(colliders);
+                var collidedWith = collider.CheckCollisions(colliders);
                 
                 var collisionVelocity = Vector2.Zero;
                 foreach (var other in collidedWith)
                 {
-                    var direction = Vector2.Normalize(collider.Position - other.Position);
-                    
+                    var direction = -collider.GetDirectionTo(other);
                     collisionVelocity += direction * simulationObject.ControlInput.Length();
                 }
                 CollisionVelocity.Add(objectId, collisionVelocity);
