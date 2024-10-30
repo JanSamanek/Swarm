@@ -24,7 +24,7 @@ namespace SwarmSimulation.Algorithms.Utilities
         public static TAgent AddAgent<TAgent>(Swarm swarm, Vector2 position, float agentSize, float perceptionRange)
             where TAgent : Agent
         {
-            var agent = (TAgent) Activator.CreateInstance(typeof(TAgent), swarm.Agents.Count, position, agentSize, perceptionRange);
+            var agent = (TAgent) Activator.CreateInstance(typeof(TAgent), position, agentSize, perceptionRange);
             swarm.Agents.Add(agent);
             return agent;
         }

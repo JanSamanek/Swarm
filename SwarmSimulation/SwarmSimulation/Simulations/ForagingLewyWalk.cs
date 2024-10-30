@@ -36,15 +36,15 @@ namespace SwarmSimulation.Simulations
             var arenaBuilder = new ArenaBuilder();
             arenaBuilder.Initialize(new Vector2(500, 300), 1000, 600)
                 .AddNest(new Vector2(500, 500), 150, 100)
-                .AddCircularObstacle(new Vector2(500, 300), 50)
-                .AddCircularObstacle(new Vector2(600, 150), 100)
-                .AddCircularObstacle(new Vector2(100, 150), 80)
-                .AddCircularObstacle(new Vector2(800, 450), 30)
-                .AddCircularObstacle(new Vector2(150, 380), 80)
-                .GenerateResources(30)
+                .AddCircularObstacle(new Vector2(500, 300), 25)
+                .AddCircularObstacle(new Vector2(600, 150), 50)
+                .AddCircularObstacle(new Vector2(100, 150), 40)
+                .AddCircularObstacle(new Vector2(800, 450), 15)
+                .AddCircularObstacle(new Vector2(150, 380), 40)
+                .GenerateResources(50000)
                 .Build();
             
-            _swarm = SwarmBuilder.CreateSwarmInNest<ForagingAgent>(Arena.Instance.Nest, 10, 10, 80);
+            _swarm = SwarmBuilder.CreateSwarmInNest<ForagingAgent>(Arena.Instance.Nest, 10, 6, 80);
         }
 
         protected override void UpdateSimulation()
@@ -63,7 +63,7 @@ namespace SwarmSimulation.Simulations
         {
             e.Graphics.Clear(Color.Black);
             ArenaRenderer.DrawArena(Arena.Instance, e.Graphics, drawNest:true);
-            SwarmRenderer.DrawAgents(_swarm, e.Graphics, drawId:true);
+            SwarmRenderer.DrawAgents(_swarm, e.Graphics);
         }
     }
 }

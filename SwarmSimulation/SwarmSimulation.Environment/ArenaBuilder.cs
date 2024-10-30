@@ -12,6 +12,7 @@ namespace SwarmSimulation.Environment
         {
             Arena.Instance.Width = (int) width;
             Arena.Instance.Height = (int) height;
+            Arena.Instance.Center = position;
             _padding = padding;
             var left = position.X + (float) padding/2 - width / 2;
             AddRectangularObstacle(new Vector2(left, position.Y), padding, height);
@@ -48,8 +49,19 @@ namespace SwarmSimulation.Environment
 
             while (Arena.Instance.Resources.Count < count)
             {
-                var position = new Vector2(random.Next(_padding, Arena.Instance.Width - _padding),
-                    random.Next(_padding, Arena.Instance.Height - _padding));
+                var arenaWidth = Arena.Instance.Width;
+                var arenaHeight = Arena.Instance.Height;
+                var arenaCenter = Arena.Instance.Center;
+
+                var fromBoundHeight = (int)arenaCenter.Y - arenaHeight / 2 + _padding;
+                var toBoundHeight = (int)arenaCenter.Y + arenaWidth / 2 - _padding;
+                var positionY = random.Next(fromBoundHeight, toBoundHeight);
+                
+                var fromBoundWidth = (int)arenaCenter.X - arenaWidth / 2 + _padding;
+                var toBoundWidth = (int)arenaCenter.X + arenaWidth /2 - _padding;
+                var positionX = random.Next(fromBoundWidth, toBoundWidth);
+                
+                var position = new Vector2(positionX, positionY);
                 var isValid = Arena.Instance.Obstacles.All(obstacle => !obstacle.IsPointInside(position));
                 if (isValid)
                 {

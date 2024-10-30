@@ -87,7 +87,7 @@
         <Compile Include="Simulations\LineFormation.cs">
           <SubType>Form</SubType>
         </Compile>
-        <Compile Include="Simulations\ObstacleAvoidance.cs">
+        <Compile Include="Simulations\Test.cs">
           <SubType>Form</SubType>
         </Compile>
         <EmbeddedResource Include="Properties\Resources.resx">

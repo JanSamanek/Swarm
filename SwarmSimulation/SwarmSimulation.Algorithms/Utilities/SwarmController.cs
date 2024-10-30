@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
 using SwarmSimulation.Algorithms.Agents;
+using SwarmSimulation.Engine;
 using SwarmSimulation.Environment.Utilities;
 
 namespace SwarmSimulation.Algorithms.Utilities
@@ -14,7 +16,6 @@ namespace SwarmSimulation.Algorithms.Utilities
         {
             UpdateNeighbours(swarm);
             Parallel.ForEach(agents, agent => ApplyAlgorithm(agent, algorithm, input));
-            GarbageCollector.ClearHarvestedResources();
         }
 
         public static void ExecuteAlgorithm<TInput>(Swarm swarm, IAlgorithm<TInput> algorithm, 
@@ -22,7 +23,6 @@ namespace SwarmSimulation.Algorithms.Utilities
         {
             UpdateNeighbours(swarm);
             Parallel.ForEach(swarm.Agents, agent => ApplyAlgorithm(agent, algorithm, input));
-            GarbageCollector.ClearHarvestedResources();
         }
         
         public static void ExecuteAlgorithm<TInput>(Swarm swarm, Agent agent, IAlgorithm<TInput> algorithm,
@@ -35,6 +35,8 @@ namespace SwarmSimulation.Algorithms.Utilities
         private static void ApplyAlgorithm<TInput>(Agent agent, IAlgorithm<TInput> algorithm, TInput input)
         {            
             var controlInput = algorithm.CalculateControlInput(agent, input);
+            controlInput += CollisionEngine.GetCollisionVelocity(agent.Id);
+            Console.WriteLine(agent.DetectCollision());
             agent.Move(controlInput);
         }
         

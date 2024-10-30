@@ -1,7 +1,6 @@
 using System.Drawing;
 using System.Linq;
 using System.Numerics;
-using SwarmSimulation.Algorithms;
 using SwarmSimulation.Algorithms.Agents;
 
 namespace SwarmSimulation.Visualization
@@ -9,7 +8,7 @@ namespace SwarmSimulation.Visualization
     public static class SwarmRenderer
     {
         public static void DrawAgents(Swarm swarm, Graphics graphics,
-            bool drawPerceptionRange = false, bool drawId = false)
+            bool drawPerceptionRange = false)
         {
             var agentsList = swarm.Agents.ToList();
             
@@ -24,10 +23,6 @@ namespace SwarmSimulation.Visualization
             foreach (var agent in agentsList)
             {
                 DrawAgent(agent, graphics, agent.Size);
-                if (drawId)
-                {
-                    DrawId(agent, graphics, agent.Size);
-                }
             }
         }
 
@@ -48,22 +43,10 @@ namespace SwarmSimulation.Visualization
                 DrawCircle(graphics, agent.Position, radius, Brushes.White);
             }
         }
-        
-        private static void DrawId(Agent agent, Graphics graphics,  float agentRadius)
-        {
-            var font = new Font("Arial", 10);
-            var stringSize = graphics.MeasureString(agent.Id.ToString(), font);
-
-            var diameter = agentRadius * 2;
-            var textX = agent.Position.X -  diameter + (diameter + stringSize.Width) / 2;
-            var textY = agent.Position.Y -  diameter + (diameter + stringSize.Height) / 2;
-
-            graphics.DrawString(agent.Id.ToString(), font, Brushes.Black, textX, textY);
-        }
 
         private static void DrawCircle( Graphics graphics, Vector2 center, float radius, Brush brush)
         {
-            graphics.FillEllipse(brush, (int) center.X - radius / 2, (int) center.Y - radius / 2, 
+            graphics.FillEllipse(brush, (int) center.X - radius, (int) center.Y - radius, 
                 radius*2, radius*2);
         }
     }

@@ -9,12 +9,12 @@ namespace SwarmSimulation.Engine.Collision
         public float Width { get; }
         public float Height { get; }
         
-        public RectangleCollider(Vector2 center, float width, float height)
+        public RectangleCollider(Vector2 center, float width, float height, int objectId)
         {
-            Center = center;    
+            Position = center;    
             Width = width;
             Height = height;
-            ColliderManager.RegisterCollider(this);
+            Id = objectId;
         }
         public override bool IsColliding(Collider other)
         {
@@ -35,11 +35,11 @@ namespace SwarmSimulation.Engine.Collision
         
         private bool Intersects(CircleCollider circle)
         {
-            var closestX = MathUtils.Clamp(circle.Center.X, Center.X - Width/2, Center.X +  Width/2);
-            var closestY = MathUtils.Clamp(circle.Center.Y, Center.Y - Height/2, Center.Y + Height/2);
+            var closestX = MathUtils.Clamp(circle.Position.X, Position.X - Width/2, Position.X +  Width/2);
+            var closestY = MathUtils.Clamp(circle.Position.Y, Position.Y - Height/2, Position.Y + Height/2);
     
-            var distanceX = circle.Center.X - closestX;
-            var distanceY = circle.Center.Y - closestY;
+            var distanceX = circle.Position.X - closestX;
+            var distanceY = circle.Position.Y - closestY;
             var vector = new Vector2(distanceX, distanceY);
             
             var distanceSquared = vector.LengthSquared();
@@ -49,8 +49,8 @@ namespace SwarmSimulation.Engine.Collision
 
         private bool Intersects(RectangleCollider rectangle)
         {
-            var xOverlap = Math.Abs(Center.X - rectangle.Center.X) <= Width / 2 + rectangle.Width / 2;
-            var yOverlap = Math.Abs(Center.Y - rectangle.Center.Y) <= Height / 2  + rectangle.Height / 2;
+            var xOverlap = Math.Abs(Position.X - rectangle.Position.X) <= Width / 2 + rectangle.Width / 2;
+            var yOverlap = Math.Abs(Position.Y - rectangle.Position.Y) <= Height / 2  + rectangle.Height / 2;
             return xOverlap && yOverlap;
         }
     }

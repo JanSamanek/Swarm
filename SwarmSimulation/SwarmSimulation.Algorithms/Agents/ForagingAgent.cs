@@ -1,7 +1,5 @@
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Numerics;
-using System.Threading.Tasks;
 using SwarmSimulation.Algorithms.Foraging.States;
 using SwarmSimulation.Environment;
 
@@ -13,8 +11,8 @@ namespace SwarmSimulation.Algorithms.Agents
         public IState State { get; set; }
         public Vector2 Target { get; set; }
         
-        public ForagingAgent(int id, Vector2 position, float size, float perceptionRange) 
-            : base(id, position, size, perceptionRange)
+        public ForagingAgent(Vector2 position, float size, float perceptionRange) 
+            : base(position, size, perceptionRange)
         {
             State = new Exploring(this);
         }
@@ -34,15 +32,15 @@ namespace SwarmSimulation.Algorithms.Agents
         
         public IEnumerable<Resource> DetectResources()
         {
-            var resourcesInRange = new ConcurrentBag<Resource>();
-            Parallel.ForEach(Arena.Instance.Resources, resource =>
+            var resourcesInRange = new List<Resource>();
+            foreach (var resource in Arena.Instance.Resources)
             {
-                var distance = (resource.Position - Position).Length();
+                var distance = Vector2.Distance(resource.Position, Position);
                 if (distance < PerceptionRange)
                 {
                     resourcesInRange.Add(resource);
                 }
-            });
+            }
             return resourcesInRange;
         }
     }

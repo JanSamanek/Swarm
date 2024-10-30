@@ -48,9 +48,9 @@ namespace SwarmSimulation.Visualization
         
         private static void DrawCircularObstacle(CircularObstacle obstacle, Graphics graphics)
         {
-            graphics.FillEllipse(Brushes.White, (int)obstacle.Center.X - obstacle.Radius / 2,
-                (int)obstacle.Center.Y - obstacle.Radius / 2,
-                obstacle.Radius, obstacle.Radius);
+            graphics.FillEllipse(Brushes.White, (int)obstacle.Position.X - obstacle.Radius,
+                (int)obstacle.Position.Y - obstacle.Radius,
+                obstacle.Radius * 2, obstacle.Radius * 2);
         }
 
         private static void DrawRectangularObstacle(RectangularObstacle obstacle, Graphics graphics)

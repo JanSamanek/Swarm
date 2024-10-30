@@ -50,6 +50,10 @@
         <Project>{32e7d9cc-fc18-4e41-9d45-d6500a68471d}</Project>
         <Name>SwarmSimulation.Algorithms</Name>
       </ProjectReference>
+      <ProjectReference Include="..\SwarmSimulation.Engine\SwarmSimulation.Engine.csproj">
+        <Project>{ed675520-dcbb-4321-b1b7-af0c4b9c84b6}</Project>
+        <Name>SwarmSimulation.Engine</Name>
+      </ProjectReference>
       <ProjectReference Include="..\SwarmSimulation.Environment\SwarmSimulation.Environment.csproj">
         <Project>{7eb7cd5e-b7b3-4c68-8397-1f32d721d7d4}</Project>
         <Name>SwarmSimulation.Environment</Name>

@@ -1,19 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
-using System.Threading.Tasks;
+using SwarmSimulation.Engine.Entity;
 
 namespace SwarmSimulation.Engine.Collision
 {
-    public abstract class Collider
+    public abstract class Collider : SimulationComponent
     {
         private readonly List<Collider> _collidedWith = new List<Collider>();
-        public Vector2 Center { get; protected set; }
-
-        public void UpdatePosition(Vector2 position)
-        {
-            Center = position;
-        }
+        public int Id { get; protected set; }
         private void AddCollision(Collider other)
         {
             if (!_collidedWith.Contains(other))
@@ -23,7 +17,7 @@ namespace SwarmSimulation.Engine.Collision
         }
 
         private void RemoveCollision(Collider other)
-        {
+        { 
             if (_collidedWith.Contains(other))
             {
                 _collidedWith.Remove(other);
@@ -31,9 +25,9 @@ namespace SwarmSimulation.Engine.Collision
         }
 
         public abstract bool IsColliding(Collider other);
-        public void CheckCollisions(List<Collider> otherColliders)
+        public  IReadOnlyList<Collider> UpdateCollisions(IEnumerable<Collider> otherColliders)
         {
-            Parallel.ForEach(otherColliders, other =>
+            foreach (var other in otherColliders)
             {
                 if (other != this)
                 {
@@ -46,13 +40,13 @@ namespace SwarmSimulation.Engine.Collision
                         RemoveCollision(other);
                     }
                 }
-            });
+            }
+            return _collidedWith.AsReadOnly();
         }
 
         public bool HasCollided()
         {
             return _collidedWith.Any();
         }
-
     }
 }

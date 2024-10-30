@@ -6,11 +6,11 @@ namespace SwarmSimulation.Engine.Collision
     {
         public float Radius { get; }
 
-        public CircleCollider(Vector2 center, float radius)
+        public CircleCollider(Vector2 center, float radius, int objectId)
         {
-            Center = center;
+            Position = center;
             Radius = radius;
-            ColliderManager.RegisterCollider(this);
+            Id = objectId;
         }
         
         public override bool IsColliding(Collider other)
@@ -32,7 +32,7 @@ namespace SwarmSimulation.Engine.Collision
 
         private bool Intersects(CircleCollider circle)
         {
-            var distance = Vector2.Distance(Center, circle.Center);
+            var distance = Vector2.Distance(Position, circle.Position);
             return distance < Radius + circle.Radius;
         }
     }

@@ -13,28 +13,21 @@ using SwarmSimulation.Visualization;
 
 namespace SwarmSimulation.Simulations
 {
-    public sealed class ObstacleAvoidance : BaseForm
+    public sealed class Test : BaseForm
     {
         private Swarm _swarm;
         private Agent _leader;
-        private IAlgorithm<AdaptiveMoveToTargetAlgorithmInput> _moveToTargetAlgorithm;
+        private IAlgorithm<MoveToTargetAlgorithmInput> _moveToTargetAlgorithm;
 
-        public ObstacleAvoidance()
+        public Test()
         {
-            Text = @"Swarm obstacle avoidance simulation";
+            Text = @"Swarm Testing simulation";
             StartSimulation();
         }
         
          protected override void InitializeSimulation()
          {
-             var moveToTargetAlgorithmSettings = new AdaptiveMoveToTargetAlgorithmSettings
-             {
-                 ObstacleAvoidanceAlgorithmSettings = new ObstacleAvoidanceAlgorithmSettings
-                 {
-                     ApfGain = 2100f
-                 }
-             };
-             _moveToTargetAlgorithm = new AdaptiveMoveToTargetAlgorithm(moveToTargetAlgorithmSettings);
+             _moveToTargetAlgorithm = new MoveToTargetAlgorithm();
              
             const float perceptionRange = 100;
             _swarm = new Swarm();
@@ -43,23 +36,17 @@ namespace SwarmSimulation.Simulations
             var arenaBuilder = new ArenaBuilder();
             arenaBuilder.Initialize(new Vector2(500, 300), 500, 500)
                 // .AddRectangularObstacle(new Vector2(500, 300), 50, 60)
-                .AddCircularObstacle(new Vector2(500, 300), 50)
+                .AddCircularObstacle(new Vector2(500, 300), 25)
+                .GenerateResources(50000)
                 .Build();
          }
 
         protected override void UpdateSimulation()
         {
-            var input = new AdaptiveMoveToTargetAlgorithmInput
+            var input = new MoveToTargetAlgorithmInput
             {
-                MoveToTargetAlgorithmInput = new MoveToTargetAlgorithmInput
-                {
-                    Speed = 15.0f,
-                    TargetPosition = new Vector2(430, 300)
-                },
-                ObstacleAvoidanceAlgorithmInput = new ObstacleAvoidanceAlgorithmInput
-                {
-                    Distance = 10f
-                }
+                Speed = 15.0f,
+                TargetPosition = new Vector2(430, 300)
             };
             SwarmController.ExecuteAlgorithm(_swarm, _leader, _moveToTargetAlgorithm, input);
             

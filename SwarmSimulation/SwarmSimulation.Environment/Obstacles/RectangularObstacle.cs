@@ -1,22 +1,25 @@
+using System;
 using System.Numerics;
+using SwarmSimulation.Engine;
 using SwarmSimulation.Engine.Collision;
+using SwarmSimulation.Engine.Entity;
+using SwarmSimulation.Engine.Physics;
 
 namespace SwarmSimulation.Environment.Obstacles
 {
-    public class RectangularObstacle : IObstacle
+    public class RectangularObstacle : SimulationObject, IObstacle
     {
-        public RectangularObstacle(Vector2 center, float width, float height)
+        public RectangularObstacle(Vector2 centerPosition, float width, float height)
         {
-            Center = center;
+            Center = centerPosition;
             Width = width;
             Height = height;
-            Collider = new RectangleCollider(center, width, height);
+            Collider = new RectangleCollider(centerPosition, width, height, Id);
+            Body = new RigidBody(centerPosition, 1, Id, isStatic:true);
         }
-
         public Vector2 Center { get; }
         public float Width { get; }
         public float Height { get; }
-        public Collider Collider { get; }
         
         public Vector2 GetDistanceVectorFromBorder(Vector2 point)
         {
@@ -56,5 +59,6 @@ namespace SwarmSimulation.Environment.Obstacles
 
             return point.X >= left && point.X <= right && point.Y >= bottom && point.Y <= top;
         }
+
     }
 }
