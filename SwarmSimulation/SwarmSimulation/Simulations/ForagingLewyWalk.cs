@@ -41,7 +41,7 @@ namespace SwarmSimulation.Simulations
                 .AddCircularObstacle(new Vector2(100, 150), 40)
                 .AddCircularObstacle(new Vector2(800, 450), 15)
                 .AddCircularObstacle(new Vector2(150, 380), 40)
-                .GenerateResources(50)
+                .GenerateResources(50000)
                 .Build();
             
             _swarm = SwarmBuilder.CreateSwarmInNest<ForagingAgent>(Arena.Instance.Nest, 10, 6, 80);

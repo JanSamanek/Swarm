@@ -54,7 +54,7 @@ namespace SwarmSimulation.Environment
                 var arenaCenter = Arena.Instance.Center;
 
                 var fromBoundHeight = (int)arenaCenter.Y - arenaHeight / 2 + _padding;
-                var toBoundHeight = (int)arenaCenter.Y + arenaWidth / 2 - _padding;
+                var toBoundHeight = (int)arenaCenter.Y + arenaHeight / 2 - _padding;
                 var positionY = random.Next(fromBoundHeight, toBoundHeight);
                 
                 var fromBoundWidth = (int)arenaCenter.X - arenaWidth / 2 + _padding;
