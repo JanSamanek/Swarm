@@ -7,7 +7,7 @@ namespace SwarmSimulation.Engine.Collision
     public abstract class Collider : SimulationComponent
     {
         private readonly List<Collider> _collidedWith = new List<Collider>();
-        public int Id { get; protected set; }
+        public int ObjectId { get; protected set; }
         private void AddCollision(Collider other)
         {
             if (!_collidedWith.Contains(other))

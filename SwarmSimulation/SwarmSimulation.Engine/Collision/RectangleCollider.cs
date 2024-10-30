@@ -14,7 +14,7 @@ namespace SwarmSimulation.Engine.Collision
             Position = center;    
             Width = width;
             Height = height;
-            Id = objectId;
+            ObjectId = objectId;
         }
         public override bool IsColliding(Collider other)
         {

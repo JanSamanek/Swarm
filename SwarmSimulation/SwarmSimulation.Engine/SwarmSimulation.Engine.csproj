@@ -47,7 +47,6 @@
         <Compile Include="Entity\SimulationComponent.cs" />
         <Compile Include="Entity\SimulationObject.cs" />
         <Compile Include="Entity\SimulationObjectManager.cs" />
-        <Compile Include="Physics\RigidBody.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
     <ItemGroup>

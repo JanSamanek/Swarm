@@ -14,18 +14,17 @@ namespace SwarmSimulation.Engine
             var colliders = SimulationObjectManager.GetColliders().ToList();
             foreach (var collider in colliders)
             {
-                var objectId = collider.Id;
-                var body = SimulationObjectManager.GetRigidBody(objectId);
+                var objectId = collider.ObjectId;
+                var simulationObject = SimulationObjectManager.GetSimulationObject(objectId);
                 
                 var collidedWith = collider.UpdateCollisions(colliders);
                 
                 var collisionVelocity = Vector2.Zero;
-                foreach (var collisionId in collidedWith.Select(c => c.Id))
+                foreach (var other in collidedWith)
                 {
-                    var collisionBody = SimulationObjectManager.GetRigidBody(collisionId);
-
-                    var direction = Vector2.Normalize(collisionBody.Position - body.Position);
-                    collisionVelocity += body.GetVelocityFromCollision(collisionBody, direction);
+                    var direction = Vector2.Normalize(collider.Position - other.Position);
+                    
+                    collisionVelocity += direction * simulationObject.ControlInput.Length();
                 }
                 CollisionVelocity.Add(objectId, collisionVelocity);
             }

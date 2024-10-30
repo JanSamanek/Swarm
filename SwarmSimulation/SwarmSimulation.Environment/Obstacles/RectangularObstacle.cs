@@ -1,9 +1,6 @@
-using System;
 using System.Numerics;
-using SwarmSimulation.Engine;
 using SwarmSimulation.Engine.Collision;
 using SwarmSimulation.Engine.Entity;
-using SwarmSimulation.Engine.Physics;
 
 namespace SwarmSimulation.Environment.Obstacles
 {
@@ -14,8 +11,8 @@ namespace SwarmSimulation.Environment.Obstacles
             Center = centerPosition;
             Width = width;
             Height = height;
-            Collider = new RectangleCollider(centerPosition, width, height, Id);
-            Body = new RigidBody(centerPosition, 1, Id, isStatic:true);
+            Collider = new RectangleCollider(centerPosition, width, height, ObjectId);
+            IsStatic = true;
         }
         public Vector2 Center { get; }
         public float Width { get; }

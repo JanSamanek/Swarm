@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using System.Numerics;
-using SwarmSimulation.Engine;
 using SwarmSimulation.Engine.Collision;
 using SwarmSimulation.Engine.Entity;
-using SwarmSimulation.Engine.Physics;
 using SwarmSimulation.Environment;
 using SwarmSimulation.Environment.Obstacles;
 using SwarmSimulation.Utilities;
@@ -14,21 +12,21 @@ namespace SwarmSimulation.Algorithms.Agents
     {
         protected Agent(Vector2 position, float size, float perceptionRange)
         {
-            Collider = new CircleCollider(position, size, Id);
-            Body = new RigidBody(position, 1, Id);
+            Collider = new CircleCollider(position, size, ObjectId);
             Position = position;
-            Velocity = Vector2.Zero;
             Size = size;
             PerceptionRange = perceptionRange;
+            IsStatic = false;                       
         }
         public float Size { get; }
         public float PerceptionRange { get; }
         public List<Agent> Neighbors { get; set; } = new List<Agent>();
         
-        public void Move(Vector2 controlInput)
+        public void Move(Vector2 controlInputVelocity, Vector2 collisionVelocity)
         {
-            Velocity = controlInput;
-            Position += controlInput * SimulationTimeManager.GetDeltaTime();
+            Velocity = controlInputVelocity + collisionVelocity;
+            ControlInput = controlInputVelocity;
+            Position += Velocity * SimulationTimeManager.GetDeltaTime();
         }
         
         public IEnumerable<IObstacle> DetectObstacles()

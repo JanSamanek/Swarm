@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using SwarmSimulation.Engine.Collision;
-using SwarmSimulation.Engine.Physics;
 
 namespace SwarmSimulation.Engine.Entity
 {
@@ -25,6 +24,10 @@ namespace SwarmSimulation.Engine.Entity
             }
         }
 
+        public static SimulationObject GetSimulationObject(int objectId)
+        {
+            return SimulationObjects.FirstOrDefault(simulationObject => simulationObject.ObjectId == objectId);
+        }
         public static IEnumerable<Collider> GetColliders()
         {
             return SimulationObjects.Select(s => s.Collider);
@@ -32,14 +35,8 @@ namespace SwarmSimulation.Engine.Entity
         
         public static Collider GetCollider(int objectId) 
         {
-            var simulationObject = SimulationObjects.Find(sim => sim.Id == objectId);
-            return simulationObject.Collider;
-        }
-        
-        public static RigidBody GetRigidBody(int objectId) 
-        {
-            var simulationObject = SimulationObjects.Find(sim => sim.Id == objectId);
-            return simulationObject.Body;
+            var simulationObject = SimulationObjects.FirstOrDefault(sim => sim.ObjectId == objectId);
+            return simulationObject?.Collider;
         }
     }
 }

@@ -41,6 +41,7 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Extensions\Vector2Extensions.cs" />
+        <Compile Include="IdGenerator.cs" />
         <Compile Include="Mathematics\MathUtils.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
         <Compile Include="Random\GausianRandom.cs" />

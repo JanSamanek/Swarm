@@ -1,7 +1,6 @@
-using System;
 using System.Numerics;
 using SwarmSimulation.Engine.Collision;
-using SwarmSimulation.Engine.Physics;
+using SwarmSimulation.Utilities;
 
 namespace SwarmSimulation.Engine.Entity
 {
@@ -11,19 +10,11 @@ namespace SwarmSimulation.Engine.Entity
         {
             SimulationObjectManager.Register(this);
         }
-        public int Id { get; } = Guid.NewGuid().GetHashCode();
-        private Vector2 _velocity;
-        public Vector2 Velocity 
-        { 
-            get => _velocity;
-            protected set
-            {
-                _velocity = value;
-                Body.UpdateVelocity(_velocity);
-            }
-        }
-        
         private Vector2 _position;
+        public bool IsStatic { get; set; }
+        public int ObjectId { get; } = IdGenerator.GetNextId();
+        public Vector2 Velocity { get; protected set; } = Vector2.Zero;
+        public Vector2 ControlInput { get; set; } = Vector2.Zero;
         public Vector2 Position
         {
             get => _position;
@@ -31,10 +22,8 @@ namespace SwarmSimulation.Engine.Entity
             {
                 _position = value;
                 Collider?.UpdatePosition(_position); 
-                Body?.UpdatePosition(_position);
             }
         }
         public Collider Collider { get; protected set; }
-        public RigidBody Body { get; protected set; }
     }
 }

@@ -15,7 +15,7 @@ namespace SwarmSimulation.Algorithms.CustomFormation
             var controlInput = Vector2.Zero;
             foreach (var neighbour in agent.Neighbors)
             {
-                var desiredDistance = input.DesiredInterAgentDistances[agent.Id, neighbour.Id];
+                var desiredDistance = input.DesiredInterAgentDistances[agent.ObjectId, neighbour.ObjectId];
                 var distanceVector = neighbour.Position - agent.Position;
                 controlInput += _settings.ApfGain * distanceVector / distanceVector.Length() *
                                 (1 - desiredDistance / distanceVector.Length());

@@ -8,9 +8,10 @@ namespace SwarmSimulation.Visualization
     public static class SwarmRenderer
     {
         public static void DrawAgents(Swarm swarm, Graphics graphics,
-            bool drawPerceptionRange = false)
+            bool drawPerceptionRange = false, bool drawId = false)
         {
             var agentsList = swarm.Agents.ToList();
+
             
             if (drawPerceptionRange)
             {
@@ -23,6 +24,10 @@ namespace SwarmSimulation.Visualization
             foreach (var agent in agentsList)
             {
                 DrawAgent(agent, graphics, agent.Size);
+                if (drawId)
+                {
+                    DrawId(agent, graphics, agent.Size);
+                }
             }
         }
 
@@ -44,6 +49,17 @@ namespace SwarmSimulation.Visualization
             }
         }
 
+        private static void DrawId(Agent agent, Graphics graphics, float radius)
+        {
+            var font = new Font("Arial", 10);
+            var stringSize = graphics.MeasureString(agent.ObjectId.ToString(), font);
+
+            var textX = agent.Position.X - radius / 2 + (radius - stringSize.Width) / 2;
+            var textY = agent.Position.Y - radius / 2 + (radius - stringSize.Height) / 2;
+
+            graphics.DrawString(agent.ObjectId.ToString(), font, Brushes.Black, textX, textY);
+        }
+        
         private static void DrawCircle( Graphics graphics, Vector2 center, float radius, Brush brush)
         {
             graphics.FillEllipse(brush, (int) center.X - radius, (int) center.Y - radius, 

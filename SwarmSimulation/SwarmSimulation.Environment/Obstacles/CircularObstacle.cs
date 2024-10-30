@@ -1,8 +1,6 @@
 using System.Numerics;
-using SwarmSimulation.Engine;
 using SwarmSimulation.Engine.Collision;
 using SwarmSimulation.Engine.Entity;
-using SwarmSimulation.Engine.Physics;
 
 namespace SwarmSimulation.Environment.Obstacles
 {
@@ -14,9 +12,8 @@ namespace SwarmSimulation.Environment.Obstacles
         {
             Radius = radius;
             Position = center;
-            Collider = new CircleCollider(center, radius, Id);
-            Body = new RigidBody(center, 1, Id, isStatic:true);
-
+            Collider = new CircleCollider(center, radius, ObjectId);
+            IsStatic = true;
         }
 
         public Vector2 GetDistanceVectorFromBorder(Vector2 point)

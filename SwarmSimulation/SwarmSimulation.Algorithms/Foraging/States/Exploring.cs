@@ -43,8 +43,7 @@ namespace SwarmSimulation.Algorithms.Foraging.States
         private Vector2 GenerateNewDirection()
         {
             var randomAngle = (float) (_random.NextDouble() * 2 * Math.PI);
-            var baseVector = new Vector2(0, 1);
-            return Vector2.Normalize(baseVector.Rotate(randomAngle));
+            return Vector2.Normalize(Vector2.One).Rotate(randomAngle);
         }
         public static void ConfigureLewyWalk(float lewyParameter, float maxFlightLength, float scale)
         {

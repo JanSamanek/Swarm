@@ -10,7 +10,7 @@ namespace SwarmSimulation.Engine.Collision
         {
             Position = center;
             Radius = radius;
-            Id = objectId;
+            ObjectId = objectId;
         }
         
         public override bool IsColliding(Collider other)

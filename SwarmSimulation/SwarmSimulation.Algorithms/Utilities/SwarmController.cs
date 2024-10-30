@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
 using SwarmSimulation.Algorithms.Agents;
 using SwarmSimulation.Engine;
-using SwarmSimulation.Environment.Utilities;
 
 namespace SwarmSimulation.Algorithms.Utilities
 {
@@ -33,11 +31,10 @@ namespace SwarmSimulation.Algorithms.Utilities
         }
         
         private static void ApplyAlgorithm<TInput>(Agent agent, IAlgorithm<TInput> algorithm, TInput input)
-        {            
-            var controlInput = algorithm.CalculateControlInput(agent, input);
-            controlInput += CollisionEngine.GetCollisionVelocity(agent.Id);
-            Console.WriteLine(agent.DetectCollision());
-            agent.Move(controlInput);
+        {
+            var controlInputVelocity =  algorithm.CalculateControlInput(agent, input);
+            var collisionVelocity = CollisionEngine.GetCollisionVelocity(agent.ObjectId);
+            agent.Move(controlInputVelocity, collisionVelocity);
         }
         
         private static  void UpdateNeighbours(Swarm swarm)
@@ -45,7 +42,7 @@ namespace SwarmSimulation.Algorithms.Utilities
             foreach (var agentToUpdate in swarm.Agents)
             {
                 agentToUpdate.Neighbors = new List<Agent>();
-                foreach (var agent in swarm.Agents.Where(agent => agentToUpdate.Id != agent.Id))
+                foreach (var agent in swarm.Agents.Where(agent => agentToUpdate.ObjectId != agent.ObjectId))
                 {
                     var distance = Vector2.Distance(agent.Position, agentToUpdate.Position);
                     if (distance <= agentToUpdate.PerceptionRange)
