@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
-using SwarmSimulation.Engine.Entity;
+using System.Numerics;
 
 namespace SwarmSimulation.Engine.Collision
 {
-    public abstract class Collider : SimulationComponent
+    public abstract class Collider
     {
         private readonly List<Collider> _collidedWith = new List<Collider>();
         public int ObjectId { get; protected set; }
+        public Vector2 Position { get; protected set; }
         private void AddCollision(Collider other)
         {
             if (!_collidedWith.Contains(other))
@@ -47,6 +48,11 @@ namespace SwarmSimulation.Engine.Collision
         public bool HasCollided()
         {
             return _collidedWith.Any();
+        }
+
+        public void UpdatePosition(Vector2 position)
+        {
+            Position = position;
         }
     }
 }

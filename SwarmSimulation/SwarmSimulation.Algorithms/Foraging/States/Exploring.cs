@@ -35,7 +35,7 @@ namespace SwarmSimulation.Algorithms.Foraging.States
                 return;
             }
 
-            if (agent.HasApproachedTarget(agent.Target) || agent.DetectCollision())
+            if (agent.HasApproachedTarget(agent.Target))
             {
                 agent.State = new Exploring(agent);
             }

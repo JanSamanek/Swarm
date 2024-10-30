@@ -14,7 +14,7 @@ namespace SwarmSimulation.Engine.Entity
         public bool IsStatic { get; set; }
         public int ObjectId { get; } = IdGenerator.GetNextId();
         public Vector2 Velocity { get; protected set; } = Vector2.Zero;
-        public Vector2 ControlInput { get; set; } = Vector2.Zero;
+        public Vector2 ControlInput { get; protected set; } = Vector2.Zero;
         public Vector2 Position
         {
             get => _position;
