@@ -16,7 +16,8 @@ namespace SwarmSimulation.Engine
             foreach (var other in collidedWith)
             {
                 var direction = -simulationObject.Collider.GetDirectionTo(other);
-                collisionVelocity += direction * simulationObject.ControlInput.Length();
+                const float correction = 1.05f;
+                collisionVelocity += direction * simulationObject.ControlInput.Length() * correction;
             }
             return collisionVelocity;
         }

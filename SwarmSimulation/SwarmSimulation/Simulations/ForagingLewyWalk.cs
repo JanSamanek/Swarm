@@ -1,11 +1,9 @@
-using System;
 using System.Drawing;
 using System.Numerics;
 using System.Windows.Forms;
 using SwarmSimulation.Algorithms;
 using SwarmSimulation.Algorithms.Agents;
 using SwarmSimulation.Algorithms.Foraging.LewyWalk;
-using SwarmSimulation.Algorithms.MoveToTarget;
 using SwarmSimulation.Algorithms.Utilities;
 using SwarmSimulation.Environment;
 using SwarmSimulation.Visualization;
@@ -44,7 +42,7 @@ namespace SwarmSimulation.Simulations
                 .GenerateResources(50)
                 .Build();
             
-            _swarm = SwarmBuilder.CreateSwarmInNest<ForagingAgent>(Arena.Instance.Nest, 50, 6, 80);
+            _swarm = SwarmBuilder.CreateSwarmInNest<ForagingAgent>(Arena.Instance.Nest, 10, 6, 80);
         }
 
         protected override void UpdateSimulation()
