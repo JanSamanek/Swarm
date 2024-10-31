@@ -54,6 +54,8 @@
         <Compile Include="Foraging\LewyWalk\ForagingLewyWalkAlgorithm.cs" />
         <Compile Include="Foraging\LewyWalk\ForagingLewyWalkAlgorithmInput.cs" />
         <Compile Include="Foraging\LewyWalk\ForagingLewyWalkAlgorithmSettings.cs" />
+        <Compile Include="Foraging\Generators\GausianRandom.cs" />
+        <Compile Include="Foraging\Generators\LewyRandom.cs" />
         <Compile Include="Foraging\States\Exploring.cs" />
         <Compile Include="Foraging\States\Harvesting.cs" />
         <Compile Include="Foraging\States\IState.cs" />

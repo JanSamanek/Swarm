@@ -35,7 +35,6 @@ namespace SwarmSimulation.Simulations
 
         private void Update(object sender, EventArgs e)
         {
-            CollisionEngine.Update();
             UpdateSimulation();
             GarbageCollector.ClearHarvestedResources();
         }

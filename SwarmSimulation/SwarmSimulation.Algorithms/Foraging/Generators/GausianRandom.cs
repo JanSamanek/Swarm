@@ -1,12 +1,12 @@
 using System;
 using System.Threading;
 
-namespace SwarmSimulation.Utilities.Random
+namespace SwarmSimulation.Algorithms.Foraging.Generators
 {
     public static class GaussianRandom
     {
-        private static readonly ThreadLocal<System.Random> Random =
-            new ThreadLocal<System.Random>(() => new System.Random(Guid.NewGuid().GetHashCode()));
+        private static readonly ThreadLocal<Random> Random =
+            new ThreadLocal<Random>(() => new Random(Guid.NewGuid().GetHashCode()));
 
         // Box-Muller transform
         public static double Next(double mean = 0.0, double standardDeviation = 1.0)

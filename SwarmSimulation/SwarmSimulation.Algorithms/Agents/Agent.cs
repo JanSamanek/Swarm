@@ -46,7 +46,7 @@ namespace SwarmSimulation.Algorithms.Agents
 
         public bool DetectCollision()
         {
-            return Collider.HasCollided();
+            return Collider.HasCollided;
         }
         
         public bool HasApproachedTarget(Vector2 target, float tolerance=5)

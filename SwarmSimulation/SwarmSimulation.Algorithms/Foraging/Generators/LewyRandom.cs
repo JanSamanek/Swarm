@@ -1,6 +1,6 @@
 using System;
 
-namespace SwarmSimulation.Utilities.Random
+namespace SwarmSimulation.Algorithms.Foraging.Generators
 {
     public static class LewyRandom
     {

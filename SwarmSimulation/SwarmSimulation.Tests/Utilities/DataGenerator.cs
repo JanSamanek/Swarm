@@ -1,4 +1,4 @@
-using SwarmSimulation.Utilities.Random;
+using SwarmSimulation.Algorithms.Foraging.Generators;
 
 namespace SwarmSimulation.Tests.Utilities
 {
