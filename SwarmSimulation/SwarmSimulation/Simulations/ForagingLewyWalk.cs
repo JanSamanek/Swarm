@@ -29,7 +29,7 @@ namespace SwarmSimulation.Simulations
             {
                 LewyParameter = 1,
                 MaxFlightLength = 600,
-                LewyScale = 20
+                LewyScale = 1.5f
             };
 
             _foragingAlgorithm = new ForagingLewyWalkAlgorithm(settings);
@@ -44,14 +44,14 @@ namespace SwarmSimulation.Simulations
                 .GenerateResources(50)
                 .Build();
             
-            _swarm = SwarmBuilder.CreateSwarmInNest<ForagingAgent>(Arena.Instance.Nest, 10, 6, 80);
+            _swarm = SwarmBuilder.CreateSwarmInNest<ForagingAgent>(Arena.Instance.Nest, 50, 6, 80);
         }
 
         protected override void UpdateSimulation()
         {
             var input = new ForagingLewyWalkAlgorithmInput
             {
-                MoveSpeed = 20
+                MoveSpeed = 40
             };
             
             SwarmController.ExecuteAlgorithm(_swarm, _foragingAlgorithm, input);

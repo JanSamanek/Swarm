@@ -5,6 +5,7 @@ using SwarmSimulation.Environment;
 
 namespace SwarmSimulation.Algorithms.Agents
 {
+    // TODO: have agent carry more resources, implement brownien
     public class ForagingAgent : Agent
     {
         public bool CarriesResource { get; private set; }

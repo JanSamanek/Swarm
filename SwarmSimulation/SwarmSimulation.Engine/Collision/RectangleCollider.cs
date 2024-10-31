@@ -1,6 +1,6 @@
 using System;
 using System.Numerics;
-using SwarmSimulation.Utilities.Mathematics;
+using SwarmSimulation.Utilities;
 
 namespace SwarmSimulation.Engine.Collision
 {

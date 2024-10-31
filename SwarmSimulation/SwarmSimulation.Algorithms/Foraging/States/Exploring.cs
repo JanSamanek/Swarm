@@ -3,7 +3,7 @@ using System.Linq;
 using System.Numerics;
 using SwarmSimulation.Algorithms.Agents;
 using SwarmSimulation.Algorithms.Foraging.Generators;
-using SwarmSimulation.Utilities.Extensions;
+using SwarmSimulation.Utilities;
 
 namespace SwarmSimulation.Algorithms.Foraging.States
 {
@@ -20,9 +20,8 @@ namespace SwarmSimulation.Algorithms.Foraging.States
         
         private void OnEnter(ForagingAgent agent)
         {
-            var direction = GenerateNewDirection();
-            var length = GetFlightLength();
-            agent.Target = agent.Position + direction * length;
+            var flight = LewyMotionGenerator.GenerateFlight(_lewyParameter, 1, _maxFlightLength, _lewyScale);
+            agent.Target = agent.Position + flight;
         }
 
         public void Execute(ForagingAgent agent)
@@ -39,17 +38,7 @@ namespace SwarmSimulation.Algorithms.Foraging.States
                 agent.State = new Exploring(agent);
             }
         }
-        private static Vector2 GenerateNewDirection()
-        {
-            var random = new Random();
-            var randomAngle = (float) (random.NextDouble() * 2 * Math.PI);
-            return Vector2.Normalize(Vector2.One).Rotate(randomAngle);
-        }
 
-        private static float GetFlightLength()
-        {
-            return (float) LewyRandom.Next(_lewyParameter, 1, _maxFlightLength, _lewyScale);
-        }
         public static void ConfigureLewyWalk(float lewyParameter, float maxFlightLength, float scale)
         {
             _maxFlightLength = maxFlightLength;

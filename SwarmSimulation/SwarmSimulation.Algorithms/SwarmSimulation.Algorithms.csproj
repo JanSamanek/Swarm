@@ -51,6 +51,7 @@
         <Compile Include="CustomFormation\FormationAlgorithm.cs" />
         <Compile Include="CustomFormation\FormationAlgorithmInput.cs" />
         <Compile Include="CustomFormation\FormationAlgorithmSettings.cs" />
+        <Compile Include="Foraging\Generators\LewyMotionGenerator.cs" />
         <Compile Include="Foraging\LewyWalk\ForagingLewyWalkAlgorithm.cs" />
         <Compile Include="Foraging\LewyWalk\ForagingLewyWalkAlgorithmInput.cs" />
         <Compile Include="Foraging\LewyWalk\ForagingLewyWalkAlgorithmSettings.cs" />

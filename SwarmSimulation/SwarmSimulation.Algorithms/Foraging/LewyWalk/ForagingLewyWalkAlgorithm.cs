@@ -3,7 +3,6 @@ using System.Numerics;
 using SwarmSimulation.Algorithms.Agents;
 using SwarmSimulation.Algorithms.Foraging.States;
 using SwarmSimulation.Algorithms.MoveToTarget;
-using SwarmSimulation.Utilities.Extensions;
 
 namespace SwarmSimulation.Algorithms.Foraging.LewyWalk
 {

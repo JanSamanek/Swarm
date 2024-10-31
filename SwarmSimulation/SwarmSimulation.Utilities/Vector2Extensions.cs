@@ -1,7 +1,7 @@
 using System;
 using System.Numerics;
 
-namespace SwarmSimulation.Utilities.Extensions
+namespace SwarmSimulation.Utilities
 {
     public static class Vector2Extensions
     {

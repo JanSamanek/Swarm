@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using SwarmSimulation.Algorithms.Agents;
-using SwarmSimulation.Utilities.Extensions;
+using SwarmSimulation.Utilities;
 
 namespace SwarmSimulation.Algorithms.LineAggregation
 {

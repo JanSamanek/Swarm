@@ -1,4 +1,4 @@
-namespace SwarmSimulation.Utilities.Mathematics
+namespace SwarmSimulation.Utilities
 {
     public static class MathUtils
     {
