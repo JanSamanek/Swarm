@@ -21,7 +21,7 @@ namespace SwarmSimulation.Algorithms.Foraging.States
         {
             if (_resource.IsConsumed)
             {
-                agent.State = new Exploring(agent);
+                agent.State = new Exploring(agent, 0);
             }
 
             if (!agent.HasApproachedTarget(_resource.Position))
@@ -36,7 +36,7 @@ namespace SwarmSimulation.Algorithms.Foraging.States
             }
             else
             {
-                agent.State = new Exploring(agent);
+                agent.State = new Exploring(agent, 0);
             }
         }
     }

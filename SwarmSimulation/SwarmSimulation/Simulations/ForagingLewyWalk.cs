@@ -26,8 +26,9 @@ namespace SwarmSimulation.Simulations
             var settings = new ForagingLewyWalkAlgorithmSettings
             {
                 LewyParameter = 1,
-                MaxFlightLength = 600,
-                LewyScale = 1.5f
+                MaxFlightLength = 800,
+                LewyScale = 3f,
+                MaxExploringAttempts = 100
             };
 
             _foragingAlgorithm = new ForagingLewyWalkAlgorithm(settings);
@@ -49,7 +50,7 @@ namespace SwarmSimulation.Simulations
         {
             var input = new ForagingLewyWalkAlgorithmInput
             {
-                MoveSpeed = 40
+                MoveSpeed = 50
             };
             
             SwarmController.ExecuteAlgorithm(_swarm, _foragingAlgorithm, input);

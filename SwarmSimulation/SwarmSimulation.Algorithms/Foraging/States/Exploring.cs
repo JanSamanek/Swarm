@@ -1,6 +1,7 @@
 using System.Linq;
 using SwarmSimulation.Algorithms.Agents;
 using SwarmSimulation.Algorithms.Foraging.Generators;
+using SwarmSimulation.Algorithms.Foraging.LewyWalk;
 
 namespace SwarmSimulation.Algorithms.Foraging.States
 {
@@ -10,8 +11,11 @@ namespace SwarmSimulation.Algorithms.Foraging.States
         private static float _maxFlightLength;
         private static float _lewyScale;
         
-        public Exploring(ForagingAgent agent)
+        private static int _maxExploringAttempts;
+        private int _attempt;
+        public Exploring(ForagingAgent agent, int attempt)
         {
+            _attempt = attempt;
             OnEnter(agent);
         }
         
@@ -30,17 +34,23 @@ namespace SwarmSimulation.Algorithms.Foraging.States
                 return;
             }
 
+            if (_attempt >= _maxExploringAttempts)
+            {
+                agent.State = new ReturningToNest(agent);
+            }
+            
             if (agent.HasApproachedTarget(agent.Target) || agent.DetectCollision())
             {
-                agent.State = new Exploring(agent);
+                agent.State = new Exploring(agent, ++_attempt);
             }
         }
 
-        public static void ConfigureLewyWalk(float lewyParameter, float maxFlightLength, float scale)
+        public static void Configure(ForagingLewyWalkAlgorithmSettings settings)
         {
-            _maxFlightLength = maxFlightLength;
-            _lewyParameter = lewyParameter;
-            _lewyScale = scale;
+            _maxFlightLength = settings.MaxFlightLength;
+            _lewyParameter = settings.LewyParameter;
+            _lewyScale = settings.LewyScale;
+            _maxExploringAttempts = settings.MaxExploringAttempts;
         }
         
     }

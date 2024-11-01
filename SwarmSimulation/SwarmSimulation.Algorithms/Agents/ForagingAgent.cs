@@ -19,7 +19,7 @@ namespace SwarmSimulation.Algorithms.Agents
             : base(position, size, perceptionRange)
         {
             _maxResourceCapacity = 5;
-            State = new Exploring(this);
+            State = new Exploring(this, 0);
         }
 
         public bool Harvest(Resource resource)

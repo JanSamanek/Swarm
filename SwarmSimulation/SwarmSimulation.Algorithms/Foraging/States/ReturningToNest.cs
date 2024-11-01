@@ -23,7 +23,7 @@ namespace SwarmSimulation.Algorithms.Foraging.States
             var droppedResource = agent.DropResource();
             if (droppedResource)
             {
-                agent.State = new Exploring(agent);
+                agent.State = new Exploring(agent, 0);
             }
         }
     }
