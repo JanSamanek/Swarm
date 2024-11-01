@@ -3,10 +3,10 @@ using System.Drawing;
 using System.Windows.Forms;
 using ScottPlot.PathStrategies;
 using ScottPlot.WinForms;
-using SwarmSimulation.Tests.Utilities;
+using SwarmSimulation.Other.Utilities;
 using Label = System.Windows.Forms.Label;
 
-namespace SwarmSimulation.Tests
+namespace SwarmSimulation.Other
 {
     public sealed class LewyDistributionVisualization : Form
     {

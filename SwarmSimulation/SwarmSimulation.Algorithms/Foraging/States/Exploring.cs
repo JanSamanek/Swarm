@@ -1,9 +1,6 @@
-using System;
 using System.Linq;
-using System.Numerics;
 using SwarmSimulation.Algorithms.Agents;
 using SwarmSimulation.Algorithms.Foraging.Generators;
-using SwarmSimulation.Utilities;
 
 namespace SwarmSimulation.Algorithms.Foraging.States
 {

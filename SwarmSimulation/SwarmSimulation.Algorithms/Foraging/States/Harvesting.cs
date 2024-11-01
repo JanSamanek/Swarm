@@ -23,14 +23,20 @@ namespace SwarmSimulation.Algorithms.Foraging.States
             {
                 agent.State = new Exploring(agent);
             }
-            
-            if (!agent.HasApproachedTarget(_resource.Position)) 
+
+            if (!agent.HasApproachedTarget(_resource.Position))
+            {
                 return;
+            }
             
-            var harvested = agent.Harvest(_resource);
-            if (harvested)
+            agent.Harvest(_resource);
+            if (agent.HasReachedMaxCapacity)
             {
                 agent.State = new ReturningToNest(agent);
+            }
+            else
+            {
+                agent.State = new Exploring(agent);
             }
         }
     }

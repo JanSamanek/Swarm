@@ -1,6 +1,6 @@
 using SwarmSimulation.Algorithms.Foraging.Generators;
 
-namespace SwarmSimulation.Tests.Utilities
+namespace SwarmSimulation.Other.Utilities
 {
     public static class DataGenerator
     {

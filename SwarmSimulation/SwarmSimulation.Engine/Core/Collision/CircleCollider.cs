@@ -1,7 +1,7 @@
 using System;
 using System.Numerics;
 
-namespace SwarmSimulation.Engine.Collision
+namespace SwarmSimulation.Engine.Core.Collision
 {
     public class CircleCollider : Collider
     {

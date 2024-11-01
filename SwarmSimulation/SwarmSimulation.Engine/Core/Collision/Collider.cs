@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 
-namespace SwarmSimulation.Engine.Collision
+namespace SwarmSimulation.Engine.Core.Collision
 {
     public abstract class Collider
     {

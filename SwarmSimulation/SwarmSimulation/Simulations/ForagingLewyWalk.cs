@@ -42,7 +42,7 @@ namespace SwarmSimulation.Simulations
                 .GenerateResources(50)
                 .Build();
             
-            _swarm = SwarmBuilder.CreateSwarmInNest<ForagingAgent>(Arena.Instance.Nest, 10, 6, 80);
+            _swarm = SwarmBuilder.CreateSwarmInNest<ForagingAgent>(Arena.Instance.Nest, 10, 6, 40);
         }
 
         protected override void UpdateSimulation()

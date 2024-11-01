@@ -1,6 +1,6 @@
 using System.Numerics;
-using SwarmSimulation.Engine.Collision;
-using SwarmSimulation.Engine.Entity;
+using SwarmSimulation.Engine.Core;
+using SwarmSimulation.Engine.Core.Collision;
 
 namespace SwarmSimulation.Environment.Obstacles
 {

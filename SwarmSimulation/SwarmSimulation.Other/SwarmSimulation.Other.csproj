@@ -6,8 +6,8 @@
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
         <ProjectGuid>{96708235-94D9-4D26-9C42-30A6D888072E}</ProjectGuid>
         <OutputType>WinExe</OutputType>
-        <RootNamespace>SwarmSimulation.Tests</RootNamespace>
-        <AssemblyName>SwarmSimulation.Tests</AssemblyName>
+        <RootNamespace>SwarmSimulation.Other</RootNamespace>
+        <AssemblyName>SwarmSimulation.Other</AssemblyName>
         <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

@@ -2,7 +2,7 @@ using System;
 using System.Numerics;
 using SwarmSimulation.Utilities;
 
-namespace SwarmSimulation.Engine.Collision
+namespace SwarmSimulation.Engine.Core.Collision
 {
     public class RectangleCollider : Collider
     { 

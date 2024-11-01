@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SwarmSimulation.Tests.Properties
+namespace SwarmSimulation.Other.Properties
 {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
@@ -45,7 +45,7 @@ namespace SwarmSimulation.Tests.Properties
                 if ((resourceMan == null))
                 {
                     global::System.Resources.ResourceManager temp =
-                        new global::System.Resources.ResourceManager("SwarmSimulation.Tests.Properties.Resources",
+                        new global::System.Resources.ResourceManager("SwarmSimulation.Other.Properties.Resources",
                             typeof(Resources).Assembly);
                     resourceMan = temp;
                 }

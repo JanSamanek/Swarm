@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwarmSimulation", "SwarmSimulation\SwarmSimulation.csproj", "{C0F3A715-AAF2-4B1C-A702-F40B8919B308}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwarmSimulation.Tests", "SwarmSimulation.Tests\SwarmSimulation.Tests.csproj", "{96708235-94D9-4D26-9C42-30A6D888072E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwarmSimulation.Other", "SwarmSimulation.Other\SwarmSimulation.Other.csproj", "{96708235-94D9-4D26-9C42-30A6D888072E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwarmSimulation.Algorithms", "SwarmSimulation.Algorithms\SwarmSimulation.Algorithms.csproj", "{32E7D9CC-FC18-4E41-9D45-D6500A68471D}"
 EndProject

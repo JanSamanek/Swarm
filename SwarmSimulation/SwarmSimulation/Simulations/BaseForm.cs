@@ -2,7 +2,6 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using SwarmSimulation.Engine;
-using SwarmSimulation.Engine.Collision;
 using SwarmSimulation.Environment.Utilities;
 using SwarmSimulation.Settings;
 using SwarmSimulation.Utilities;

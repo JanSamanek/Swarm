@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Numerics;
-using SwarmSimulation.Engine.Collision;
-using SwarmSimulation.Engine.Entity;
+using SwarmSimulation.Engine.Core;
+using SwarmSimulation.Engine.Core.Collision;
 using SwarmSimulation.Environment;
 using SwarmSimulation.Environment.Obstacles;
 using SwarmSimulation.Utilities;

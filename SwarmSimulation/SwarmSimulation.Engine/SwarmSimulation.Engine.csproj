@@ -40,12 +40,12 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="CollisionEngine.cs" />
-        <Compile Include="Collision\CircleCollider.cs" />
-        <Compile Include="Collision\Collider.cs" />
-        <Compile Include="Collision\RectangleCollider.cs" />
-        <Compile Include="Entity\SimulationObject.cs" />
-        <Compile Include="Entity\SimulationObjectManager.cs" />
+        <Compile Include="Core\CollisionEngine.cs" />
+        <Compile Include="Core\Collision\CircleCollider.cs" />
+        <Compile Include="Core\Collision\Collider.cs" />
+        <Compile Include="Core\Collision\RectangleCollider.cs" />
+        <Compile Include="Core\SimulationObject.cs" />
+        <Compile Include="Core\SimulationObjectManager.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
     <ItemGroup>

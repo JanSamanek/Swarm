@@ -1,3 +1,4 @@
+using System;
 using System.Numerics;
 using SwarmSimulation.Environment.Utilities;
 
@@ -15,13 +16,17 @@ namespace SwarmSimulation.Environment
             _capacity = capacity;
         }
 
-        public void Harvest()
+        public int Harvest(int amount)
         {
-            _capacity -= 1;
-            if (_capacity <= 0)
+            _capacity -= amount;
+            if (_capacity > 0)
             {
-                Destroy();
+                return amount;
             }
+            
+            Destroy();
+            var amountHarvested = amount - Math.Abs(_capacity);
+            return amountHarvested;
         }
 
         private void Destroy()

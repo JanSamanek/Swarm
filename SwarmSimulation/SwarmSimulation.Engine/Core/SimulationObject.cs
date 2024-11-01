@@ -1,8 +1,8 @@
 using System.Numerics;
-using SwarmSimulation.Engine.Collision;
+using SwarmSimulation.Engine.Core.Collision;
 using SwarmSimulation.Utilities;
 
-namespace SwarmSimulation.Engine.Entity
+namespace SwarmSimulation.Engine.Core
 {
     public abstract class SimulationObject
     {

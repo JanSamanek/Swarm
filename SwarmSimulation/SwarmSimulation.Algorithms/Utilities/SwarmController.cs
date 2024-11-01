@@ -4,6 +4,7 @@ using System.Numerics;
 using System.Threading.Tasks;
 using SwarmSimulation.Algorithms.Agents;
 using SwarmSimulation.Engine;
+using SwarmSimulation.Engine.Core;
 
 namespace SwarmSimulation.Algorithms.Utilities
 {

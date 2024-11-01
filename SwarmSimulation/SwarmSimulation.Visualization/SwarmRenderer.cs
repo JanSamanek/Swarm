@@ -41,7 +41,14 @@ namespace SwarmSimulation.Visualization
         {
             if (agent is ForagingAgent foragingAgent && foragingAgent.CarriesResource)
             {
-                DrawCircle(graphics, foragingAgent.Position, radius, Brushes.Red);
+                if (foragingAgent.CarriesResource && foragingAgent.HasReachedMaxCapacity)
+                {
+                    DrawCircle(graphics, foragingAgent.Position, radius, Brushes.Red);
+                }
+                else if (foragingAgent.CarriesResource && !foragingAgent.HasReachedMaxCapacity)
+                {
+                    DrawCircle(graphics, foragingAgent.Position, radius, Brushes.Orange);
+                }
             }
             else
             {

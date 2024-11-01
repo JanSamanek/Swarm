@@ -1,8 +1,7 @@
 using System.Linq;
 using System.Numerics;
-using SwarmSimulation.Engine.Entity;
 
-namespace SwarmSimulation.Engine
+namespace SwarmSimulation.Engine.Core
 {
     public static class CollisionEngine
     {

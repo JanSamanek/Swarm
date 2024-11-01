@@ -1,9 +1,8 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using SwarmSimulation.Engine.Collision;
 
-namespace SwarmSimulation.Engine.Entity
+namespace SwarmSimulation.Engine.Core
 {
     public static class SimulationObjectManager
     {
