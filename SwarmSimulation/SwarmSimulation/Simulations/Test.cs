@@ -13,7 +13,7 @@ namespace SwarmSimulation.Simulations
     public sealed class Test : BaseForm
     {
         private Swarm _swarm;
-        private Agent _leader;
+        private LeaderAgent _leader;
         private IAlgorithm<MoveToTargetAlgorithmInput> _moveToTargetAlgorithm;
 
         public Test()
@@ -26,9 +26,12 @@ namespace SwarmSimulation.Simulations
          {
              _moveToTargetAlgorithm = new MoveToTargetAlgorithm();
              
-            const float perceptionRange = 100;
-            _swarm = new Swarm();
-            _leader = SwarmBuilder.AddAgent<LeaderAgent>(_swarm, new Vector2(550,300), 10, perceptionRange);
+            _leader = new LeaderAgent(new Vector2(550,300), 10, 100);
+            
+            var swarmBuilder = new SwarmBuilder();
+            _swarm = swarmBuilder
+                .AddLeaderToSwarm(_leader)
+                .Build();     
             
             var arenaBuilder = new ArenaBuilder();
             arenaBuilder.Initialize(new Vector2(500, 300), 500, 500)

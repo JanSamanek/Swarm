@@ -31,7 +31,6 @@ namespace SwarmSimulation.Simulations
             };
             _dispersionAlgorithm = new ProximityAlgorithm(algorithmSettings);
             
-            const float perceptionRange = 100;
             var positions = new List<Vector2>
             {
                 new Vector2(490, 300),
@@ -50,7 +49,14 @@ namespace SwarmSimulation.Simulations
                 new Vector2(500, 300),
                 new Vector2(500, 310)
             };
-            _swarm = SwarmBuilder.CreateSwarm<BasicAgent>(positions, 5, perceptionRange);
+            
+            var swarmBuilder = new SwarmBuilder();
+            _swarm = swarmBuilder
+                .SetPositions(positions)
+                .SetPerceptionRange(100)
+                .SetAgentSize(5)
+                .SetAgentType(AgentsType.Basic)
+                .Build();        
         }
 
         protected override void UpdateSimulation()

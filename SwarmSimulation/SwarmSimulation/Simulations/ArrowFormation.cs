@@ -16,6 +16,7 @@ namespace SwarmSimulation.Simulations
     public sealed class ArrowFormation : BaseForm
     {
         private Swarm _swarm;
+        private LeaderAgent _leader;
         private IAlgorithm<FormationAlgorithmInput> _arrowFormationAlgorithm;
         private IAlgorithm<MoveToTargetAlgorithmInput> _moveToTargetAlgorithm;
 
@@ -36,9 +37,7 @@ namespace SwarmSimulation.Simulations
              
              _moveToTargetAlgorithm = new MoveToTargetAlgorithm();
              
-            const float perceptionRange = 200;
-
-            _swarm = SwarmBuilder.CreateSwarm<LeaderAgent>(new Vector2(500,300), 5, perceptionRange);
+            _leader = new LeaderAgent(new Vector2(500, 300), 5, 200);
             var positions = new List<Vector2>
             {
                 new Vector2(480, 320),
@@ -46,7 +45,15 @@ namespace SwarmSimulation.Simulations
                 new Vector2(460, 340),
                 new Vector2(540, 340)
             };
-            SwarmBuilder.AddAgents<BasicAgent>(_swarm, positions, 5, perceptionRange);
+            
+            var swarmBuilder = new SwarmBuilder();
+            _swarm = swarmBuilder.AddLeaderToSwarm(_leader)
+                .SetPositions(positions)
+                .SetPerceptionRange(200)
+                .SetAgentSize(5)
+                .SetAgentType(AgentsType.Basic)
+                .Build();
+                
         }
 
         protected override void UpdateSimulation()
@@ -72,7 +79,7 @@ namespace SwarmSimulation.Simulations
                 Speed = 15.0f,
                 TargetPosition = new Vector2(350, 150)
             };
-            SwarmController.ExecuteAlgorithm(_swarm, _swarm.Agents.OfType<LeaderAgent>(), _moveToTargetAlgorithm, moveToTargetAlgorithmInput);
+            SwarmController.ExecuteAlgorithm(_swarm, _leader, _moveToTargetAlgorithm, moveToTargetAlgorithmInput);
             
             PictureBox.Invalidate();
         }

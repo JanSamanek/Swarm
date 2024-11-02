@@ -31,7 +31,6 @@ namespace SwarmSimulation.Simulations
             };
             _lineFormationAlgorithm = new LineAggregationAlgorithm(algorithmSettings);
             
-            const float perceptionRange = 120;
             _swarm = new Swarm();
             var positions = new List<Vector2>
             {
@@ -43,8 +42,12 @@ namespace SwarmSimulation.Simulations
                 new Vector2(325, 380),
                 new Vector2(430, 270)
             };
-            _swarm = SwarmBuilder.CreateSwarm<BasicAgent>(positions, 5, perceptionRange);
-        }
+            var swarmBuilder = new SwarmBuilder();
+            _swarm = swarmBuilder.SetPositions(positions)
+                .SetPerceptionRange(120)
+                .SetAgentSize(5)
+                .SetAgentType(AgentsType.Basic)
+                .Build();        }
 
         protected override void UpdateSimulation()
         {

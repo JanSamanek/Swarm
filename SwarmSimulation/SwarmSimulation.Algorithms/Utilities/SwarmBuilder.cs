@@ -1,14 +1,58 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using SwarmSimulation.Algorithms.Agents;
 using SwarmSimulation.Environment;
 
 namespace SwarmSimulation.Algorithms.Utilities
 {
-    public static class SwarmBuilder
+    public class SwarmBuilder
     {
-        public static Swarm CreateSwarmInNest<TAgent>(Nest nest, int agentCount, float agentSize, int perceptionRange) where TAgent : Agent
+        private int _perceptionRange;
+        private float _agentSize;
+        private int _maxResourceCapacity;
+        private IEnumerable<Vector2> _positions = Enumerable.Empty<Vector2>();
+        private AgentsType _agentsType;
+        private readonly List<LeaderAgent> _leaderAgents = new List<LeaderAgent>();
+
+        public SwarmBuilder SetAgentSize(float agentRadius)
+        {
+            _agentSize = agentRadius;
+            return this;
+        }
+
+        public SwarmBuilder SetPerceptionRange(int perceptionRange)
+        {
+            _perceptionRange = perceptionRange;
+            return this;
+        }
+
+        public SwarmBuilder SetMaxResourceCapacity(int maxResourceCapacity)
+        {
+            _maxResourceCapacity = maxResourceCapacity;
+            return this;
+        }
+
+        public SwarmBuilder SetPositions(IEnumerable<Vector2> positions)
+        {
+            _positions = positions;
+            return this;
+        }
+
+        public SwarmBuilder SetAgentType(AgentsType type)
+        {
+            _agentsType = type;
+            return this;
+        }
+
+        public SwarmBuilder AddLeaderToSwarm(LeaderAgent leader)
+        {
+            _leaderAgents.Add(leader);
+            return this;
+        }
+
+        public Swarm BuildInNest(Nest nest, int agentCount)
         {
             var positions = new HashSet<Vector2>();
 
@@ -17,43 +61,41 @@ namespace SwarmSimulation.Algorithms.Utilities
                 var randomPosition = nest.GetRandomPositionInNest();
                 positions.Add(randomPosition);
             }
-            
-            return CreateSwarm<TAgent>(positions, agentSize, perceptionRange);
+
+            _positions = positions;
+            var swarm = Build();
+            return swarm;
         }
         
-        public static TAgent AddAgent<TAgent>(Swarm swarm, Vector2 position, float agentSize, float perceptionRange)
-            where TAgent : Agent
-        {
-            var agent = (TAgent) Activator.CreateInstance(typeof(TAgent), position, agentSize, perceptionRange);
-            swarm.Agents.Add(agent);
-            return agent;
-        }
-
-        public static IEnumerable<TAgent> AddAgents<TAgent>(Swarm swarm, IEnumerable<Vector2> positions,float agentSize, float perceptionRange)
-            where TAgent : Agent
-        {
-            var agents = new List<TAgent>();
-            foreach (var position in positions)
-            {
-                var agent = AddAgent<TAgent>(swarm, position, agentSize, perceptionRange);
-                agents.Add(agent);
-            }
-            return agents;
-        }
-
-        public static Swarm CreateSwarm<TAgent>(Vector2 agentPosition, float agentSize, float perceptionRange)
-            where TAgent : Agent
-        {
-            return CreateSwarm<TAgent>(new[] { agentPosition }, agentSize, perceptionRange);
-        }
-        
-        public static Swarm CreateSwarm<TAgent>(IEnumerable<Vector2> positions, float agentSize, float perceptionRange)
-            where TAgent : Agent
+        public Swarm Build()
         {
             var swarm = new Swarm();
-            foreach (var position in positions)
+            switch (_agentsType)
             {
-                AddAgent<TAgent>(swarm, position, agentSize, perceptionRange);
+                case AgentsType.Basic:
+                {
+                    foreach (var position in _positions)
+                    {
+                        swarm.Agents.Add(new BasicAgent(position, _agentSize, _perceptionRange));
+                    } 
+                    break;
+                }
+                case AgentsType.Foraging:
+                {
+                    foreach (var position in _positions)
+                    {
+                        swarm.Agents.Add(new ForagingAgent(position, _agentSize, _perceptionRange,
+                            _maxResourceCapacity));
+                    }
+                    break;
+                }
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            foreach (var leader in _leaderAgents)
+            {
+                swarm.Agents.Add(leader);
             }
             return swarm;
         }

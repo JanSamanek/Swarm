@@ -15,10 +15,10 @@ namespace SwarmSimulation.Algorithms.Agents
         public IState State { get; set; }
         public Vector2 Target { get; set; }
         
-        public ForagingAgent(Vector2 position, float size, float perceptionRange) 
+        public ForagingAgent(Vector2 position, float size, float perceptionRange, int maxResourceCapacity) 
             : base(position, size, perceptionRange)
         {
-            _maxResourceCapacity = 5;
+            _maxResourceCapacity = maxResourceCapacity;
             State = new Exploring(this, 0);
         }
 

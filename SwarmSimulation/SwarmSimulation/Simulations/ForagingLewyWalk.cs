@@ -30,8 +30,8 @@ namespace SwarmSimulation.Simulations
                 LewyScale = 3f,
                 MaxExploringAttempts = 100
             };
-
             _foragingAlgorithm = new ForagingLewyWalkAlgorithm(settings);
+            
             var arenaBuilder = new ArenaBuilder();
             arenaBuilder.Initialize(new Vector2(500, 300), 1000, 600)
                 .AddNest(new Vector2(500, 500), 150, 100)
@@ -43,7 +43,13 @@ namespace SwarmSimulation.Simulations
                 .GenerateResources(50)
                 .Build();
             
-            _swarm = SwarmBuilder.CreateSwarmInNest<ForagingAgent>(Arena.Instance.Nest, 10, 6, 40);
+            var swarmBuilder = new SwarmBuilder();
+            _swarm = swarmBuilder
+                .SetPerceptionRange(40)
+                .SetAgentSize(6)
+                .SetAgentType(AgentsType.Foraging)
+                .SetMaxResourceCapacity(5)
+                .BuildInNest(Arena.Instance.Nest, 10);
         }
 
         protected override void UpdateSimulation()

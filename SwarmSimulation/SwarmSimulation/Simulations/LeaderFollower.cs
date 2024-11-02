@@ -9,6 +9,7 @@ using SwarmSimulation.Algorithms.Agents;
 using SwarmSimulation.Algorithms.MoveToTarget;
 using SwarmSimulation.Algorithms.Proximity;
 using SwarmSimulation.Algorithms.Utilities;
+using SwarmSimulation.Environment;
 using SwarmSimulation.Visualization;
 
 namespace SwarmSimulation.Simulations
@@ -16,7 +17,7 @@ namespace SwarmSimulation.Simulations
     public sealed class LeaderFollower : BaseForm
     {
         private Swarm _swarm;
-        private Agent _leader;
+        private LeaderAgent _leader;
 
         private IAlgorithm<ProximityAlgorithmInput> _leaderFollowerAlgorithm;
         private IAlgorithm<MoveToTargetAlgorithmInput> _moveToTargetAlgorithm;
@@ -40,8 +41,12 @@ namespace SwarmSimulation.Simulations
             
             _moveToTargetAlgorithm = new MoveToTargetAlgorithm();
             
-            const float perceptionRange = 100;
-
+            var arenaBuilder = new ArenaBuilder();
+            arenaBuilder.Initialize(new Vector2(500, 300), 1000, 600)
+                .AddCircularObstacle(new Vector2(400, 400), 70)
+                .AddCircularObstacle(new Vector2(400, 200), 70)
+                .Build();
+            
             var positions = new List<Vector2>
             {
                 new Vector2(550, 300),
@@ -51,8 +56,15 @@ namespace SwarmSimulation.Simulations
                 new Vector2(475, 256),
                 new Vector2(525, 256)
             };
-            _swarm = SwarmBuilder.CreateSwarm<BasicAgent>(positions, 5, perceptionRange);
-            _leader = SwarmBuilder.AddAgent<LeaderAgent>(_swarm, new Vector2(500, 300), 5, perceptionRange);
+            _leader = new LeaderAgent(new Vector2(500, 300), 5, 100);
+            
+            var swarmBuilder = new SwarmBuilder();
+            _swarm = swarmBuilder.AddLeaderToSwarm(_leader)
+                .SetPositions(positions)
+                .SetPerceptionRange(100)
+                .SetAgentSize(5)
+                .SetAgentType(AgentsType.Basic)
+                .Build();
         }
 
         protected override void UpdateSimulation()
@@ -66,7 +78,7 @@ namespace SwarmSimulation.Simulations
 
             var moveToTargetAlgorithmInput = new MoveToTargetAlgorithmInput
             {
-                TargetPosition = new Vector2(300, 300),
+                TargetPosition = new Vector2(200, 300),
                 Speed = 35.0f
             };
             SwarmController.ExecuteAlgorithm(_swarm, _leader, _moveToTargetAlgorithm, moveToTargetAlgorithmInput);
@@ -78,6 +90,7 @@ namespace SwarmSimulation.Simulations
         {
             e.Graphics.Clear(Color.Black);
             SwarmRenderer.DrawAgents(_swarm, e.Graphics);
+            ArenaRenderer.DrawArena(Arena.Instance, e.Graphics);
         }
     }
 }
