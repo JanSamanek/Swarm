@@ -3,6 +3,7 @@ using System.Numerics;
 using System.Windows.Forms;
 using SwarmSimulation.Algorithms;
 using SwarmSimulation.Algorithms.Agents;
+using SwarmSimulation.Algorithms.Foraging.AdaptiveLewyWalk;
 using SwarmSimulation.Algorithms.Foraging.LewyWalk;
 using SwarmSimulation.Algorithms.Utilities;
 using SwarmSimulation.Environment;
@@ -10,12 +11,12 @@ using SwarmSimulation.Visualization;
 
 namespace SwarmSimulation.Simulations
 {
-    public sealed class ForagingLewyWalk : BaseForm
+    public sealed class ForagingAdaptiveLewyWalk : BaseForm
     {
         private Swarm _swarm;
-        private IAlgorithm<LwForagingAlgorithmInput> _foragingAlgorithm;
+        private IAlgorithm<AlwForagingAlgorithmInput> _foragingAlgorithm;
 
-        public ForagingLewyWalk()
+        public ForagingAdaptiveLewyWalk()
         {
             Text = @"Swarm foraging simulation";
             StartSimulation();
@@ -23,14 +24,14 @@ namespace SwarmSimulation.Simulations
 
         protected override void InitializeSimulation()
         {
-            var settings = new LwForagingAlgorithmSettings
+            var settings = new AlwForagingAlgorithmSettings
             {
-                LewyParameter = 1,
                 MaxFlightLength = 800,
                 LewyScale = 3f,
-                MaxExploringAttempts = 100
+                MaxExploringAttempts = 100,
+                BrownianToLewyTimeSeconds = 10
             };
-            _foragingAlgorithm = new LwForagingAlgorithm(settings);
+            _foragingAlgorithm = new AlwForagingAlgorithm(settings);
             
             var arenaBuilder = new ArenaBuilder();
             arenaBuilder.Initialize(new Vector2(500, 300), 1000, 600)
@@ -47,14 +48,14 @@ namespace SwarmSimulation.Simulations
             _swarm = swarmBuilder
                 .SetPerceptionRange(40)
                 .SetAgentSize(6)
-                .SetAgentType(AgentsType.LWForaging)
+                .SetAgentType(AgentsType.ALWForaging)
                 .SetMaxResourceCapacity(5)
                 .BuildInNest(Arena.Instance.Nest, 10);
         }
 
         protected override void UpdateSimulation()
         {
-            var input = new LwForagingAlgorithmInput
+            var input = new AlwForagingAlgorithmInput
             {
                 MoveSpeed = 50
             };

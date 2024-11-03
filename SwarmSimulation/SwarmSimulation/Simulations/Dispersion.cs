@@ -5,7 +5,7 @@ using System.Numerics;
 using System.Windows.Forms;
 using SwarmSimulation.Algorithms;
 using SwarmSimulation.Algorithms.Agents;
-using SwarmSimulation.Algorithms.Proximity;
+using SwarmSimulation.Algorithms.Aggregation.Proximity;
 using SwarmSimulation.Algorithms.Utilities;
 using SwarmSimulation.Visualization;
 

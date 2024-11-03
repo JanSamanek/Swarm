@@ -1,4 +1,4 @@
-using SwarmSimulation.Algorithms.Foraging.Generators;
+using SwarmSimulation.Algorithms.Utilities.Generator;
 
 namespace SwarmSimulation.Other.Utilities
 {

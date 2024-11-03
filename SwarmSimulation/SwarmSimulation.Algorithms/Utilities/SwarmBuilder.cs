@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using SwarmSimulation.Algorithms.Agents;
+using SwarmSimulation.Algorithms.Agents.Foraging;
+using SwarmSimulation.Algorithms.Agents.Formation;
 using SwarmSimulation.Environment;
 
 namespace SwarmSimulation.Algorithms.Utilities
@@ -11,7 +13,7 @@ namespace SwarmSimulation.Algorithms.Utilities
     {
         private int _perceptionRange;
         private float _agentSize;
-        private int _maxResourceCapacity;
+        private int _maxResourceCapacity = 1;
         private IEnumerable<Vector2> _positions = Enumerable.Empty<Vector2>();
         private AgentsType _agentsType;
         private readonly List<LeaderAgent> _leaderAgents = new List<LeaderAgent>();
@@ -80,11 +82,20 @@ namespace SwarmSimulation.Algorithms.Utilities
                     } 
                     break;
                 }
-                case AgentsType.Foraging:
+                case AgentsType.LWForaging:
                 {
                     foreach (var position in _positions)
                     {
-                        swarm.Agents.Add(new ForagingAgent(position, _agentSize, _perceptionRange,
+                        swarm.Agents.Add(new LwForagingAgent(position, _agentSize, _perceptionRange,
+                            _maxResourceCapacity));
+                    }
+                    break;
+                }
+                case AgentsType.ALWForaging:
+                {
+                    foreach (var position in _positions)
+                    {
+                        swarm.Agents.Add(new AlwForagingAgent(position, _agentSize, _perceptionRange,
                             _maxResourceCapacity));
                     }
                     break;
