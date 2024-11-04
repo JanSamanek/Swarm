@@ -1,6 +1,6 @@
 namespace SwarmSimulation.Algorithms.Foraging.AdaptiveLewyWalk
 {
-    public class AlwForagingAlgorithmInput
+    public class AclwForagingAlgorithmInput
     {
         public float MoveSpeed { get; set; }
     }

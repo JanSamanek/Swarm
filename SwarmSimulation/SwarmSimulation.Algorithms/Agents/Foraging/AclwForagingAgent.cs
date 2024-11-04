@@ -5,14 +5,16 @@ using SwarmSimulation.Algorithms.Foraging.AdaptiveLewyWalk.States;
 
 namespace SwarmSimulation.Algorithms.Agents.Foraging
 {
-    public class AlwForagingAgent : ForagingAgent
+    public class AclwForagingAgent : ForagingAgent
     {
-        public IState<AlwForagingAgent> State { get; set; }
+        public IState<AclwForagingAgent> State { get; set; }
         public int TicksFromLastSuccessfulExploration { get; set; } 
-        public AlwForagingAgent(Vector2 position, float size, float perceptionRange, int maxResourceCapacity) 
+        public bool IsPerformingLongFlight { get; set; }
+        
+        public AclwForagingAgent(Vector2 position, float size, float perceptionRange, int maxResourceCapacity) 
             : base(position, size, perceptionRange, maxResourceCapacity)
         {
-            State = new AlwExploring(this);
+            State = new AclwExploring(this);
         }
         
     }

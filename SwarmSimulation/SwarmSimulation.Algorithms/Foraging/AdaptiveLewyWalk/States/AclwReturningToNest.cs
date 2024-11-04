@@ -4,19 +4,20 @@ using SwarmSimulation.Environment;
 
 namespace SwarmSimulation.Algorithms.Foraging.AdaptiveLewyWalk.States
 {
-    public class AlwReturningToNest : IState<AlwForagingAgent>
+    public class AclwReturningToNest : IState<AclwForagingAgent>
     {
-        public AlwReturningToNest(AlwForagingAgent agent)
+        public AclwReturningToNest(AclwForagingAgent agent)
         {
             OnEnter(agent);
         }
         
-        private static void OnEnter(AlwForagingAgent agent)
+        private static void OnEnter(AclwForagingAgent agent)
         {
+            agent.IsPerformingLongFlight = false;
             agent.Target = Arena.Instance.Nest.GetRandomPositionInNest();
         }
 
-        public void Execute(AlwForagingAgent agent)
+        public void Execute(AclwForagingAgent agent)
         {
             agent.TicksFromLastSuccessfulExploration++;
             if (!agent.HasApproachedTarget(agent.Target)) 
@@ -26,7 +27,7 @@ namespace SwarmSimulation.Algorithms.Foraging.AdaptiveLewyWalk.States
             if (droppedResource)
             {
                 agent.UnsuccessfulExplorationAttempts = 0;
-                agent.State = new AlwExploring(agent);
+                agent.State = new AclwExploring(agent);
             }
         }
     }

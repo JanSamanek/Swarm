@@ -33,16 +33,23 @@
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
     <ItemGroup>
+        <Reference Include="MathNet.Numerics, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\packages\MathNet.Numerics.5.0.0\lib\net461\MathNet.Numerics.dll</HintPath>
+        </Reference>
+        <Reference Include="mscorlib" />
         <Reference Include="System"/>
         <Reference Include="System.Core"/>
         <Reference Include="System.Data"/>
         <Reference Include="System.Numerics" />
+        <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+          <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net47\System.ValueTuple.dll</HintPath>
+        </Reference>
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Agents\Agent.cs" />
         <Compile Include="Agents\AgentsType.cs" />
-        <Compile Include="Agents\Foraging\AlwForagingAgent.cs" />
+        <Compile Include="Agents\Foraging\AclwForagingAgent.cs" />
         <Compile Include="Agents\Foraging\ForagingAgent.cs" />
         <Compile Include="Agents\Foraging\LwForagingAgent.cs" />
         <Compile Include="Agents\Formation\BasicAgent.cs" />
@@ -54,12 +61,12 @@
         <Compile Include="Aggregation\LineAggregation\LineAggregationAlgorithm.cs" />
         <Compile Include="Aggregation\LineAggregation\LineAggregationAlgorithmInput.cs" />
         <Compile Include="Aggregation\LineAggregation\LineAggregationAlgorithmSettings.cs" />
-        <Compile Include="Foraging\AdaptiveLewyWalk\AlwForagingAlgorithmInput.cs" />
-        <Compile Include="Foraging\AdaptiveLewyWalk\AlwForagingAlgorithm.cs" />
-        <Compile Include="Foraging\AdaptiveLewyWalk\AlwForagingAlgorithmSettings.cs" />
-        <Compile Include="Foraging\AdaptiveLewyWalk\States\AlwExploring.cs" />
-        <Compile Include="Foraging\AdaptiveLewyWalk\States\AlwHarvesting.cs" />
-        <Compile Include="Foraging\AdaptiveLewyWalk\States\AlwReturningToNest.cs" />
+        <Compile Include="Foraging\AdaptiveLewyWalk\AclwForagingAlgorithmInput.cs" />
+        <Compile Include="Foraging\AdaptiveLewyWalk\AclwForagingAlgorithm.cs" />
+        <Compile Include="Foraging\AdaptiveLewyWalk\AclwForagingAlgorithmSettings.cs" />
+        <Compile Include="Foraging\AdaptiveLewyWalk\States\AclwExploring.cs" />
+        <Compile Include="Foraging\AdaptiveLewyWalk\States\AclwHarvesting.cs" />
+        <Compile Include="Foraging\AdaptiveLewyWalk\States\AclwReturningToNest.cs" />
         <Compile Include="Foraging\IState.cs" />
         <Compile Include="Foraging\LewyWalk\LwForagingAlgorithm.cs" />
         <Compile Include="Foraging\LewyWalk\LwForagingAlgorithmInput.cs" />
@@ -103,6 +110,9 @@
     <ItemGroup>
       <Folder Include="Aggregation\" />
       <Folder Include="Other\" />
+    </ItemGroup>
+    <ItemGroup>
+      <None Include="packages.config" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -95,7 +95,7 @@ namespace SwarmSimulation.Algorithms.Utilities
                 {
                     foreach (var position in _positions)
                     {
-                        swarm.Agents.Add(new AlwForagingAgent(position, _agentSize, _perceptionRange,
+                        swarm.Agents.Add(new AclwForagingAgent(position, _agentSize, _perceptionRange,
                             _maxResourceCapacity));
                     }
                     break;

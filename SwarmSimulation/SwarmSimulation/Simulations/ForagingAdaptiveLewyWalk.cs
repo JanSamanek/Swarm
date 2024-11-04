@@ -14,7 +14,7 @@ namespace SwarmSimulation.Simulations
     public sealed class ForagingAdaptiveLewyWalk : BaseForm
     {
         private Swarm _swarm;
-        private IAlgorithm<AlwForagingAlgorithmInput> _foragingAlgorithm;
+        private IAlgorithm<AclwForagingAlgorithmInput> _foragingAlgorithm;
 
         public ForagingAdaptiveLewyWalk()
         {
@@ -24,14 +24,16 @@ namespace SwarmSimulation.Simulations
 
         protected override void InitializeSimulation()
         {
-            var settings = new AlwForagingAlgorithmSettings
+            var settings = new AclwForagingAlgorithmSettings
             {
                 MaxFlightLength = 800,
+                LongFlightThreshold = 500,
                 LewyScale = 3f,
                 MaxExploringAttempts = 100,
-                BrownianToLewyTimeSeconds = 10
+                BrownianToLewyTimeSeconds = 8,
+                RepulsionGain = 1500000
             };
-            _foragingAlgorithm = new AlwForagingAlgorithm(settings);
+            _foragingAlgorithm = new AclwForagingAlgorithm(settings);
             
             var arenaBuilder = new ArenaBuilder();
             arenaBuilder.Initialize(new Vector2(500, 300), 1000, 600)
@@ -46,16 +48,16 @@ namespace SwarmSimulation.Simulations
             
             var swarmBuilder = new SwarmBuilder();
             _swarm = swarmBuilder
-                .SetPerceptionRange(40)
+                .SetPerceptionRange(80)
                 .SetAgentSize(6)
                 .SetAgentType(AgentsType.ALWForaging)
                 .SetMaxResourceCapacity(5)
-                .BuildInNest(Arena.Instance.Nest, 10);
+                .BuildInNest(Arena.Instance.Nest, 50);
         }
 
         protected override void UpdateSimulation()
         {
-            var input = new AlwForagingAlgorithmInput
+            var input = new AclwForagingAlgorithmInput
             {
                 MoveSpeed = 50
             };

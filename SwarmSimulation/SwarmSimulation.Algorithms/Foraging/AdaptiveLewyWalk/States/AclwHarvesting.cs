@@ -4,27 +4,28 @@ using SwarmSimulation.Environment;
 
 namespace SwarmSimulation.Algorithms.Foraging.AdaptiveLewyWalk.States
 {
-    public class AlwHarvesting : IState<AlwForagingAgent>
+    public class AclwHarvesting : IState<AclwForagingAgent>
     {
         private readonly Resource _resource;
-        public AlwHarvesting(AlwForagingAgent agent, Resource resource)
+        public AclwHarvesting(AclwForagingAgent agent, Resource resource)
         {
             _resource = resource;
             OnEnter(agent);
         }
 
-        private void OnEnter(AlwForagingAgent agent)
+        private void OnEnter(AclwForagingAgent agent)
         {
+            agent.IsPerformingLongFlight = false;
             agent.Target = _resource.Position;
         }
 
-        public void Execute(AlwForagingAgent agent)
+        public void Execute(AclwForagingAgent agent)
         {
             agent.TicksFromLastSuccessfulExploration = 0;
             if (_resource.IsConsumed)
             {
                 agent.UnsuccessfulExplorationAttempts = 0;
-                agent.State = new AlwExploring(agent);
+                agent.State = new AclwExploring(agent);
             }
 
             if (!agent.HasApproachedTarget(_resource.Position))
@@ -36,12 +37,12 @@ namespace SwarmSimulation.Algorithms.Foraging.AdaptiveLewyWalk.States
             if (agent.HasReachedMaxCapacity)
             {
                 agent.UnsuccessfulExplorationAttempts = 0;
-                agent.State = new AlwReturningToNest(agent);
+                agent.State = new AclwReturningToNest(agent);
             }
             else
             {
                 agent.UnsuccessfulExplorationAttempts = 0;
-                agent.State = new AlwExploring(agent);
+                agent.State = new AclwExploring(agent);
             }
         }
     }
