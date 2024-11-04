@@ -27,7 +27,7 @@ namespace SwarmSimulation.Simulations
             var settings = new AclwForagingAlgorithmSettings
             {
                 MaxFlightLength = 800,
-                LongFlightThreshold = 500,
+                LongFlightThreshold = 300,
                 LewyScale = 3f,
                 MaxExploringAttempts = 100,
                 BrownianToLewyTimeSeconds = 8,
@@ -48,7 +48,7 @@ namespace SwarmSimulation.Simulations
             
             var swarmBuilder = new SwarmBuilder();
             _swarm = swarmBuilder
-                .SetPerceptionRange(80)
+                .SetPerceptionRange(40)
                 .SetAgentSize(6)
                 .SetAgentType(AgentsType.ALWForaging)
                 .SetMaxResourceCapacity(5)
