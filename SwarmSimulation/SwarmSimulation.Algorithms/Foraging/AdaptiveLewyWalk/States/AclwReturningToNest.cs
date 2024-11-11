@@ -1,5 +1,5 @@
+using System.Linq;
 using SwarmSimulation.Algorithms.Agents.Foraging;
-using SwarmSimulation.Algorithms.Foraging.LewyWalk.States;
 using SwarmSimulation.Environment;
 
 namespace SwarmSimulation.Algorithms.Foraging.AdaptiveLewyWalk.States
@@ -19,6 +19,14 @@ namespace SwarmSimulation.Algorithms.Foraging.AdaptiveLewyWalk.States
 
         public void Execute(AclwForagingAgent agent)
         {
+            var resources = agent.DetectResources().ToList();
+            if (resources.Any())
+            {
+                agent.TicksFromLastSuccessfulExploration = 0;
+                agent.State = new AclwHarvesting(agent, resources.First());
+                return;
+            }
+            
             agent.TicksFromLastSuccessfulExploration++;
             if (!agent.HasApproachedTarget(agent.Target)) 
                 return;

@@ -1,3 +1,4 @@
+using System.Linq;
 using SwarmSimulation.Algorithms.Agents.Foraging;
 using SwarmSimulation.Environment;
 
@@ -17,6 +18,13 @@ namespace SwarmSimulation.Algorithms.Foraging.LewyWalk.States
 
         public void Execute(LwForagingAgent agent)
         {
+            var resources = agent.DetectResources().ToList();
+            if (resources.Any())
+            {
+                agent.State = new LwHarvesting(agent, resources.First());
+                return;
+            }
+            
             if (!agent.HasApproachedTarget(agent.Target)) 
                 return;
 

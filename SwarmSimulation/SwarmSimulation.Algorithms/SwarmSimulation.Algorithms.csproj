@@ -52,8 +52,8 @@
         <Compile Include="Agents\Foraging\AclwForagingAgent.cs" />
         <Compile Include="Agents\Foraging\ForagingAgent.cs" />
         <Compile Include="Agents\Foraging\LwForagingAgent.cs" />
-        <Compile Include="Agents\Formation\BasicAgent.cs" />
-        <Compile Include="Agents\Formation\LeaderAgent.cs" />
+        <Compile Include="Agents\Aggregation\BasicAgent.cs" />
+        <Compile Include="Agents\Aggregation\LeaderAgent.cs" />
         <Compile Include="Agents\Swarm.cs" />
         <Compile Include="Aggregation\CustomFormation\FormationAlgorithm.cs" />
         <Compile Include="Aggregation\CustomFormation\FormationAlgorithmInput.cs" />
@@ -108,8 +108,10 @@
       </ProjectReference>
     </ItemGroup>
     <ItemGroup>
+      <Folder Include="Agents\TaskAllocation\" />
       <Folder Include="Aggregation\" />
       <Folder Include="Other\" />
+      <Folder Include="TaskAllocation\" />
     </ItemGroup>
     <ItemGroup>
       <None Include="packages.config" />

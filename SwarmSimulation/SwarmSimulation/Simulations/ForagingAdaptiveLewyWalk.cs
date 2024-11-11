@@ -4,7 +4,6 @@ using System.Windows.Forms;
 using SwarmSimulation.Algorithms;
 using SwarmSimulation.Algorithms.Agents;
 using SwarmSimulation.Algorithms.Foraging.AdaptiveLewyWalk;
-using SwarmSimulation.Algorithms.Foraging.LewyWalk;
 using SwarmSimulation.Algorithms.Utilities;
 using SwarmSimulation.Environment;
 using SwarmSimulation.Visualization;
@@ -27,9 +26,9 @@ namespace SwarmSimulation.Simulations
             var settings = new AclwForagingAlgorithmSettings
             {
                 MaxFlightLength = 800,
-                LongFlightThreshold = 300,
+                LongFlightThreshold = 350,
                 LewyScale = 3f,
-                MaxExploringAttempts = 100,
+                MaxExploringAttempts = 150,
                 BrownianToLewyTimeSeconds = 8,
                 RepulsionGain = 1500000
             };

@@ -6,7 +6,7 @@ using System.Numerics;
 using System.Windows.Forms;
 using SwarmSimulation.Algorithms;
 using SwarmSimulation.Algorithms.Agents;
-using SwarmSimulation.Algorithms.Agents.Formation;
+using SwarmSimulation.Algorithms.Agents.Aggregation;
 using SwarmSimulation.Algorithms.Aggregation.Proximity;
 using SwarmSimulation.Algorithms.Other.MoveToTarget;
 using SwarmSimulation.Algorithms.Utilities;

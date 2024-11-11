@@ -1,6 +1,6 @@
 using System.Numerics;
 
-namespace SwarmSimulation.Algorithms.Agents.Formation
+namespace SwarmSimulation.Algorithms.Agents.Aggregation
 {
     public class BasicAgent : Agent
     {

@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Numerics;
 using SwarmSimulation.Algorithms.Agents;
-using SwarmSimulation.Algorithms.Agents.Formation;
+using SwarmSimulation.Algorithms.Agents.Aggregation;
 using SwarmSimulation.Utilities;
 
 namespace SwarmSimulation.Algorithms.Aggregation.Proximity

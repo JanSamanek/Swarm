@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using SwarmSimulation.Algorithms.Agents;
+using SwarmSimulation.Algorithms.Agents.Aggregation;
 using SwarmSimulation.Algorithms.Agents.Foraging;
-using SwarmSimulation.Algorithms.Agents.Formation;
 using SwarmSimulation.Environment;
 
 namespace SwarmSimulation.Algorithms.Utilities
