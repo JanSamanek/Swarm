@@ -61,6 +61,11 @@
         <Compile Include="Aggregation\LineAggregation\LineAggregationAlgorithm.cs" />
         <Compile Include="Aggregation\LineAggregation\LineAggregationAlgorithmInput.cs" />
         <Compile Include="Aggregation\LineAggregation\LineAggregationAlgorithmSettings.cs" />
+        <Compile Include="AreaCoverage\Lloyd\LloydsAlgorithm.cs" />
+        <Compile Include="AreaCoverage\Lloyd\LloydsAlgorithmInput.cs" />
+        <Compile Include="AreaCoverage\Lloyd\Utilities\Cell.cs" />
+        <Compile Include="AreaCoverage\Lloyd\Utilities\Line.cs" />
+        <Compile Include="AreaCoverage\Lloyd\Utilities\Segment.cs" />
         <Compile Include="Foraging\AdaptiveLewyWalk\AclwForagingAlgorithmInput.cs" />
         <Compile Include="Foraging\AdaptiveLewyWalk\AclwForagingAlgorithm.cs" />
         <Compile Include="Foraging\AdaptiveLewyWalk\AclwForagingAlgorithmSettings.cs" />

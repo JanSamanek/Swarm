@@ -1,3 +1,4 @@
+using System;
 using System.Numerics;
 using SwarmSimulation.Algorithms.Agents;
 using SwarmSimulation.Algorithms.Agents.Foraging;
@@ -19,8 +20,11 @@ namespace SwarmSimulation.Algorithms.Foraging.LewyWalk
 
         public Vector2 CalculateControlInput(Agent agent, LwForagingAlgorithmInput input)
         {
-            var foragingAgent = (LwForagingAgent) agent;
-
+            if (!(agent is LwForagingAgent foragingAgent))
+            {
+                throw new Exception("Agent must be an LwForagingAgent");
+            }
+            
             foragingAgent.State.Execute(foragingAgent);
             
             var moveInput = new MoveToTargetAlgorithmInput

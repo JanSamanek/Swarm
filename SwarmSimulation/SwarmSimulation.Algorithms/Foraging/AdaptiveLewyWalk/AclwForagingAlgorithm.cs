@@ -23,7 +23,11 @@ namespace SwarmSimulation.Algorithms.Foraging.AdaptiveLewyWalk
 
         public Vector2 CalculateControlInput(Agent agent, AclwForagingAlgorithmInput input)
         {
-            var foragingAgent = (AclwForagingAgent) agent;
+            if (!(agent is AclwForagingAgent foragingAgent))
+            {
+                throw new ArgumentException("Agent must be an AclwForagingAgent");
+            }
+
             foragingAgent.State.Execute(foragingAgent);
             
             var moveInput = new MoveToTargetAlgorithmInput
@@ -45,27 +49,27 @@ namespace SwarmSimulation.Algorithms.Foraging.AdaptiveLewyWalk
         {
             var controlInput = Vector2.Zero;
             
-            var longFlightNeighborsCount =
-                foragingAgent.Neighbors.Count(n => ((AclwForagingAgent)n).IsPerformingLongFlight);
-            if (longFlightNeighborsCount == 0)
+            var longFlightNeighboursCount =
+                foragingAgent.Neighbours.Count(n => ((AclwForagingAgent)n).IsPerformingLongFlight);
+            if (longFlightNeighboursCount == 0)
             {
                 return controlInput;
             }
             
-            foreach (var neighbor in foragingAgent.Neighbors)
+            foreach (var neighbour in foragingAgent.Neighbours)
             {
-                var foragingNeighbor = (AclwForagingAgent) neighbor;
-                if (foragingNeighbor.IsPerformingLongFlight)
+                var foragingNeighbour = (AclwForagingAgent) neighbour;
+                if (foragingNeighbour.IsPerformingLongFlight)
                 {
-                    var distanceVector = foragingAgent.Position - neighbor.Position;
-                    var distance = Vector2.Distance(foragingAgent.Position, foragingNeighbor.Position);
+                    var distanceVector = foragingAgent.Position - neighbour.Position;
+                    var distance = Vector2.Distance(foragingAgent.Position, foragingNeighbour.Position);
 
                     controlInput += _settings.RepulsionGain * distanceVector / (float)Math.Pow(distance, 3) *
                                     (1 / distance - 1 / foragingAgent.PerceptionRange);
                 }
             }
             
-            return controlInput/ longFlightNeighborsCount;
+            return controlInput/ longFlightNeighboursCount;
         }
     }
 }

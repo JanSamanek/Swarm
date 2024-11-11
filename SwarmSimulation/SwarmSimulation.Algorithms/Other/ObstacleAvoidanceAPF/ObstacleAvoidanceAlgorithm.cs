@@ -23,9 +23,9 @@ namespace SwarmSimulation.Algorithms.Other.ObstacleAvoidanceAPF
                 controlInput += CalculateApf(distanceVector, input.Distance);
             }
 
-            foreach (var neighbor in agent.Neighbors)
+            foreach (var neighbour in agent.Neighbours)
             {
-                var distanceVector = agent.Position - neighbor.Position;
+                var distanceVector = agent.Position - neighbour.Position;
                 controlInput += CalculateApf(distanceVector, input.Distance);
             }
             return controlInput;

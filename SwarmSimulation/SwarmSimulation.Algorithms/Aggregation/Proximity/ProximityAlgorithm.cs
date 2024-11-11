@@ -16,12 +16,12 @@ namespace SwarmSimulation.Algorithms.Aggregation.Proximity
         }
         public Vector2 CalculateControlInput(Agent agent, ProximityAlgorithmInput input)
         {
-            var toCalculateFrom = agent.Neighbors
+            var toCalculateFrom = agent.Neighbours
                 .OrderBy(neighbour => Vector2.Distance(neighbour.Position, agent.Position))
                 .Take(input.NeighboursToCalculateFrom)
                 .ToList();
 
-            var nearbyLeaders = agent.Neighbors.OfType<LeaderAgent>().ToList();
+            var nearbyLeaders = agent.Neighbours.OfType<LeaderAgent>().ToList();
             if (nearbyLeaders.Any())
             {
                 var random = new Random();

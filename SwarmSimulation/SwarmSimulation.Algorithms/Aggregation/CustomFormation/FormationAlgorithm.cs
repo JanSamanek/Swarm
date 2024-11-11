@@ -13,7 +13,7 @@ namespace SwarmSimulation.Algorithms.Aggregation.CustomFormation
         public Vector2 CalculateControlInput(Agent agent, FormationAlgorithmInput input)
         {
             var controlInput = Vector2.Zero;
-            foreach (var neighbour in agent.Neighbors)
+            foreach (var neighbour in agent.Neighbours)
             {
                 var desiredDistance = input.DesiredInterAgentDistances[agent.ObjectId, neighbour.ObjectId];
                 var distanceVector = neighbour.Position - agent.Position;

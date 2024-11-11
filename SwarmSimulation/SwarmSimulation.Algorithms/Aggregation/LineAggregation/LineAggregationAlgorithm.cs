@@ -39,7 +39,7 @@ namespace SwarmSimulation.Algorithms.Aggregation.LineAggregation
         }
         private static IEnumerable<Agent> GetAdjacentAgents(Agent agent, float orientationAngle)
         {
-            var closest = agent.Neighbors
+            var closest = agent.Neighbours
                 .OrderBy(neighbour 
                     => Math.Abs((neighbour.Position - agent.Position).Rotate(orientationAngle).X))
                 .ToList();

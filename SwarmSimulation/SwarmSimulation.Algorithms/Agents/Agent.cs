@@ -20,7 +20,7 @@ namespace SwarmSimulation.Algorithms.Agents
         }
         public float Size { get; }
         public float PerceptionRange { get; }
-        public List<Agent> Neighbors { get; set; } = new List<Agent>();
+        public List<Agent> Neighbours { get; set; } = new List<Agent>();
         
         public void Move(Vector2 controlInputVelocity, Vector2 collisionVelocity)
         {

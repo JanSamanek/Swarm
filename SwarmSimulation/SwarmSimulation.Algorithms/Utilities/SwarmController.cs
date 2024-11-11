@@ -42,13 +42,13 @@ namespace SwarmSimulation.Algorithms.Utilities
         {
             foreach (var agentToUpdate in swarm.Agents)
             {
-                agentToUpdate.Neighbors = new List<Agent>();
+                agentToUpdate.Neighbours = new List<Agent>();
                 foreach (var agent in swarm.Agents.Where(agent => agentToUpdate.ObjectId != agent.ObjectId))
                 {
                     var distance = Vector2.Distance(agent.Position, agentToUpdate.Position);
                     if (distance <= agentToUpdate.PerceptionRange)
                     {
-                        agentToUpdate.Neighbors.Add(agent);
+                        agentToUpdate.Neighbours.Add(agent);
                     }
                 }
             }
