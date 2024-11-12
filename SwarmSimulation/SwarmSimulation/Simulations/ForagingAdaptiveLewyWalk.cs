@@ -31,7 +31,7 @@ namespace SwarmSimulation.Simulations
                 LewyScale = 3f,
                 MaxExploringAttempts = 100,
                 BrownianToLewyTimeSeconds = 8,
-                RepulsionGain = 1500000
+                RepulsionGain = 1000000
             };
             _foragingAlgorithm = new AclwForagingAlgorithm(settings);
             
