@@ -1,3 +1,4 @@
+using System;
 using System.Numerics;
 
 namespace SwarmSimulation.Algorithms.AreaCoverage.Lloyd.Utilities
@@ -19,6 +20,11 @@ namespace SwarmSimulation.Algorithms.AreaCoverage.Lloyd.Utilities
             _point2 = point2;
         }
 
+        public bool IsPointOnSegment(Vector2 point)
+        {
+            return point.X >= Math.Min(_point1.X, _point2.X) && point.X <= Math.Max(_point1.X, _point2.X) &&
+                   point.Y >= Math.Min(_point1.Y, _point2.Y) && point.Y <= Math.Max(_point1.Y, _point2.Y);
+        }
         public Line GetLine()
         {
             var slope = GetSlope();
