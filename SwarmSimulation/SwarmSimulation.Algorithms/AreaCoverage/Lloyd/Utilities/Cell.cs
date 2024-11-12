@@ -5,16 +5,22 @@ namespace SwarmSimulation.Algorithms.AreaCoverage.Lloyd.Utilities
 {
     public class Cell
     {
-        private readonly List<Vector2> _vertexPositions = new List<Vector2>();
+        private Dictionary<> orderedSegments = new Dictionary<, >();
+        private readonly List<Vector2> _vertexes = new List<Vector2>();
 
         public void AddVertex(Vector2 vertex)
         {
-            _vertexPositions.Add(vertex);
+            _vertexes.Add(vertex);
         }
 
-        public List<Vector2> GetVertexPositions()
+        public void RemoveVertex(Vector2 vertex)
         {
-            return _vertexPositions;
+            _vertexes.Remove(vertex);
+        }
+
+        public List<Vector2> GetVertexes()
+        {
+            return _vertexes;
         }
     }
 }

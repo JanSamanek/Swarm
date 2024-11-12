@@ -4,19 +4,19 @@ namespace SwarmSimulation.Algorithms.AreaCoverage.Lloyd.Utilities
 {
     public class Line
     {
-        private readonly float _slope;
-        private readonly float _intercept;
+        public float Slope { get; }
+        public float Intercept { get; }
 
         public Line(float slope, float intercept)
         {
-            _slope = slope;
-            _intercept = intercept;
+            Slope = slope;
+            Intercept = intercept;
         }
 
         public Vector2 GetIntersection(Line other)
         {
-            var xIntersect = (other._intercept - _intercept) / (_slope - other._slope);
-            var yIntersect = _slope * xIntersect + _intercept;
+            var xIntersect = (other.Intercept - Intercept) / (Slope - other.Slope);
+            var yIntersect = Slope * xIntersect + Intercept;
             return new Vector2(xIntersect, yIntersect);
         }
     }

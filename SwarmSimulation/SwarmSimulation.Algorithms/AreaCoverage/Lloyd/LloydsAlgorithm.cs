@@ -34,7 +34,24 @@ namespace SwarmSimulation.Algorithms.AreaCoverage.Lloyd
                 var slope = bisectorDirection.X / bisectorDirection.Y;
                 var intercept = midPointFromAgent.Y - midPointFromAgent.X * slope;
                 var bisector = new Line(slope, intercept);
-                
+
+                var vertexes = voronoi.GetVertexes();
+                var vertexesCount = vertexes.Count;
+                for (var i = 0; i < vertexesCount; i++)
+                {
+                    var point1 = vertexes.ElementAt(i);
+                    var point2 = vertexes.ElementAt((i + 1) % vertexesCount);
+                    var segment = new Segment(point1, point2);
+                    var segmentsLine = segment.GetLine();
+                    
+                    var intersection = segmentsLine.GetIntersection(bisector);
+                    if (!segment.IsPointOnSegment(intersection))
+                    {
+                        continue;
+                    }
+
+                    // TODO: už mám bod, teď zjistit který vertexy discardovat
+                }
             }
         }
 

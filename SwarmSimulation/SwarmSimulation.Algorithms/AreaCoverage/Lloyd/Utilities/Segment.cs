@@ -22,8 +22,17 @@ namespace SwarmSimulation.Algorithms.AreaCoverage.Lloyd.Utilities
 
         public bool IsPointOnSegment(Vector2 point)
         {
-            return point.X >= Math.Min(_point1.X, _point2.X) && point.X <= Math.Max(_point1.X, _point2.X) &&
-                   point.Y >= Math.Min(_point1.Y, _point2.Y) && point.Y <= Math.Max(_point1.Y, _point2.Y);
+            if (point.X >= Math.Min(_point1.X, _point2.X) && point.X <= Math.Max(_point1.X, _point2.X))
+            {
+                var line = GetLine();
+                var y = line.Slope * point.X + line.Intercept;
+                if (Math.Abs(y - point.Y) < 0.01f)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
         public Line GetLine()
         {
